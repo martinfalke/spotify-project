@@ -1,0 +1,10 @@
+@import './shared.scss';
+
+// Bootstrap customization
+$theme-colors: (
+  // set primary, secondary, success, info, danger, warning, light, dark, link
+  "primary": $primary-color,
+  "secondary": $secondary-color
+);
+$body-bg: $bg-color;
+@import "~bootstrap/scss/bootstrap";
