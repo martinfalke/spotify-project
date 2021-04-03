@@ -1,3 +1,9 @@
 // src/state/auth/authActions.js
+import { createAction } from '../utils';
+import * as types from './authTypes';
 
-export const AUTH_INIT_TEST = 'AUTH_INIT_TEST';
+export default {
+    initAuth: () => createAction(types.AUTH_INIT_TEST),
+    saveSpotifyToken: (token, expires_in, spotify_string) => createAction(types.AUTH_SPOTIFY, {token, expires_in, spotify_string}),
+    saveSpotifyTokenError: (error) => createAction(types.AUTH_SPOTIFY_ERROR, {error}),
+}

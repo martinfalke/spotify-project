@@ -1,6 +1,7 @@
 // src/state/auth/authSagas.js
-import { fork, call, put, take, select} from 'redux-saga/effects';
-import { AUTH_INIT_TEST } from './authActions';
+import { fork, all, put, take, takeLatest } from 'redux-saga/effects';
+import * as types from './authTypes';
+import actions from './authActions';
 
 const firebase = null; // TODO: set up firebase
 function signIn() {
@@ -11,12 +12,14 @@ function signIn() {
 
 function* handleAuthInit(){
     while(true){
-        yield take(AUTH_INIT_TEST);
+        yield take(types.AUTH_INIT_TEST);
 
         console.log("reached initial saga");
     }
 }
 
-export default function* authSaga() {
-    yield fork(handleAuthInit);
+export default function*() {
+    yield all([
+        takeLatest(types.AUTH_INIT_TEST, handleAuthInit)
+    ])
 };

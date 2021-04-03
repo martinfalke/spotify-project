@@ -1,0 +1,4 @@
+// src/state/auth/authTypes.js
+export const AUTH_INIT_TEST = 'AUTH_INIT_TEST';
+export const AUTH_SPOTIFY = 'AUTH_SPOTIFY';
+export const AUTH_SPOTIFY_ERROR = 'AUTH_SPOTIFY_ERROR';
