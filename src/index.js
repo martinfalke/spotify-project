@@ -7,7 +7,7 @@ import firebaseConfig from './api/firebaseConfig';
 import { Provider } from 'react-redux';
 import store from './state/store';
 
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 import './index.scss';
 import App from './App';
@@ -18,9 +18,9 @@ firebase.initializeApp(firebaseConfig);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter hashType="noslash">
         <App />
-      </BrowserRouter>
+      </HashRouter> 
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

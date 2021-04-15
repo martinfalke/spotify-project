@@ -14,7 +14,7 @@ function* handleAuthInit(){
     while(true){
         yield take(types.AUTH_INIT_TEST);
 
-        console.log("reached initial saga");
+        console.log("reached initial saga (auth)");
     }
 }
 

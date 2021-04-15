@@ -1,7 +1,7 @@
 // src/api/spotifyAuth.js
 
 // generates a random String used to validate that the request is actually from the user's browser
-function generateURIstate(len){
+function generateSpotifyString(len){
     var arr = new Uint8Array((len || 10) / 2);
     window.crypto.getRandomValues(arr);
     return Array.from(arr, (dec)=>dec.toString(16).padStart(2, "0")).join('');
@@ -10,7 +10,7 @@ function generateURIstate(len){
 // Spotify's "Implicit Grant Flow", general info at:
 // https://developer.spotify.com/documentation/general/guides/authorization-guide/#implicit-grant-flow
 const clientId = "c0e19491232e4cadbff0efd339179f6d";
-const redirectUri = (process.env.NODE_ENV !== 'production') ? "http://localhost:3000/login" : "https://listify-app.github.io/login";
+const redirectUri = (process.env.NODE_ENV !== 'production') ? "http://localhost:3000/#" : "https://listify-app.github.io/#/login";
 
 // https://developer.spotify.com/documentation/general/guides/scopes/#overview
 // encode spaces as %20 after reducing from array (done to easily add/remove scopes)
@@ -31,5 +31,5 @@ const scope = encodeURIComponent([
 
 const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${scope}&response_type=token`;
 
-export { redirectUri, generateURIstate };
+export { redirectUri, generateSpotifyString };
 export default authUrl;
