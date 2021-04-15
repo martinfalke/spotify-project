@@ -10,7 +10,7 @@ function generateSpotifyString(len){
 // Spotify's "Implicit Grant Flow", general info at:
 // https://developer.spotify.com/documentation/general/guides/authorization-guide/#implicit-grant-flow
 const clientId = "c0e19491232e4cadbff0efd339179f6d";
-const redirectUri = (process.env.NODE_ENV !== 'production') ? "http://localhost:3000/#" : "https://listify-app.github.io/#/login";
+const redirectUri = (process.env.NODE_ENV !== 'production') ? "http://localhost:3000/#" : "https://martinfalke.github.io/spotify-project/#"; //"https://listify-app.github.io/#/login";
 
 // https://developer.spotify.com/documentation/general/guides/scopes/#overview
 // encode spaces as %20 after reducing from array (done to easily add/remove scopes)
