@@ -13,7 +13,7 @@ function App() {
       <Route path="/error=:error(.*)&state=:state(.*)" component={LoginPresenter} />
       <Route exact path="/" component={StartPresenter}>
       </Route>
-      <Route path="/*" render={() => {console.log("wtf"); return <Redirect to="/" />;}} />
+      <Route path="/*" render={() => <Redirect to="/" />} />
     </Switch>
   );
 }
