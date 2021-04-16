@@ -9,10 +9,12 @@ import authActions from '../state/auth/authActions';
 import firebase from 'firebase';
 
 function StartPresenter(props){
-    const [spotifyString, setSpotifyString] = useState(generateSpotifyString());
+    const [spotifyString, setSpotifyString] = useState(null);
 
     useEffect(function(){
-        props.setSpotifyState(spotifyString);
+        const randomString = generateSpotifyString();
+        setSpotifyString(randomString);
+        props.setSpotifyState(randomString);
     }, []);
 
     return <StartView loginUrl={`${spotifyAuthUrl}&state=${spotifyString}`} firebaseOptions={JSON.stringify(firebase.apps[0].options, null, 2)}/>;
