@@ -14,7 +14,7 @@ function StartView(props){
             <h1>Listify</h1>
           </header>
           <Button variant="secondary" href={props.loginUrl} className="login-bnt">
-          <i class="fa fa-spotify">
+          <i className="fa fa-spotify">
             Login with Spotify
             </i>
           </Button>
