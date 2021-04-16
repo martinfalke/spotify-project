@@ -1,30 +1,31 @@
 // src/presenters/LoginPresenter.js
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import authActions from '../state/auth/authActions';
 
 function LoginPresenter(props){
-    console.log(props);
+    const history = useHistory();
+    const params = useParams();
 
     // state must be present and correct
-    if(!props.match.params.state || props.match.params.state != localStorage.getItem("spotifyState")){
+    if(!params.state || params.state != localStorage.getItem("spotifyState")){
         console.error("Faulty URL parameter \'state\' for login attempt.");
-        return <Redirect to="/" />;
+        history.push("/");
     }
 
     localStorage.removeItem("spotifyState");
 
-    if(props.match.params.error){
-        props.saveSpotifyTokenError(props.match.error);
-        return <Redirect to="/" />;
+    if(params.error){
+        props.saveSpotifyTokenError(params.error);
+        history.push("/");
     }
 
-    if(props.match.params.token && props.match.params.expires_in){
-        props.saveSpotifyToken(props.match.params.token, props.match.params.expires_in);
-        return <Redirect to="/authorized" />;
+    if(params.token && params.expires_in){
+        props.saveSpotifyToken(params.token, params.expires_in);
+        history.push("/authorized");
     }
 
-    return <Redirect to="/" />;
+    return <div></div>;
 }
 
 const mapStateToProps = (state) => ({
