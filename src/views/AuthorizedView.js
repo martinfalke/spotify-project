@@ -76,7 +76,14 @@ function AuthorizedView(props){
                 <Tab className="listify" eventKey="logo" title="Listify" disabled></Tab>
             </Tabs>
             <div className="App">
-                
+                <p>Spotify login success!</p>
+                <h2>Sample API data from authorized user</h2>
+                <h5>Username</h5>
+                <p>{props.username}</p>
+                <h5>Display name</h5>
+                <p>{props.display_name}</p>
+                <h5>Country Code</h5>
+                <p>{props.country}</p>
             </div>
         </div>
   );

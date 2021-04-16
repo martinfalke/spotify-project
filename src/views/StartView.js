@@ -4,7 +4,7 @@ import "./StartView.scss";
 
 function StartView(props){
     return(
-        <div className="App" >
+        <div className="start-view" >
           {/* <p>Firebase config options</p>
           <code>
             <pre>{props.firebaseOptions}</pre>
