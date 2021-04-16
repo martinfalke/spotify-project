@@ -1,0 +1,30 @@
+
+.App
+{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+
+}
+
+.login-header h1
+{
+    font-size: 60px;
+    color: rgb(1, 32, 13);
+    text-transform: uppercase;
+    padding: 20px;
+    margin: 10px;
+}
+
+
+.login-header .vertical-line
+{
+    height: 2px;
+    background-color: #fff;
+    width: 150px;
+    margin: 0 auto;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
