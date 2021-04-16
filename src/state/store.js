@@ -9,7 +9,9 @@ const reduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVT
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(rootReducer, compose(applyMiddleware(sagaMiddleware), reduxDevTools));
+const store = (process.env.NODE_ENV !== 'production') ? 
+    createStore(rootReducer, compose(applyMiddleware(sagaMiddleware), reduxDevTools))       // development mode
+    : createStore(rootReducer, applyMiddleware(sagaMiddleware));                            // production mode (should not require Redux devtools extension)
 
 export default store;
 
