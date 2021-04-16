@@ -3,12 +3,17 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import AuthorizedView from '../views/AuthorizedView';
 import { getCurrentUser } from "../api/spotifyUser";
+import { useHistory } from 'react-router';
 
 function AuthorizedPresenter(props){
+    const { token } = props;
+    const history = useHistory();
+    if(!token){
+        history.push("/");
+    }
     // TODO: move retrieval of user to the redux store
     const [user, setUser] = useState(null);
     const [promise, setPromise] = useState(null);
-    const { token } = props;
     useEffect(() => {
         setPromise(getCurrentUser(token).then(r=>r.json()).then(res=>setUser(res)));
     }, []);
