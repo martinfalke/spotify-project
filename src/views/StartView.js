@@ -5,11 +5,6 @@ import "./StartView.scss";
 function StartView(props){
     return(
         <div className="start-view" >
-          {/* <p>Firebase config options</p>
-          <code>
-            <pre>{props.firebaseOptions}</pre>
-          </code> */}
-          <p>{console.log(`Firebase config options: ${props.firebaseOptions}`)}</p>
           <header className="login-header">
             <h1>Listify</h1>
           </header>

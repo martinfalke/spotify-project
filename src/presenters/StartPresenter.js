@@ -6,8 +6,6 @@ import StartView from '../views/StartView';
 import { connect } from 'react-redux';
 import authActions from '../state/auth/authActions';
 
-import firebase from 'firebase';
-
 function StartPresenter(props){
     const [spotifyString, setSpotifyString] = useState(null);
 
@@ -17,7 +15,7 @@ function StartPresenter(props){
         props.setSpotifyState(randomString);
     }, []);
 
-    return <StartView loginUrl={`${spotifyAuthUrl}&state=${spotifyString}`} firebaseOptions={JSON.stringify(firebase.apps[0].options, null, 2)}/>;
+    return <StartView loginUrl={`${spotifyAuthUrl}&state=${spotifyString}`} />;
 }
 
 const mapDispatchToProps = {
