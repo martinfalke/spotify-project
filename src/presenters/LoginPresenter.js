@@ -8,8 +8,8 @@ function LoginPresenter(props){
     const params = useParams();
 
     // state must be present and correct
-    if(!params.state || params.state != localStorage.getItem("spotifyState")){
-        console.error("Faulty URL parameter \'state\' for login attempt.");
+    if(!params.state || params.state !== localStorage.getItem("spotifyState")){
+        console.error("Faulty URL parameter 'state' for login attempt.");
         history.push("/");
     }
 
@@ -21,6 +21,7 @@ function LoginPresenter(props){
     }
 
     if(params.token && params.expires_in){
+        localStorage.setItem("spotifyToken", params.token);
         props.saveSpotifyToken(params.token, params.expires_in);
         history.push("/authorized");
     }
