@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import React from 'react'
+import SearchPresenter from '../presenters/SearchPresenter'
 
 
 function AuthorizedView(props){
@@ -71,11 +72,13 @@ function AuthorizedView(props){
 
                 </Tab>
                 <Tab eventKey="search" title="Search">
-                <p>Search</p>
+                <SearchPresenter>
+                </SearchPresenter>
                 </Tab>
                 <Tab className="listify" eventKey="logo" title="Listify" disabled></Tab>
             </Tabs>
-            <div className="App">
+            
+            {/*<div className="App">
                 <p>Spotify login success!</p>
                 <h2>Sample API data from authorized user</h2>
                 <h5>Username</h5>
@@ -85,6 +88,7 @@ function AuthorizedView(props){
                 <h5>Country Code</h5>
                 <p>{props.country}</p>
             </div>
+            */}
         </div>
   );
 }
