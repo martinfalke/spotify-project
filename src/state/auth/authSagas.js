@@ -1,5 +1,5 @@
 // src/state/auth/authSagas.js
-import { fork, all, put, take, takeLatest } from 'redux-saga/effects';
+import { all, take, takeLatest } from 'redux-saga/effects';
 import * as types from './authTypes';
 import actions from './authActions';
 
@@ -18,8 +18,10 @@ function* handleAuthInit(){
     }
 }
 
-export default function*() {
+function* authRootSaga() {
     yield all([
         takeLatest(types.AUTH_INIT_TEST, handleAuthInit)
     ])
 };
+
+export default authRootSaga;

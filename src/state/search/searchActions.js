@@ -2,6 +2,7 @@
 import { createAction } from '../utils';
 import * as types from './searchTypes';
 
-export default {
+const actions = {
     initSearch: () => createAction(types.SEARCH_INIT_TEST),
-}
+};
+export default actions;

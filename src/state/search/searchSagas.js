@@ -11,8 +11,10 @@ function* handleSearchInit(){
     }
 }
 
-export default function*() {
+function* searchRootSaga() {
     yield all([
         takeLatest(types.SEARCH_INIT_TEST, handleSearchInit)
     ])
 };
+
+export default searchRootSaga;

@@ -9,6 +9,21 @@ const requestTypes = {
     DELETE: "DELETE"
 }
 
+function handleHttpResponse(response){
+    return response.json().then(
+        (json) => {
+            if(!response.ok) {
+                const error = Object.assign({}, json, {
+                    status: response.status,
+                    statusText: response.statusText
+                });
+
+                return Promise.reject(error);
+            }
+            return json;
+        });
+}
+
 const spotifyApiCall = (token, endpoint, method="GET", content_type="application/json", bodyObj={}) => {
     // add slash if missing
     const finalEndpoint = (endpoint.startsWith("/")) ? endpoint : "/" + endpoint;
@@ -26,7 +41,7 @@ const spotifyApiCall = (token, endpoint, method="GET", content_type="application
         headers["Content-Type"] = content_type;
     }
     
-    return fetch(baseUrl+finalEndpoint, parameters);
+    return fetch(baseUrl+finalEndpoint, parameters).then(handleHttpResponse).then(response => ({response}) ).catch(error => ({error}) );
 }
 
 export { requestTypes, spotifyApiCall };
