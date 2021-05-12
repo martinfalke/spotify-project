@@ -28,18 +28,13 @@ export default createReducer(initialState, {
     [types.PLAYLIST_DELETE_FROM_LIST]: (state, action) => {
         const playlistId = action.playlistId;
         let trackLocationsObj = state.trackLocations[state.selectedTrack];
-        let updatedTrackLocations = trackLocationsObj.foundIn.map((isContained, playlist)=>{
-            if(playlist === playlistId){
-                isContained = false;
-            } 
-        });
 
         return {...state,
             trackLocations: {
                 ...state.trackLocations,
                 [state.selectedTrack]:{
                     ...trackLocationsObj,
-                    foundIn: updatedTrackLocations
+                    [playlistId]: false
                 }
             }
         }

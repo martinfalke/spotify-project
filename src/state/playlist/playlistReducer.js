@@ -24,7 +24,7 @@ const initialState = {
 }
 
 export default createReducer(initialState, {
-    [types.PLAYLIST_MOVE_UP_SONG]: (state, action) => {
+    [types.PLAYLIST_MOVE_UP_SONG_SUCCESS]: (state, action) => {
         console.log("move up");
         //const playlistId = action.playlistId;
         const CI = action.CI;
@@ -33,33 +33,26 @@ export default createReducer(initialState, {
         }
 
         let playlistobj = state.playlists[state.selectedList];
-        let reorderedList = playlistobj.tracks.map( (track, i, tracklist) => {
-            if(i === CI){
-                // console.log(i);
-                tracklist[i] = tracklist[i-1];
-                tracklist[i-1] = track;
-                //console.log(tracklist);
-            }
-            // console.log("track:"+track);
-            // console.log("tracklist:"+tracklist);
-            return tracklist
+        let reorderedList = playlistobj.tracks;
 
-        });
+        let tmp = reorderedList[CI-1];
+        reorderedList[CI-1] = reorderedList[CI];
+        reorderedList[CI] = tmp;
 
-        //console.log(reorderedList)
+        console.log(reorderedList)
 
         return { ...state, 
                 playlists: {
                     ...state.playlists,
                     [state.selectedList]: {
                         ...playlistobj,
-                        tracks: reorderedList
+                        tracks: [...reorderedList]
                     },
 
             }
         };
     },
-    [types.PLAYLIST_MOVE_DOWN_SONG]: (state, action) => {
+    [types.PLAYLIST_MOVE_DOWN_SONG_SUCCESS]: (state, action) => {
         console.log("move down");
         //const playlistId = action.playlistId;
         const CI = action.CI;
@@ -68,20 +61,18 @@ export default createReducer(initialState, {
         if(CI === playlistobj.tracks.length - 1){
             return state;
         }
-        let reorderedList = playlistobj.tracks.map( (track, i, tracklist) => {
-            if(i === CI){
-                
-                tracklist[i] = tracklist[i+1];
-                tracklist[i+1] = track;
-            }
-        });
+        let reorderedList = playlistobj.tracks;
+
+        let tmp = reorderedList[CI];
+        reorderedList[CI] = reorderedList[CI+1];
+        reorderedList[CI+1] = tmp;
 
         return { ...state, 
                 playlists: {
                     ...state.playlists,
                     [state.selectedList]: {
                         ...playlistobj,
-                        tracks: reorderedList
+                        tracks: [...reorderedList]
                     },
 
             }
