@@ -3,6 +3,7 @@ import * as types from './playlistTypes';
 import { createReducer } from '../utils';
 
 const initialState = {
+    //mock data
     status: null,
     selectedList: "1234",
     playlists: {
@@ -13,6 +14,13 @@ const initialState = {
     trackIndex: {},
     featureMaps: {},
 
+    //initial state
+    // status: null,
+    // selectedList: "",
+    // playlists: {},
+    // trackIndex: {},
+    // featureMaps: {},
+
 }
 
 export default createReducer(initialState, {
@@ -20,18 +28,25 @@ export default createReducer(initialState, {
         console.log("move up");
         //const playlistId = action.playlistId;
         const CI = action.CI;
-        if(CI == 0){
+        if(CI === 0){
             return state;
         }
 
         let playlistobj = state.playlists[state.selectedList];
         let reorderedList = playlistobj.tracks.map( (track, i, tracklist) => {
-            if(i == CI){
-                console.log(i);
+            if(i === CI){
+                // console.log(i);
                 tracklist[i] = tracklist[i-1];
                 tracklist[i-1] = track;
+                //console.log(tracklist);
             }
+            // console.log("track:"+track);
+            // console.log("tracklist:"+tracklist);
+            return tracklist
+
         });
+
+        //console.log(reorderedList)
 
         return { ...state, 
                 playlists: {
@@ -50,11 +65,11 @@ export default createReducer(initialState, {
         const CI = action.CI;
 
         let playlistobj = state.playlists[state.selectedList];
-        if(CI == playlistobj.tracks.length - 1){
+        if(CI === playlistobj.tracks.length - 1){
             return state;
         }
         let reorderedList = playlistobj.tracks.map( (track, i, tracklist) => {
-            if(i == CI){
+            if(i === CI){
                 
                 tracklist[i] = tracklist[i+1];
                 tracklist[i+1] = track;

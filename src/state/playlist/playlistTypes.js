@@ -1,4 +1,11 @@
 // src/state/playlist/playlistTypes.js
+
+//for reducer
 export const PLAYLIST_MOVE_UP_SONG = 'PLAYLIST_MOVE_UP_SONG';
 export const PLAYLIST_MOVE_DOWN_SONG = 'PLAYLIST_MOVE_DOWN_SONG';
 export const PLAYLIST_DELETE_FROM_LIST = 'PLAYLIST_DELETE_FROM_LIST';
+
+//for saga
+export const TRIGGER_MOVE_UP_SONG = 'TRIGGER_MOVE_UP_SONG';
+export const TRIGGER_MOVE_DOWN_SONG = 'TRIGGER_MOVE_DOWN_SONG';
+export const TRIGGER_DELETE_FROM_LIST = 'TRIGGER_DELETE_FROM_LIST';

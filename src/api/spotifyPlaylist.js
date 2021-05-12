@@ -2,11 +2,8 @@
 import { spotifyApiCall, requestTypes } from './spotifyUtil';
 
 
-const moveTrack = (token, playlistId, CI) => {
-    return spotifyApiCall(token, '/playlists/' + playlistId + 'tracks', bodyObj = {
-        "range_start": ,
-        "insert_before": ,
-    })
+const moveTrack = (token, playlistId, snapshotId, range_start, insert_before) => {
+    return spotifyApiCall(token, '/playlists/' + playlistId + 'tracks', bodyObj = {range_start,insert_before});
 }
 
 const deleteFromPlaylist = (token, playlistId, ) => {

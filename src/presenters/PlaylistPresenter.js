@@ -14,7 +14,7 @@ function PlaylistPresenter(props){
     }, [Playlist])
 
     useEffect(() =>{
-        setSelectedPlaylist(playlist.map( playlistId => ))
+        setSelectedPlaylist()
     }, [SelectedPlaylist])
 
 
