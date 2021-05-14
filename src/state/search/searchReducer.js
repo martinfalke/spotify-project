@@ -7,11 +7,28 @@ const initialState = {
     latestQuery: null,
     activePage: null,
     isExact: false,
-    resulTypes: ["track"]
+    resultTypes: ["track"]
 }
 
 export default createReducer(initialState, {
     [types.SEARCH_INIT_TEST]: (state, action) => {
         return { ...state, status: "initialized"};
     },
+    [types.SEARCH_GET]: (state, action) => {
+        return { ...state, status: "Query accepted"}
+    },
+    [types.SEARCH_GET_SUCCESS]: (state, action) => {
+        return { ...state, activePage: action.payload, status: "API OK"}
+    },
+    [types.SEARCH_GET_ERROR]: (state, action) => {
+        return { ...state, activePage: initialState.activePage, status: "API ERROR"}
+    },
+    [types.SEARCH_NEXT]: (state, action) => {
+        return { ...state, status: "Next Page Found"}
+    },
+    [types.SEARCH_PREV]: (state, action) => {
+        return { ...state, status: "Prev Page Found"}
+    }
+    
 });
+
