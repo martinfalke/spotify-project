@@ -1,42 +1,54 @@
-
-
-.tabs{
-    display: flex;
-    padding: 10px;
-}
-
+@import '../index.scss';
 .bg{
     width: 290px;
     height: 476px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    left: 575px;
-    top: 200px;
+    margin-top: 80px;
     filter: blur(2px);
-}
+    opacity:60%;
+} 
+
 .searchcontainer{
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
-    left: 16px;
+    justify-content: center;
     top: 250px;
-    width: 100%
+    width: 60%;
+    position:fixed
+
 }
 
 
-.searchbar{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        width: 50%;
+.s-searchbar{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
 }
 
-.searchinput{
+.s-searchbar img {
+    width: 30px;
+    height: 30px;
+    margin-left:4px ;
+    padding-top: 4px;
+
+}
+
+.s-searchinput{
+    margin:0;
     width: 100%;
 
 }
+.searchview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    vertical-align: center;
+    width: 100%;
+}
+
 /*  change the position only   
     position: absolute;
     width: 640px;

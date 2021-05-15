@@ -4,7 +4,12 @@
 $theme-colors: (
   // set primary, secondary, success, info, danger, warning, light, dark, link
   "primary": $primary-color,
-  "secondary": $secondary-color
+  "secondary": $secondary-color,
+  "highlight": $orange-color,
+  "dark":$purple-color,
+  "light": $light-color,
+  "white": $bg-color,
+  "transparent":$transparent-color
   
 );
 $body-bg: $bg-color;
