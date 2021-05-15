@@ -16,7 +16,7 @@ import trackmarked from '../images/Icons/Inboxes fill.svg'
 import React from 'react'
 
 // navigation bar 
-    // LOGO+listyfy playlist
+// LOGO+listyfy playlist
 // background
 // search bar
 
@@ -28,8 +28,9 @@ function SearchResultView(props){
                 <div className='sr-searchbar'>
                     <form className='sr-searchinput'>
                         <Form.Group controlId="formSearchInput">
-                            <Form.Control type="text" placeholder="Search for a song, an artist or an album" />
-                             {/* <Form.Control  defaultValue={props.search} type="text" placeholder="Search for a song, an artist or an album" /> */}
+                            <Form.Control autoFocus={props.tabVisible} defaultValue={props.search} 
+                                    type="text" placeholder="Search for a song, an artist or an album"
+                                    onChange={e=>props.onSearch(e.target.value)} />
                        </Form.Group>
                     </form>
                         <img
@@ -49,39 +50,40 @@ function SearchResultView(props){
                 {/* Here needs to fetch searchresults data */}
                 <div className='resultscontainer'>
 
-                    {/* mock songitem */}
-                    {/* {props.tracks.map((songitem)=> ( */}
+                   { props.results.map((item, index) => {
+                       return (
                         <div className='songitem' >    
-                        <h6>1</h6>
-                        <img 
-                            className="songitem-cover"
-                            src={songcover}
-                            /* src={songitem.image} */
-                         />
-                        <Card>
-                                <div className='cardcontent'>
-                                    <p className="cd-name text-muted">
-                                    The weekend
-                                    {/* {songitem.name} */}
-                                    </p>
-                                    <p className="cd-artist text-muted">
-                                    Blinding Lightscjsojcosjvosjvojo
-                                    </p>
-                                    <p className="cd-album text-muted">
-                                    After Hours
-                                    </p>
-                                    
-                                    {/* These functions have not been implemented yet
-                                    <div className='cd-Actions'>
-                                        <Button>
-                                            <img
-                                                src={trackmarked} />
-                                        </Button>
-                                        <i className="fa fa-plus add-song" aria-hidden="true" />
-                                    </div> */}
-                                </div>
-                        </Card>
-                        </div>
+                       <h6>{(props.currentPage-1)*20 + index+1}</h6>
+                       <img 
+                           className="songitem-cover"
+                           src={item.image} 
+                        />
+                       <Card>
+                               <div className='cardcontent'>
+                                   <p className="cd-name text-muted">
+                                   {item.name}
+                                   </p>
+                                   <p className="cd-artist text-muted">
+                                   {item.artist}
+                                   </p>
+                                   <p className="cd-album text-muted">
+                                   {item.album}
+                                   </p>
+                                   
+                                   {/* These functions have not been implemented yet
+                                   <div className='cd-Actions'>
+                                       <Button>
+                                           <img
+                                               src={trackmarked} />
+                                       </Button>
+                                       <i className="fa fa-plus add-song" aria-hidden="true" />
+                                   </div> */}
+                               </div>
+                       </Card>
+                       </div>
+                       )
+                    })}
+                        
 {/*                         ))
                     }     */}
 
@@ -89,20 +91,17 @@ function SearchResultView(props){
                     <div className="Pagenav">
                         <nav>
                             <ul class="pagination">
-                                <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
+                                <li class={(props.currentPage===1) ? "page-item disabled" : "page-item"}>
+                                <span class="page-link" aria-label="Previous" onClick={props.onPrevPage} disabled={props.currentPage===1}>
                                     <span aria-hidden="true">&laquo;</span>
                                     <span class="sr-only">Previous</span>
-                                </a>
+                                </span>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
+                                <li class={(props.currentPage===props.numPages) ? "page-item disabled" : "page-item"}>
+                                <span class="page-link" aria-label="Next" onClick={props.onNextPage} disabled={props.currentPage===props.numPages}>
                                     <span aria-hidden="true">&raquo;</span>
                                     <span class="sr-only">Next</span>
-                                </a>
+                                </span>
                                 </li>
                             </ul>
                         </nav>

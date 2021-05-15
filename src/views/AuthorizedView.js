@@ -5,9 +5,11 @@ import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import React from 'react'
 import SearchPresenter from '../presenters/SearchPresenter'
-
+import DropdownButton from 'react-bootstrap/DropdownButton'
 
 function AuthorizedView(props){
+
+
     return (
         <div>
             <Tabs className="tabs" defaultActiveKey="tracks" id="home-page-tabs">
@@ -76,7 +78,23 @@ function AuthorizedView(props){
                 </SearchPresenter>
                 </Tab>
                 <Tab className="listify" eventKey="logo" title="Listify" disabled></Tab>
+                <Tab classname="usermenu" eventKey="usermenu" title="Menu">
+                    <nav>
+                        <div class="dropdown">
+                            <button><a href="#">Home</a></button>
+                            <div class="projects">
+                                <button>Projects</button>
+                                <ul class="list">
+                                    <li><a href="#">Weather App1</a></li>
+                                    <li><a href="#">Weather App2</a></li>
+                                    <li><a href="#">Weather App3</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </Tab>
             </Tabs>
+         
             
             {/*<div className="App">
                 <p>Spotify login success!</p>
