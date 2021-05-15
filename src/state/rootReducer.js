@@ -4,13 +4,13 @@ import auth from "./auth/authReducer";
 import fbase from './fbase/fbaseReducer';
 import search from './search/searchReducer';
 import user from './user/userReducer';
-import playlist from './playlist/playlistReducer';
-import track from './tracks/tracksReducer';
+import lists from './playlist/playlistReducer';
+import tracks from './tracks/tracksReducer';
 
 
 // TODO: import different reducers
 
 // TODO: add imported reducers in object
 export default combineReducers(
-    { auth, fbase, search, user, playlist, track}
+    { auth, fbase, search, user, lists, tracks}
 );

@@ -2,31 +2,50 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PlaylistView from '../views/PlaylistView';
-import { getPlaylists} from "../api/spotifyPlaylist"
+import playlistActions from '../state/playlist/playlistActions';
 
 function PlaylistPresenter(props){
-    const { token } = props;
-    const [Playlist, setPlaylist] = useState({})
-    const [SelectedPlaylist, setSelectedPlaylist] = useState({});
+    const { token, playlists, playlistsFetched, selectedPlaylist  } = props;
 
-    useEffect( () => {
-        setPlaylist (getPlaylists(token))
-    }, [Playlist])
+    useEffect(()=>{
+        props.fetchPlaylists(token);
+    },[])
 
-    useEffect(() =>{
-        setSelectedPlaylist()
-    }, [SelectedPlaylist])
+    useEffect(()=>{
+        if(Object.keys(playlists).length !== 0){
+            playlists.forEach(playlist => {
+                if(!playlist.tracks){
+                    props.fetchTracks(token, playlist.id);
+                }
+            });
+        }
+    },[playlistsFetched])
+
+    const updateSelectedPlaylist = (playlistId) => props.selectPlaylist(playlistId);
+
+    useEffect(() => {
+        
+    },[selectedPlaylist])
 
 
 
-    return <PlaylistView playlist={SelectedPlaylist}/> 
+
+
+    return <PlaylistView playlist={}/> 
 }
 
 const mapStateToProps = (state) => ({
-    token: state.auth.spotify.token
+    token: state.auth.spotify.token,
+    selectedPlaylist: state.lists.selectedPlaylist,
+    playlists: state.lists.playlists,
+    playlistsFetched: state.lists.playlistsFetched,
+    tracks: state.tracks
 })
   
 const mapDispatchToProps = {
+    fetchPlaylists: playlistActions.fetchPlaylist,
+    fetchTracks: playlistActions.fetchTrack,
+    selectPlaylist: playlistActions.selectPlaylist,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlaylistPresenter);

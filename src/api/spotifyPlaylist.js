@@ -1,13 +1,21 @@
 // src/api/spotifyPlaylist.js
 import { spotifyApiCall, requestTypes } from './spotifyUtil';
 
-
-const moveTrack = (token, playlistId, snapshotId, range_start, insert_before) => {
-    return spotifyApiCall(token, '/playlists/' + playlistId + 'tracks', bodyObj = {range_start,insert_before});
+const fetchPlaylist = (token) => {
+    console.log('fetch playlist');
+    return spotifyApiCall(token, '/me/playlists');
 }
 
-const deleteFromPlaylist = (token, playlistId, ) => {
-    return spotifyApiCall(token, '/playlists/' + playlistId + 'tracks', method = requestTypes.DELETE, bodyObj = {})
+const fetchTrack = (token, playlist_id, market) => {
+    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks?market=' + market);
 }
 
-export { moveTrack, deleteFromPlaylist };
+const moveTrack = (token, playlist_id, range_start, insert_before, snapshot_id) => {
+    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks',{range_start,insert_before,snapshot_id});
+}
+
+const deleteFromPlaylist = (token, playlist_id, tracks, snapshot_id) => {
+    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks', requestTypes.DELETE, {tracks, snapshot_id})
+}
+
+export { moveTrack, deleteFromPlaylist, fetchPlaylist, fetchTrack };
