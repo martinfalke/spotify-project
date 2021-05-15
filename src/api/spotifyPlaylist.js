@@ -1,13 +1,13 @@
 // src/api/spotifyPlaylist.js
 import { spotifyApiCall, requestTypes } from './spotifyUtil';
 
-const fetchPlaylist = (token) => {
+const fetchPlaylist = (token, offset) => {
     console.log('fetch playlist');
-    return spotifyApiCall(token, '/me/playlists');
+    return spotifyApiCall(token, '/me/playlists?offset='+offset+"&limit=20");
 }
 
-const fetchTrack = (token, playlist_id, market) => {
-    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks?market=' + market);
+const fetchTrack = (token, playlist_id, offset) => {
+    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks?market=from_token&offset='+offset+'&limit=100');
 }
 
 const moveTrack = (token, playlist_id, range_start, insert_before, snapshot_id) => {
