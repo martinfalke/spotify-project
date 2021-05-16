@@ -11,9 +11,10 @@ import Card from 'react-bootstrap/Card'
 import LOGO from '../images/LOGO.svg'
 import logo from '../images/logo-02.png'
 import trackmarkicon from '../images/Icons/Inboxes fill.svg'
+import nottrackedicon from '../images/Icons/Inboxes.png'
 // import icons from '/node_modules/bootstrap-icons/icons'
 import React from 'react'
-import { ButtonGroup } from 'react-bootstrap';
+import { ButtonGroup, NavItem } from 'react-bootstrap';
 
 
 function PlaylistView(props){
@@ -102,7 +103,8 @@ function PlaylistView(props){
                     </thead>
                 </Table>
                 <div className='songscontainer'>
-                    <div className='songitem'>
+                    {/* {props.playlist.tracks.map((item)=> {})} */}
+                    <div className='p-songitem'>
                         <h6>1</h6>
                         <img className="p-songcover"
                             src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
@@ -110,25 +112,34 @@ function PlaylistView(props){
                             height= '48px'
                             />
                        <Card borderless='1'>
-                            <div className="cardbody">
-                                    <div className='cardcontent'>
-                                        <div className="song-name">
-                                        The weekend
+                            <div className="p-cardbody">
+                                    <div className='p-cardcontent'>
+                                        <div className="p-songname">
+                                           {/*  {item.track} */}
+                                            The weekend
                                         </div>
-                                        <div className="song-artist">
-                                        Blinding Lights
+                                        <div className="p-songartist">
+                                            <i class="fas fa-user"></i>
+                                            Blinding Lights
                                         </div>
-                                        <div className="song-album">
-                                        After Hours
+                                        <div className="p-songalbum">
+                                            <i class="fas fa-record-vinyl"></i>
+                                            After Hours
                                         </div>
                                     </div>
-                                    <div className="Actions">
-                                        {/* <button><i class="fa fa-box"></i></button> */}
-                                        <button className="trackmark">
+                                    <div className="p-actions">
+                                        <button className="trackmarked" >
+                                            {/* if added in tracks  */}
                                             <img
                                                 src={trackmarkicon}
                                                 />
                                         </button>
+                                        {/* : <button className="nottrackmarked" >
+                                            <img
+                                                src={nottrackedicon}
+                                                />
+                                        </button>
+                                        */}
                                         <ButtonGroup>
                                         <button>
                                             <i class="far fa-arrow-alt-circle-up"></i>
@@ -164,7 +175,7 @@ function PlaylistView(props){
                                         {/* <button><i class="fa fa-box"></i></button> */}
                                         <button className="trackmark">
                                             <img
-                                                src={trackmarkicon}
+                                                src={nottrackedicon}
                                                 />
                                         </button>
                                         <ButtonGroup>

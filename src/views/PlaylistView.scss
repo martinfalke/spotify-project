@@ -103,7 +103,6 @@
 .p-tabletitle {
     display: flex;
     justify-content: space-between;
-    margin-inline: 12px;
     margin-bottom: 0px;
 
 }
@@ -116,7 +115,7 @@
 .p-tabletitle tr{
     display: flex;
     justify-content: space-between;
-    padding-right: 36px;
+    padding-right: 16px;
     width: 100%;
 }
 .songscontainer {
@@ -125,32 +124,32 @@
     padding-inline: 12px;
 }
 
-.cardcontent{
+.p-cardcontent{
     display:flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
     width:100%;
   }
-.song-name{
+.p-songname{
     flex: 1.5;
     padding-right: 4px;
     color:gray;
 }
-.song-artist{
+.p-songartist{
     flex: 1;
     padding-right: 4px;
     color:gray;
 }
-.song-album{
+.p-songalbum{
     flex: 1;
     padding-right: 4px;
     color:gray;
 }
 .p-songcover {
-    margin-left: 8px;
+    margin-inline: 8px;
 }
-.cardbody {
+.p-cardbody {
     display: flex;
     flex-direction: row-reverse;
     flex-direction: row;
@@ -163,36 +162,41 @@
     align-items: flex-end;
 } */
 
-.songitem{
+.p-songitem{
 display: flex;
+flex-direction: row;
 justify-content: space-between;
 align-items: center;
 margin-bottom: 8px;
+padding-left: 8px;
+background-color: white;
 
 }
 
 .card{
     border:none;
 }
-.Actions{
+.p-actions{
     display: flex;
     flex-direction: column;
     align-items:flex-end
 
 }
 
-.Actions button{
+.p-actions button{
     margin: 0;
     padding:4px
 }
-.trackmark {
+
+.trackmarked {
     padding:0px;
     margin:0;
 }
-.trackmark img{
+.trackmarked img{
     padding:0px;
     margin:0;
     width: 18px;
     height:18px;
 }
+
 
