@@ -1,23 +1,19 @@
 // src/presenters/AuthorizedPresenter.js
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import AuthorizedView from '../views/AuthorizedView';
 import { useHistory } from 'react-router';
 import authActions from '../state/auth/authActions';
 import userActions from '../state/user/userActions';
+import fbaseActions from '../state/fbase/fbaseActions';
 
 function AuthorizedPresenter(props){
     const { token, user } = props;
     const history = useHistory();
+    
     // makes sure the user is authorized
     if(!token){
-        const storedToken = localStorage.getItem("spotifyToken");
-        if(!storedToken){
-            history.push("/");
-        }
-        else{
-            props.saveSpotifyToken(storedToken);
-        }
+        history.push("/login");
     }
 
     useEffect(() => {
@@ -27,7 +23,12 @@ function AuthorizedPresenter(props){
     }, [token]);
 
 
-    return (user) ? <AuthorizedView username={user.id || ""} country={user.country || ""} display_name={user.display_name || ""}/> : <div>Fetching user..</div>;
+    return (user) ? <AuthorizedView username={user.id || ""} 
+                        country={user.country || ""} 
+                        display_name={user.display_name || ""}
+                        logout={() => props.logout()}/>
+                        : 
+                        <div>Fetching user..</div>;
 }
 
 const mapStateToProps = (state) => ({
@@ -38,6 +39,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     saveSpotifyToken: authActions.saveSpotifyToken,
     fetchSpotifyUser: userActions.fetchUser,
+    logout: fbaseActions.logout
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorizedPresenter);

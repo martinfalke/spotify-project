@@ -14,3 +14,12 @@ export const createReducer = (initialState, handlers) =>
         else
             return state;
     }
+
+
+export const createExpirationDate = (secondsUntilExpiration) => {
+    return new Date(Date.now() + secondsUntilExpiration*1000);
+}
+
+export const isDateExpired = (expirationDate) => (expirationDate.getTime() < Date.now());
+
+export const isDateExpiredIn = (expirationDate, remainingSeconds) => (expirationDate.getTime()+remainingSeconds*1000 < Date.now());
