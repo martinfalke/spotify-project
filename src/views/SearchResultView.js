@@ -1,27 +1,20 @@
 // src/views/SearchResultView.js
 import './SearchResultView.scss';
-import Table from 'react-bootstrap/Table'
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
-import Button from "react-bootstrap/Button"
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import Card from 'react-bootstrap/Card'
-import LOGO from '../images/LOGO.svg'
-import logo from '../images/logo-02.png'
-import spotifyicon from '../images/Icons/Spotify_Icon.png'
-import searchicon from '../images/Icons/Search.svg'
-import trackmarked from '../images/Icons/Inboxes fill.svg'
-import untrackmark from '../images/Icons/Inboxes.png'
-import React from 'react'
+import Table from 'react-bootstrap/Table';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import spotifyicon from '../images/Icons/Spotify_Icon.png';
+import searchicon from '../images/Icons/Search.svg';
+import trackmarked from '../images/Icons/Inboxes fill.svg';
+import untrackmark from '../images/Icons/Inboxes.png';
+
 
 
 function SearchResultView(props){
     return (
         <div className= 'searchresultview'>
             <div className= 'searchresultcontainer'>
-            <h7 className="sr-slogan">Listify helps you find manage and find inspiration for your playlist</h7>
                 <div className='sr-searchbar'>
                     <form className='sr-searchinput'>
                         <Form.Group controlId="formSearchInput">
@@ -31,7 +24,7 @@ function SearchResultView(props){
                        </Form.Group>
                     </form>
                         <img
-                                alt=""
+                                alt="search icon"
                                 src= {searchicon}
                             />
                 </div>
@@ -51,13 +44,14 @@ function SearchResultView(props){
 
                    { props.results.map((item, index) => {
                        return (
-                        <div className='songitem' >  
+                        <div className='songitem' key={index}>  
                             <span className="cd-preview fake-button" onClick={()=>console.log(index)}>
                                 <i class="fas fa-play-circle"></i>
                             </span>
                             <div className='cd-cover'>  
                                 {/* <h6>{(props.currentPage-1)*20 + index+1}</h6> */}
-                                <img 
+                                <img
+                                    alt="song album cover"
                                     className="songitem-cover"
                                     src={item.image} 
                                     />
@@ -77,20 +71,23 @@ function SearchResultView(props){
                                    </p>
                                    {/* These functions have not been implemented yet */}
                                    <div className='cd-Actions' > 
-                                       <Button onClick={()=>console.log(index)}>
+                                       <Button variant="light" onClick={()=>console.log(index)}>
                                            {/* <Button onClick={()=>props.addToStash(index)}> */}
                                            {/* If it is not clicked */}
                                            {/* <img
+                                            alt="add to track stash"
                                             src={untrackmark}
                                            /> */}
                                            {/* If it is clicked */}
                                            <img
-                                               src={trackmarked} />
+                                                alt="remove from track stash"
+                                                src={trackmarked} />
                                        </Button>
                                        
                                        <a href={item.spotifyUrl}>
                                            {/* Open Spotify */}
                                             <img
+                                                alt="open song in Spotify"
                                                 src={spotifyicon}
                                                 className='openinspotify'
                                                 />
@@ -133,7 +130,7 @@ function SearchResultView(props){
 export default SearchResultView;
 
 //small tracksview has not been implemented
-            {/*
+            /*
             <div className= 'smtrackscontainer'>
                 <div className="trackstitle"> 
                     <h5>
@@ -206,4 +203,4 @@ export default SearchResultView;
                     </div>
                    
                 </div>
-            </div> */}
+            </div> */

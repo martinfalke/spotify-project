@@ -89,7 +89,7 @@
 .th-actions {
   display: inline-flex;
   flex:1;
-  justify-content:start;  /* width=10% */
+  justify-content: flex-start;  /* width=10% */
   flex-direction: row-reverse;
 }
 .searchresultcontainer {
@@ -146,6 +146,9 @@
   padding: 8px;
   width: 100%;
   border-color: white;
+  i{
+    margin-right: 4px;
+  }
 }
 
 .cardcontent p{

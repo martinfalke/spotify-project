@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import AuthorizedView from '../views/AuthorizedView';
 import { useHistory } from 'react-router';
-import authActions from '../state/auth/authActions';
 import userActions from '../state/user/userActions';
 import fbaseActions from '../state/fbase/fbaseActions';
 
@@ -23,9 +22,7 @@ function AuthorizedPresenter(props){
     }, [token]);
 
 
-    return (user) ? <AuthorizedView username={user.id || ""} 
-                        country={user.country || ""} 
-                        display_name={user.display_name || ""}
+    return (user) ? <AuthorizedView username={user.display_name || user.id || ""}
                         logout={() => props.logout()}/>
                         : 
                         <div>Fetching user..</div>;
@@ -37,7 +34,6 @@ const mapStateToProps = (state) => ({
 })
   
 const mapDispatchToProps = {
-    saveSpotifyToken: authActions.saveSpotifyToken,
     fetchSpotifyUser: userActions.fetchUser,
     logout: fbaseActions.logout
 }

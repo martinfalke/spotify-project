@@ -1,4 +1,6 @@
 @import '../index.scss';
+@import '../shared.scss';
+
 .bg{
     width: 290px;
     height: 476px;
@@ -14,8 +16,12 @@
     justify-content: center;
     top: 250px;
     width: 60%;
-    position:fixed
-
+    position: fixed;
+    h6 {
+        border-radius: 8px;
+        padding: 8px 12px;
+        background-color: rgba($secondary-color, 0.1);
+    }
 }
 
 

@@ -1,21 +1,10 @@
 // src/views/AuthorizedView.js
 import './AuthorizedView.scss';
-import SearchView from  '../views/SearchView'
-import SearchResultView from '../views/SearchResultView'
-import Table from 'react-bootstrap/Table'
-import { Tabs, Tab, Navbar } from "react-bootstrap";
-import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import LOGO from '../images/LOGO.svg'
-import searchicon from '../images/Icons/Search.svg'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import { Tab, Navbar } from "react-bootstrap";
+import Nav from 'react-bootstrap/Nav';
+import LOGO from '../images/LOGO.svg';
 import NavDropdown from "react-bootstrap/NavDropdown";
-
-
-
-import React from 'react'
-import SearchPresenter from '../presenters/SearchPresenter'
+import SearchPresenter from '../presenters/SearchPresenter';
 // import PlaylistView from './PlaylistView';
 
 
@@ -24,7 +13,7 @@ function AuthorizedView(props){
     return (
         <div>
             <Tab.Container id="left-tabs-example" defaultActiveKey="playlist">
-            <Nav class="navbar">
+            <Nav className="navbar">
             <Nav variant="tabs" className="mr-auto" id="nav-container">
                     <Nav.Item>
                         <Nav.Link eventKey="playlist">Playlist</Nav.Link>
@@ -36,9 +25,9 @@ function AuthorizedView(props){
                         <Nav.Link eventKey="tracks">Tracks</Nav.Link>
                     </Nav.Item>
             </Nav>
-            <Nav inline>
+            <Nav>
                 <NavDropdown title={props.username}>
-                    <NavDropdown.Item eventKey="1">Sign Out</NavDropdown.Item>
+                    <NavDropdown.Item onClick={props.logout} eventKey="1">Sign Out</NavDropdown.Item>
                 </NavDropdown>
                 <Navbar.Brand>
                     <img id="listify-logo" src={LOGO} alt="Logo" height="30" width="30"/>
@@ -46,31 +35,18 @@ function AuthorizedView(props){
             </Nav>
             </Nav>
             <Tab.Content>
-                <Tab.Pane eventKey="search" title="Search">
+                <Tab.Pane eventKey="search">
                     <SearchPresenter>
                     </SearchPresenter> 
                 </Tab.Pane>
-                <Tab.Pane eventKey="playlist" title="Search">
+                <Tab.Pane eventKey="playlist">
                     <p>Playlistview</p>
                 </Tab.Pane>
-                <Tab.Pane eventKey="tracks" title="Search">
+                <Tab.Pane eventKey="tracks">
                     <p>Tracksview</p>
                 </Tab.Pane>
             </Tab.Content>
             </Tab.Container>
-
-            
-            {/*<div className="App">
-                <p>Spotify login success!</p>
-                <h2>Sample API data from authorized user</h2>
-                <h5>Username</h5>
-                <p>{props.username}</p>
-                <h5>Display name</h5>
-                <p>{props.display_name}</p>
-                <h5>Country Code</h5>
-                <p>{props.country}</p>
-            </div>
-            */}
         </div>
   );
 }

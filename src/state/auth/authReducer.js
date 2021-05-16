@@ -14,7 +14,7 @@ const initialState = {
 
 export default createReducer(initialState, {
     [types.AUTH_INIT_TEST]: (state, action) => {
-        return { ...state, status: "initialized"};
+        return { ...state, status: "OK"};
     },
     [types.AUTH_SPOTIFY]: (state, action) => {
         localStorage.setItem("spotifyToken", action.token);
