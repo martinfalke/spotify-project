@@ -4,10 +4,21 @@ import {useState, useEffect} from "react"
 import { getSearchResults } from "../api/spotifySearch"
 import { connect } from 'react-redux';
 import searchActions from '../state/search/searchActions';
+import SearchView from '../views/SearchView';
+import SearchResultView from '../views/SearchResultView';
 
+function setNextPage(currentPage, numPages, setPage){
+    if(currentPage === numPages) return;
+    setPage(currentPage+1);
+}
+function setPrevPage(currentPage, setPage){
+    if(currentPage === 0) return;
+    setPage(currentPage-1);
+}
 
 function SearchPresenter(props) {
     console.log(props);
+    //search == search
     const [search, setSearch] = useState("");
     const { token } = props;
 
@@ -16,36 +27,51 @@ function SearchPresenter(props) {
         props.getSearchResults(token, search);
     }, [search])
 
-    function setNextPage(currentPage, numPages, setPage){
-        if(currentPage === numPages) return;
-        setPage(currentPage+1);
-    }
-    function setPrevPage(currentPage, setPage){
-        if(currentPage === 0) return;
-        setPage(currentPage-1);
-    }
+    const [isTabVisible, setIsTabVisible] = useState(false);
+    useEffect(()=>{
+        const observer = new MutationObserver(() =>{
+            let searchTab = document.querySelector('#home-page-tabs-tabpane-search');
+            setIsTabVisible( (searchTab && searchTab.classList.contains("active")) );
+        })
+        let searchTab = document.querySelector('#home-page-tabs-tabpane-search');
+        observer.observe(searchTab, {
+            attributes: true
+        });
 
-    const [query, setQuery] = useState("");
+        return () => observer.disconnect(searchTab);
+    }, []);
+
+    useEffect(()=>{
+        if(isTabVisible){
+            const searchBar = document.getElementById("formSearchInput");
+            searchBar.focus();
+        }
+    }, [isTabVisible]);
+
     const [page, setPage] = useState(1);
-
-    const numPages = Math.ceil(searchResults.length/20);
-    const pageResults = searchResults.slice((page-1)*20, (page*20));
+    const numPages = Math.ceil(props.totalResults/20);
+   
     
-    return ( 
-    <Container>
-        <Form.Control 
-            type="search"
-            placeholder="Search Songs/Artists" 
-            value={search} 
-            onChange={e => setSearch(e.target.value)} 
-        />
-        <div className="flex-grow-1 my-2" style={{ overflowY: "auto" }}>
-           songs
-        </div>
-    </Container>);
+    return (search) ?
+        <SearchResultView   onSearch={(term)=>setSearch(term)} search={search}
+                            results={props.results} currentPage={page}
+                            numPages={numPages}
+                            onNextPage={() => {
+                                setNextPage(page, numPages, setPage);
+                                props.getNextPage(token);
+                            }}
+                            onPrevPage={() => {
+                                setPrevPage(page, setPage);
+                                props.getPreviousPage(token);
+                            }}
+                            tabVisible={isTabVisible}
+        /> : 
+        <SearchView onSearch={(term)=>setSearch(term)} tabVisible={isTabVisible} />
+
 }
 
 const mapStateToProps = (state) => { 
+    let totalResults = (state.search.activePage && state.search.activePage.total) || 0; 
     let itemsArray = [];
     if(state.search.activePage){
         itemsArray = state.search.activePage.items.map( (item) => {
@@ -75,13 +101,16 @@ const mapStateToProps = (state) => {
         })
     }
     return {
+        totalResults: totalResults,
         results: itemsArray,
         token: state.auth.spotify.token
     };
 }
   
 const mapDispatchToProps = {
-    getSearchResults: searchActions.getSearchResults
+    getSearchResults: searchActions.getSearchResults,
+    getNextPage: searchActions.getNextPage,
+    getPreviousPage: searchActions.getPreviousPage
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPresenter);

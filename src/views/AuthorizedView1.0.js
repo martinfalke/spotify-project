@@ -10,20 +10,47 @@ import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import LOGO from '../images/LOGO.svg'
 import searchicon from '../images/Icons/Search.svg'
-
-
 import React from 'react'
-import SearchPresenter from '../presenters/SearchPresenter'
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import PlaylistView from './PlaylistView';
+
 
 function AuthorizedView(props){
     return (
         <div>
-            <Tabs className="tabs" defaultActiveKey="tracks" id="home-page-tabs">
+            <Navbar className= "justify-content-between" bg='light' variant= 'orange' >             
+                <Navbar.Brand href="#authorized"> 
+                    <img
+                        alt=""
+                        src={LOGO}
+                        width="30"
+                        height="30"
+                        className="d-inline-block align-top"
+                    />{' '}
+                    Listify
+                </Navbar.Brand>
+                <Nav className= "justify-content-center" activeKey="/authorized" >
+                    <Nav.Link href="#playlist" >Playlist</Nav.Link>
+                    <Nav.Link href="#link">Tracks</Nav.Link>
+                    <Nav.Link href="#authorized" disabled>
+                        Search
+                    </Nav.Link>
+                    <img 
+                            alt=""
+                            src= {searchicon}
+                            width="24"
+                            height="24"
+                            className="d-inline-block vertical-align-middle " 
+                    />{' '}
+                
+                </Nav>
+            </Navbar>
+            <SearchResultPresenter>
+            <SearchResultPresenter/>
+
+            {/* <Tabs className="tabs" defaultActiveKey="search" id="home-page-tabs">
                 <Tab eventKey="playlist" title="Playlists">
-                    <PlaylistView/>
+                    <p>Will display playlists eventually</p>
                 </Tab>
+                
                 <Tab eventKey="tracks" title="Tracks">
                     <Table striped bordered hover variant="dark">
                         <thead>
@@ -81,30 +108,15 @@ function AuthorizedView(props){
                     </Table>
 
                 </Tab>
-                <Tab eventKey="search" title="Search">
-                 <SearchPresenter>
-                </SearchPresenter> 
-                </Tab>
-                <Tab className="listify" eventKey="logo" title="Listify" disabled></Tab>
-                <Tab classname="usermenu" eventKey="usermenu" title="Menu">
-                    <nav>
-                        <div class="dropdown">
-                            <button><a href="#">Home</a></button>
-                            <div class="projects">
-                                <button>Projects</button>
-                                <ul class="list">
-                                    <li><a href="#">Weather App1</a></li>
-                                    <li><a href="#">Weather App2</a></li>
-                                    <li><a href="#">Weather App3</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
+ */}
+
+{/*                 <Tab eventKey="search" title="Search">
+                <p>Search</p>
+                <SearchView/>
                 </Tab>
             </Tabs>
-         
-            
-            {/*<div className="App">
+ */}
+            {/* <div className="App">
                 <p>Spotify login success!</p>
                 <h2>Sample API data from authorized user</h2>
                 <h5>Username</h5>
@@ -113,49 +125,9 @@ function AuthorizedView(props){
                 <p>{props.display_name}</p>
                 <h5>Country Code</h5>
                 <p>{props.country}</p>
-            </div>
-            */}
+            </div> */}
         </div>
   );
 }
 
 export default AuthorizedView;
-
-
-
-
-
-
-/* function AuthorizedView(props){
-
-    return (
-        <div className='allthingscontainer'>
-             <Navbar className="NavigationForEveryPage justify-content-between">             
-                <Navbar.Brand href="#authorized"> 
-                    <img
-                        alt=""
-                        src={LOGO}
-                        width='30'
-                        height='30'
-                    />{' '}
-                    Listify
-                </Navbar.Brand>
-                <Nav className= "navpages" activeKey="/authorized" >
-                    <Nav.Link href="#Playlist" >Playlist</Nav.Link>
-                    <Nav.Link href="#Tracks">Tracks</Nav.Link>
-                    <Nav.Link href="#authorized" disabled>
-                        Search
-                    </Nav.Link>
-                    <img 
-                            alt=""
-                            src= {searchicon}
-                    />{' '}
-                </Nav>
-            </Navbar>
-            <SearchPresenter/>
-        </div>
-  );
-}
-
-export default AuthorizedView; */
-
