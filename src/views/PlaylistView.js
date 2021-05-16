@@ -34,26 +34,24 @@ function PlaylistView(props){
 
 
                 })} */}
-                <div className="selectedplaylist">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
-                        >
-                    </img>
-                    <p class="h6 text-light">Playlist A</p>
-                </div>
-                <div className="unselectedplaylist">
+
+                {props.allPlaylists.map((playlist) => {
+                    return (
+                        <div className='selectedplaylist' onClick = {playlist => props.onSelectPlaylist(playlist.id)}>
+                            <img src={playlist.image}></img>
+                            <p class="h6 text-light">{playlist.name}</p>
+                        </div>
+                    )
+                })}
+                
+                {/* <div className="unselectedplaylist">
                     <img
                         src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
                         >
                     </img>
                     <p class="h6 text-secondary">Playlist B</p>
-                </div>
-                <div className="unselectedplaylist">
-                    <img
-                            src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
-                            />
-                    <p class="h6 text-secondary">Playlist C</p>
-                </div>
+                </div> */}
+
             </div>
             {/* Playlist content (selected)*/}
             {/* display the content of selected playlist
@@ -68,13 +66,10 @@ function PlaylistView(props){
                 */}
             <div className="playlistcontent">
                 <div className="playlistbanner">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
-                    />
+                    <img src={props.playlist.image} />
                     <div className="playlistinfo">
-                        <div class=" h4 text-light">Playlist A</div>
-                        <p class=" md text-light">Playlist A introduction</p>
-                        <p class=" md text-light">Playlist A Description</p>
+                        <div class=" h4 text-light">{props.playlist.name}</div>
+                        <p class=" md text-light">{props.playlist.description}</p>
                     
                         <form className="actionsbar">
                             <div class= "form-group">
@@ -83,8 +78,8 @@ function PlaylistView(props){
                             <div class="form-group">
                                 {/* <label for="exampleFormControlSelect1">Sort</label> */}
                                 <select class="form-control" id="PlaylistSortAction" placeholder="Sort">
-                                <option>dancability</option>
-                                <option>beats</option>
+                                <option>artist</option>
+                                <option>album</option>
                                 <option>3</option>
                                 <option>4</option>
                                 <option>5</option>
@@ -103,92 +98,58 @@ function PlaylistView(props){
                     </thead>
                 </Table>
                 <div className='songscontainer'>
-                    {/* {props.playlist.tracks.map((item)=> {})} */}
-                    <div className='p-songitem'>
-                        <h6>1</h6>
-                        <img className="p-songcover"
-                            src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
-                            width= '48px'
-                            height= '48px'
-                            />
-                       <Card borderless='1'>
-                            <div className="p-cardbody">
-                                    <div className='p-cardcontent'>
-                                        <div className="p-songname">
-                                           {/*  {item.track} */}
-                                            The weekend
-                                        </div>
-                                        <div className="p-songartist">
-                                            <i class="fas fa-user"></i>
-                                            Blinding Lights
-                                        </div>
-                                        <div className="p-songalbum">
-                                            <i class="fas fa-record-vinyl"></i>
-                                            After Hours
-                                        </div>
+                    {props.tracks.map((track, index)=> {
+                        return (
+                            <div className='p-songitem'>
+                                <h6>{index+1}</h6>
+                                <img className="p-songcover"
+                                    src={track.image}
+                                    width= '48px'
+                                    height= '48px'
+                                    />
+                            <Card borderless='1'>
+                                    <div className="p-cardbody">
+                                            <div className='p-cardcontent'>
+                                                <div className="p-songname">
+                                                    {track.name}
+                                                </div>
+                                                <div className="p-songartist">
+                                                    <i class="fas fa-user"></i>
+                                                    {track.artist}
+                                                </div>
+                                                <div className="p-songalbum">
+                                                    <i class="fas fa-record-vinyl"></i>
+                                                    {track.album_name}
+                                                </div>
+                                            </div>
+                                            <div className="p-actions">
+                                                <button className="trackmarked" >
+                                                    {/* if added in tracks  */}
+                                                    <img
+                                                        src={trackmarkicon}
+                                                        />
+                                                </button>
+                                                {/* : <button className="nottrackmarked" >
+                                                    <img
+                                                        src={nottrackedicon}
+                                                        />
+                                                </button>
+                                                */}
+                                                <ButtonGroup>
+                                                <button>
+                                                    <i class="far fa-arrow-alt-circle-up"></i>
+                                                </button>
+                                                <button><i class="far fa-arrow-alt-circle-down"></i></button>
+                                                <button><i class="far fa-minus-square"></i></button>
+                                                </ButtonGroup>
+                                            </div>
                                     </div>
-                                    <div className="p-actions">
-                                        <button className="trackmarked" >
-                                            {/* if added in tracks  */}
-                                            <img
-                                                src={trackmarkicon}
-                                                />
-                                        </button>
-                                        {/* : <button className="nottrackmarked" >
-                                            <img
-                                                src={nottrackedicon}
-                                                />
-                                        </button>
-                                        */}
-                                        <ButtonGroup>
-                                        <button>
-                                            <i class="far fa-arrow-alt-circle-up"></i>
-                                        </button>
-                                        <button><i class="far fa-arrow-alt-circle-down"></i></button>
-                                        <button><i class="far fa-minus-square"></i></button>
-                                        </ButtonGroup>
-                                    </div>
+                                </Card>
                             </div>
-                        </Card>
-                    </div>
-                    <div className='songitem'>
-                        <h6>2</h6>
-                        <img
-                            src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
-                            width= '48px'
-                            height= '48px'
-                            />
-                        <Card borderless='1'>
-                            <div className="cardbody">
-                                    <div className='cardcontent'>
-                                        <div className="song-name">
-                                        The weekend
-                                        </div>
-                                        <div className="song-artist">
-                                        Blinding Lights
-                                        </div>
-                                        <div className="song-album">
-                                        After Hours
-                                        </div>
-                                    </div>
-                                    <div className="Actions">
-                                        {/* <button><i class="fa fa-box"></i></button> */}
-                                        <button className="trackmark">
-                                            <img
-                                                src={nottrackedicon}
-                                                />
-                                        </button>
-                                        <ButtonGroup>
-                                        <button>
-                                            <i class="far fa-arrow-alt-circle-up"></i>
-                                        </button>
-                                        <button><i class="far fa-arrow-alt-circle-down"></i></button>
-                                        <button><i class="far fa-minus-square"></i></button>
-                                        </ButtonGroup>
-                                    </div>
-                            </div>
-                        </Card>
-                    </div>
+                        )
+                        
+                    })}
+                    
                 </div>
             </div>
         </div>

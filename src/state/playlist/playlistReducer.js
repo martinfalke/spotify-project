@@ -75,6 +75,7 @@ export default createReducer(initialState, {
                     name: track.name,
                     preview_url: track.preview_url,
                     uri: track.uri,
+                    duration: track.duration_ms
                 }
             }
 

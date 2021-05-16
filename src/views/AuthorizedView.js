@@ -23,7 +23,7 @@ function AuthorizedView(props){
         <div>
             <Tabs className="tabs" defaultActiveKey="tracks" id="home-page-tabs">
                 <Tab eventKey="playlist" title="Playlists">
-                    <PlaylistView/>
+                    <PlaylistPresenter/>
                 </Tab>
                 <Tab eventKey="tracks" title="Tracks">
                     
