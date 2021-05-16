@@ -3,18 +3,19 @@ import './AuthorizedView.scss';
 import SearchView from  '../views/SearchView'
 import SearchResultView from '../views/SearchResultView'
 import Table from 'react-bootstrap/Table'
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
-import Navbar from 'react-bootstrap/Navbar'
+import { Tabs, Tab, Navbar } from "react-bootstrap";
 import Nav from 'react-bootstrap/Nav'
 import Form from 'react-bootstrap/Form'
 import LOGO from '../images/LOGO.svg'
 import searchicon from '../images/Icons/Search.svg'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import NavDropdown from "react-bootstrap/NavDropdown";
+
 
 
 import React from 'react'
 import SearchPresenter from '../presenters/SearchPresenter'
-import DropdownButton from 'react-bootstrap/DropdownButton'
 // import PlaylistView from './PlaylistView';
 
 
@@ -22,77 +23,42 @@ import DropdownButton from 'react-bootstrap/DropdownButton'
 function AuthorizedView(props){
     return (
         <div>
-            <Tabs className="tabs" defaultActiveKey="tracks" id="home-page-tabs">
-                <Tab eventKey="playlist" title="Playlists">
-                    {/* <PlaylistView/> */}
-                </Tab>
-                <Tab eventKey="tracks" title="Tracks">
-                    <Table striped bordered hover variant="dark">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Artist</th>
-                                <th>Song Name</th>
-                                <th>Album</th>
-                            </tr>
-                        </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>The Weeknd</td>
-                                    <td>Blinding Lights</td>
-                                    <td>After Hours</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>The Weeknd</td>
-                                    <td>In Your Eyes</td>
-                                    <td>After Hours</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Justin Bieber</td>
-                                    <td>Peaches</td>
-                                    <td>Justice</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Molly Sandén</td>
-                                    <td>Nån annan nu</td>
-                                    <td>Nån annan nu</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Lil Nas X</td>
-                                    <td>Montero</td>
-                                    <td>Montero</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Alesso</td>
-                                    <td>Going Dumb</td>
-                                    <td>Going Dumb</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Tusse</td>
-                                    <td>Voices</td>
-                                    <td>Voices</td>
-                                </tr>
-                            </tbody>
-                    </Table>
+            <Tab.Container id="left-tabs-example" defaultActiveKey="playlist">
+            <Nav class="navbar">
+            <Nav variant="tabs" className="mr-auto" id="nav-container">
+                    <Nav.Item>
+                        <Nav.Link eventKey="playlist">Playlist</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="search">Search</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="tracks">Tracks</Nav.Link>
+                    </Nav.Item>
+            </Nav>
+            <Nav inline>
+                <NavDropdown title={props.username}>
+                    <NavDropdown.Item eventKey="1">Sign Out</NavDropdown.Item>
+                </NavDropdown>
+                <Navbar.Brand>
+                    <img id="listify-logo" src={LOGO} alt="Logo" height="30" width="30"/>
+                </Navbar.Brand>
+            </Nav>
+            </Nav>
+            <Tab.Content>
+                <Tab.Pane eventKey="search" title="Search">
+                    <SearchPresenter>
+                    </SearchPresenter> 
+                </Tab.Pane>
+                <Tab.Pane eventKey="playlist" title="Search">
+                    <p>Playlistview</p>
+                </Tab.Pane>
+                <Tab.Pane eventKey="tracks" title="Search">
+                    <p>Tracksview</p>
+                </Tab.Pane>
+            </Tab.Content>
+            </Tab.Container>
 
-                </Tab>
-                <Tab eventKey="search" title="Search">
-                 <SearchPresenter>
-                </SearchPresenter> 
-                </Tab>
-                <Tab className="listify" eventKey="logo" title="Listify" disabled></Tab>
-                <Tab classname="usermenu" eventKey="usermenu" title="Username">
-                   
-                </Tab>
-            </Tabs>
-         
             
             {/*<div className="App">
                 <p>Spotify login success!</p>

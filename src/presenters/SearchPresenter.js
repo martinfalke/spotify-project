@@ -30,10 +30,10 @@ function SearchPresenter(props) {
     const [isTabVisible, setIsTabVisible] = useState(false);
     useEffect(()=>{
         const observer = new MutationObserver(() =>{
-            let searchTab = document.querySelector('#home-page-tabs-tabpane-search');
+            let searchTab = document.querySelector('#left-tabs-example-tab-search');
             setIsTabVisible( (searchTab && searchTab.classList.contains("active")) );
         })
-        let searchTab = document.querySelector('#home-page-tabs-tabpane-search');
+        let searchTab = document.querySelector('#left-tabs-example-tab-search');
         observer.observe(searchTab, {
             attributes: true
             
