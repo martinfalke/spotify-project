@@ -37,8 +37,8 @@ function PlaylistView(props){
 
                 {props.allPlaylists.map((playlist) => {
                     return (
-                        <div className='selectedplaylist' onClick = {playlist => props.onSelectPlaylist(playlist.id)}>
-                            <img src={playlist.image}></img>
+                        <div className='selectedplaylist' onClick = {(playlist) => props.onSelectPlaylist(playlist.id)}>
+                            <img src={playlist.image.url}></img>
                             <p class="h6 text-light">{playlist.name}</p>
                         </div>
                     )
@@ -66,7 +66,7 @@ function PlaylistView(props){
                 */}
             <div className="playlistcontent">
                 <div className="playlistbanner">
-                    <img src={props.playlist.image} />
+                    <img src={props.playlist.image.url} />
                     <div className="playlistinfo">
                         <div class=" h4 text-light">{props.playlist.name}</div>
                         <p class=" md text-light">{props.playlist.description}</p>
@@ -103,7 +103,7 @@ function PlaylistView(props){
                             <div className='p-songitem'>
                                 <h6>{index+1}</h6>
                                 <img className="p-songcover"
-                                    src={track.image}
+                                    src={track.image.url}
                                     width= '48px'
                                     height= '48px'
                                     />
@@ -136,7 +136,7 @@ function PlaylistView(props){
                                                 </button>
                                                 */}
                                                 <ButtonGroup>
-                                                <button>
+                                                <button onClick={(track)=> props.onMoveUpSong()}>
                                                     <i class="far fa-arrow-alt-circle-up"></i>
                                                 </button>
                                                 <button><i class="far fa-arrow-alt-circle-down"></i></button>

@@ -26,7 +26,7 @@ function PlaylistPresenter(props){
     const moveDownSong = (token, playlistId, CI, snapshot_id) => props.moveDownSong(token, playlistId, CI, snapshot_id);
     const deleteFromList = (token, playlistId, trackId, snapshot_id, CI) => props.deleteFromList(token, playlistId, trackId, snapshot_id, CI); 
     
-    //console.log(playlist);
+    //console.log(playlistTracks);
     return (playlist && playlists && playlistTracks && allPlaylists) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 
                             onMoveUpSong = {moveUpSong}
@@ -70,13 +70,11 @@ const mapStateToProps = (state) => {
                 return {
                     name: trackObj.name,
                     album_name: trackObj.album_name,
-                    // TODO: Rami's code for artists+duration
                     artist: artistString,
                     spotifyUrl: trackObj.external_urls,
                     duration: trackMinutes + ":" + trackSeconds,
                     previewSong: trackObj.preview_url,
                     image: trackObj.album_image
-                    // etc.
                 }
             })
         }
