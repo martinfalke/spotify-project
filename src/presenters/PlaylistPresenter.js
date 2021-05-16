@@ -1,11 +1,11 @@
 // src/presenters/PlaylistPresenter.js
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PlaylistView from '../views/PlaylistView';
 import playlistActions from '../state/playlist/playlistActions';
 
 function PlaylistPresenter(props){
-    const { token, playlists, playlistsFetched, playlist, playlistTracks, allPlaylists  } = props;
+    const { token, playlists, playlistsFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist  } = props;
 
     useEffect(()=>{
         props.fetchPlaylists(token);
@@ -22,10 +22,11 @@ function PlaylistPresenter(props){
     },[playlistsFetched])
     
     const updateSelectedPlaylist = (playlistId) => props.selectPlaylist(playlistId);
-    const moveUpSong = (token, playlistId, CI, snapshot_id) => props.moveUpSong(token, playlistId, CI, snapshot_id);
-    const moveDownSong = (token, playlistId, CI, snapshot_id) => props.moveDownSong(token, playlistId, CI, snapshot_id);
-    const deleteFromList = (token, playlistId, trackId, snapshot_id, CI) => props.deleteFromList(token, playlistId, trackId, snapshot_id, CI); 
+    const moveUpSong = (CI) => props.moveUpSong(token, playlist.id, CI, playlist.snapshot_id);
+    const moveDownSong = (CI) => props.moveDownSong(token, playlist.id, CI, playlist.snapshot_id);
+    const deleteFromList = (CI) => props.deleteFromList(token, playlist.id, playlistTracks[CI].uri, playlist.snapshot_id, CI); 
     
+    //console.log("playlistTracks");
     //console.log(playlistTracks);
     return (playlist && playlists && playlistTracks && allPlaylists) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 
@@ -35,6 +36,7 @@ function PlaylistPresenter(props){
                             tracks = {playlistTracks}
                             allPlaylists = {allPlaylists}
                             playlist = {playlist}
+                            selectedPlaylist={selectedPlaylist}
 
     /> : <div>Fetching playlists and tracks..</div>
 }
@@ -45,10 +47,8 @@ const mapStateToProps = (state) => {
     let playlistTracks = null;
     if(state.lists.playlistsFetched){
         // retrieve the focused playlist
-
-        if(state.lists.selectedPlaylist){
-            console.log(state.lists.playlists);
-            selectedPlaylistData = state.lists.playlists[state.lists.selectedPlaylist];
+        if(state.lists.selectedList){
+            selectedPlaylistData = state.lists.playlists[state.lists.selectedList];
         }
         else{
             selectedPlaylistData = Object.values(state.lists.playlists)[0];
@@ -74,12 +74,14 @@ const mapStateToProps = (state) => {
                     spotifyUrl: trackObj.external_urls,
                     duration: trackMinutes + ":" + trackSeconds,
                     previewSong: trackObj.preview_url,
-                    image: trackObj.album_image
+                    image: trackObj.album_image,
+                    uri: trackObj.uri
                 }
             })
         }
 
         // create array containing relevant info about all playlists
+        //console.log(state.lists.playlists);
         allPlaylists = Object.values(state.lists.playlists).map((playlist) => ({
             name: playlist.name,
             image: playlist.image,
@@ -89,7 +91,7 @@ const mapStateToProps = (state) => {
     }
     return ({
         token: state.auth.spotify.token,
-        //selectedPlaylist: state.lists.selectedPlaylist,
+        selectedPlaylist: state.lists.selectedList,
         playlists: state.lists.playlists,
         playlist: selectedPlaylistData,
         playlistsFetched: state.lists.playlistsFetched,

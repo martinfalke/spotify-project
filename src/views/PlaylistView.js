@@ -35,9 +35,13 @@ function PlaylistView(props){
 
                 })} */}
 
-                {props.allPlaylists.map((playlist) => {
+                {props.allPlaylists.map((playlist,i) => {
                     return (
-                        <div className='selectedplaylist' onClick = {(playlist) => props.onSelectPlaylist(playlist.id)}>
+                        <div className={(
+                            props.selectedPlaylist && props.selectedPlaylist === playlist.id || !props.selectedPlaylist && i === 0) ?
+                                'selectedplaylist': "unselectedplaylist"} 
+                                onClick = {() => props.onSelectPlaylist(playlist.id)}
+                        >
                             <img src={playlist.image.url}></img>
                             <p class="h6 text-light">{playlist.name}</p>
                         </div>
@@ -136,11 +140,15 @@ function PlaylistView(props){
                                                 </button>
                                                 */}
                                                 <ButtonGroup>
-                                                <button onClick={(track)=> props.onMoveUpSong()}>
+                                                <button onClick={()=> props.onMoveUpSong(index)}>
                                                     <i class="far fa-arrow-alt-circle-up"></i>
                                                 </button>
-                                                <button><i class="far fa-arrow-alt-circle-down"></i></button>
-                                                <button><i class="far fa-minus-square"></i></button>
+                                                <button onClick={()=> props.onMoveDownSong(index)}>
+                                                    <i class="far fa-arrow-alt-circle-down"></i>
+                                                </button>
+                                                <button onClick={()=> props.onDeleteSong(index)}>
+                                                    <i class="far fa-minus-square"></i>
+                                                </button>
                                                 </ButtonGroup>
                                             </div>
                                     </div>

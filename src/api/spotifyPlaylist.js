@@ -2,7 +2,6 @@
 import { spotifyApiCall, requestTypes } from './spotifyUtil';
 
 const fetchPlaylist = (token, offset) => {
-    console.log('fetch playlist');
     return spotifyApiCall(token, '/me/playlists?offset='+offset+"&limit=20");
 }
 
@@ -11,7 +10,7 @@ const fetchTrack = (token, playlist_id, offset) => {
 }
 
 const moveTrack = (token, playlist_id, range_start, insert_before, snapshot_id) => {
-    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks',{range_start,insert_before,snapshot_id});
+    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks', requestTypes.GET, {range_start,insert_before,snapshot_id});
 }
 
 const deleteFromPlaylist = (token, playlist_id, tracks, snapshot_id) => {

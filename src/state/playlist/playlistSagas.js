@@ -14,6 +14,9 @@ function* handleMoveUp(action){
     const insert_before = action.CI-1;
     const snapshot_id = action.snapshot_id;
     const { response, error } = yield call(moveTrack, token, playlistId, range_start, insert_before, snapshot_id);
+    console.log(response);
+    //console.log(error);
+    //console.log(action.CI)
     if(!error){      
         yield put({'type': types.PLAYLIST_MOVE_UP_SONG_SUCCESS, payload: {CI: action.CI, snapshot_id: response.snapshot_id}});
     }else{
@@ -29,9 +32,9 @@ function* handleMoveDown(action){
     const snapshot_id = action.snapshot_id;
     const { response, error } = yield call(moveTrack, token, playlistId, range_start, insert_before, snapshot_id);
     if(!error){
-        yield put({'type': types.PLAYLIST_MOVE_UP_SONG_SUCCESS, payload: {CI: action.CI, snapshot_id: response.snapshot_id}});
+        yield put({'type': types.PLAYLIST_MOVE_DOWN_SONG_SUCCESS, payload: {CI: action.CI, snapshot_id: response.snapshot_id}});
     }else{
-        yield put({'type': types.PLAYLIST_MOVE_UP_SONG_ERROR, payload: error.error});
+        yield put({'type': types.PLAYLIST_MOVE_DOWN_SONG_ERROR, payload: error.error});
     }
 }
 
@@ -41,6 +44,8 @@ function* handleDeleteFromPlaylist(action){
     const snapshot_id = action.snapshot_id;
     const tracks = [{"uri": action.trackId, "positions": [action.CI]}];
     const { response, error } = yield call(deleteFromPlaylist, token, playlistId, tracks, snapshot_id);
+    
+    console.log(error)
     if(!error){
         yield put({'type': types.PLAYLIST_DELETE_FROM_LIST_SUCCESS, payload: {CI: action.CI, snapshot_id: response.snapshot_id}});
     }else{

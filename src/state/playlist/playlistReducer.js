@@ -30,7 +30,7 @@ const initialState = {
 
 export default createReducer(initialState, {
     [types.PLAYLIST_GET_SUCCESS]: (state, action) => {
-        console.log(action);
+        //console.log(action);
         let playlistsObj = {};
         action.payload.playlists.forEach(playlist => {
             playlistsObj[playlist.id] = {
@@ -49,7 +49,8 @@ export default createReducer(initialState, {
         return {...state,
             playlists: playlistsObj,
             playlistsFetched: true,
-            status: "Fetch Playlists Success"
+            selectedList: Object.values(playlistsObj)[0].id,
+            status: "Fetch Playlists Success",
         }
     },
     [types.PLAYLIST_GET_ERROR]: (state, action) => {
@@ -103,27 +104,31 @@ export default createReducer(initialState, {
     [types.PLAYLIST_MOVE_UP_SONG_SUCCESS]: (state, action) => {
         console.log("move up");
         //const playlistId = action.playlistId;
-        let snapshot_id = action.snapshot_id;
-        const CI = action.CI;
+        let snapshot_id = action.payload.snapshot_id;
+        const CI = action.payload.CI;
         if(CI === 0){
             return state;
         }
 
         let playlistobj = state.playlists[state.selectedList];
         let reorderedList = playlistobj.tracks;
+        // console.log("before")
+        // console.log(playlistobj.tracks)
+         console.log("CI" +CI)
 
         let tmp = reorderedList[CI-1];
         reorderedList[CI-1] = reorderedList[CI];
         reorderedList[CI] = tmp;
 
-        console.log(reorderedList)
+        // console.log("reordered");
+        // console.log(reorderedList)
 
         return { ...state, 
                 playlists: {
                     ...state.playlists,
-                    snapshot_id: snapshot_id,
                     [state.selectedList]: {
                         ...playlistobj,
+                        snapshot_id: snapshot_id,
                         tracks: [...reorderedList]
                     },
 
@@ -139,9 +144,9 @@ export default createReducer(initialState, {
 
     [types.PLAYLIST_MOVE_DOWN_SONG_SUCCESS]: (state, action) => {
         console.log("move down");
-        let snapshot_id = action.snapshot_id;
+        let snapshot_id = action.payload.snapshot_id;
         //const playlistId = action.playlistId;
-        const CI = action.CI;
+        const CI = action.payload.CI;
 
         let playlistobj = state.playlists[state.selectedList];
         if(CI === playlistobj.tracks.length - 1){
@@ -156,9 +161,9 @@ export default createReducer(initialState, {
         return { ...state, 
                 playlists: {
                     ...state.playlists,
-                    snapshot_id: snapshot_id,
                     [state.selectedList]: {
                         ...playlistobj,
+                        snapshot_id: snapshot_id,
                         tracks: [...reorderedList]
                     },
 
@@ -174,8 +179,8 @@ export default createReducer(initialState, {
 
     [types.PLAYLIST_DELETE_FROM_LIST_SUCCESS]: (state, action) => {
         console.log("delete from playlist");
-        let snapshot_id = action.snapshot_id;
-        const CI = action.CI;
+        let snapshot_id = action.payload.snapshot_id;
+        const CI = action.payload.CI;
         let playlistobj = state.playlists[state.selectedList];
         let trackList = playlistobj.tracks;
         let updatedList = trackList.slice(0, CI).concat(trackList.slice(CI+1, trackList.length));
@@ -183,9 +188,9 @@ export default createReducer(initialState, {
         return { ...state, 
                         playlists: {
                             ...state.playlists,
-                            snapshot_id: snapshot_id,
                             [state.selectedList]: {
                                 ...playlistobj,
+                                snapshot_id: snapshot_id,
                                 tracks: updatedList
                             },
 
@@ -200,7 +205,6 @@ export default createReducer(initialState, {
     },
 
     [types.PLAYLIST_SELECT]: (state, action) => {
-        console.log('select playlist');
         let playlistId = action.playlistId;
 
         return {...state,
