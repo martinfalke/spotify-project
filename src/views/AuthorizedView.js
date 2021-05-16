@@ -15,14 +15,14 @@ import searchicon from '../images/Icons/Search.svg'
 import React from 'react'
 import SearchPresenter from '../presenters/SearchPresenter'
 import DropdownButton from 'react-bootstrap/DropdownButton'
-import PlaylistView from './PlaylistView';
+// import PlaylistView from './PlaylistView';
 
 function AuthorizedView(props){
     return (
         <div>
             <Tabs className="tabs" defaultActiveKey="tracks" id="home-page-tabs">
                 <Tab eventKey="playlist" title="Playlists">
-                    <PlaylistView/>
+                    {/* <PlaylistView/> */}
                 </Tab>
                 <Tab eventKey="tracks" title="Tracks">
                     <Table striped bordered hover variant="dark">
