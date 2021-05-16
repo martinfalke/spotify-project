@@ -15,10 +15,6 @@ import searchicon from '../images/Icons/Search.svg'
 import trackmarked from '../images/Icons/Inboxes fill.svg'
 import React from 'react'
 
-// navigation bar 
-// LOGO+listyfy playlist
-// background
-// search bar
 
 function SearchResultView(props){
     return (
@@ -42,7 +38,9 @@ function SearchResultView(props){
                         <thead>
                             <tr>
                             <th class='th-index'>#</th>
-                            <th class='th-songinfo'>Details</th>
+                            <th class='th-songname'>Name</th>
+                            <th class='th-songartist'>Artist</th>
+                            <th class='th-songalbum'>Album name</th>
                             <th class='th-actions'>Actions</th>
                             </tr>
                         </thead>
@@ -52,16 +50,18 @@ function SearchResultView(props){
 
                    { props.results.map((item, index) => {
                        return (
-                        <div className='songitem' >    
-                       <h6>{(props.currentPage-1)*20 + index+1}</h6>
-                       <img 
-                           className="songitem-cover"
-                           src={item.image} 
-                        />
-                       <Card>
+                        <div className='songitem' >  
+                            <div className='cd-cover'>  
+                                <h6>{(props.currentPage-1)*20 + index+1}</h6>
+                                <img 
+                                    className="songitem-cover"
+                                    src={item.image} 
+                                    />
+                            </div>
+                            <Card>
                                <div className='cardcontent'>
                                    <p className="cd-name text-muted">
-                                   {item.name}
+                                   {item.track}
                                    </p>
                                    <p className="cd-artist text-muted">
                                    {item.artist}
@@ -69,7 +69,7 @@ function SearchResultView(props){
                                    <p className="cd-album text-muted">
                                    {item.album}
                                    </p>
-                                   
+                                   <div className='cd-Actions'>
                                    {/* These functions have not been implemented yet
                                    <div className='cd-Actions'>
                                        <Button>
@@ -77,7 +77,8 @@ function SearchResultView(props){
                                                src={trackmarked} />
                                        </Button>
                                        <i className="fa fa-plus add-song" aria-hidden="true" />
-                                   </div> */}
+                                    */}
+                                    </div>
                                </div>
                        </Card>
                        </div>

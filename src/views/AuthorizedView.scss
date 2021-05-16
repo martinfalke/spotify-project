@@ -1,4 +1,26 @@
-.tabs{
+@import '../index.scss';
+
+.allthingscontainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+}
+
+.navpages {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-right: 4px;
+    height:fit-content;
+}
+.navpages img{
+    width: 24;
+    height: 24;
+}
+
+
+/* .tabs{
     display: flex;
     padding: 10px;
 }
@@ -67,4 +89,4 @@ position:relative;
     opacity: 1;
     pointer-events: all;
     transform:translateY(0px);
-}
+} */

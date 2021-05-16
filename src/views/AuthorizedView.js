@@ -1,11 +1,21 @@
 // src/views/AuthorizedView.js
 import './AuthorizedView.scss';
+import SearchView from  '../views/SearchView'
+import SearchResultView from '../views/SearchResultView'
 import Table from 'react-bootstrap/Table'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Form from 'react-bootstrap/Form'
+import LOGO from '../images/LOGO.svg'
+import searchicon from '../images/Icons/Search.svg'
+
+
 import React from 'react'
 import SearchPresenter from '../presenters/SearchPresenter'
 import DropdownButton from 'react-bootstrap/DropdownButton'
+// import PlaylistView from './PlaylistView';
 
 function AuthorizedView(props){
 
@@ -14,7 +24,7 @@ function AuthorizedView(props){
         <div>
             <Tabs className="tabs" defaultActiveKey="tracks" id="home-page-tabs">
                 <Tab eventKey="playlist" title="Playlists">
-                    <p>Will display playlists eventually</p>
+                    {/* <PlaylistView/> */}
                 </Tab>
                 <Tab eventKey="tracks" title="Tracks">
                     <Table striped bordered hover variant="dark">
@@ -74,8 +84,8 @@ function AuthorizedView(props){
 
                 </Tab>
                 <Tab eventKey="search" title="Search">
-                <SearchPresenter>
-                </SearchPresenter>
+                 <SearchPresenter>
+                </SearchPresenter> 
                 </Tab>
                 <Tab className="listify" eventKey="logo" title="Listify" disabled></Tab>
                 <Tab classname="usermenu" eventKey="usermenu" title="Menu">
@@ -112,3 +122,42 @@ function AuthorizedView(props){
 }
 
 export default AuthorizedView;
+
+
+
+
+
+
+/* function AuthorizedView(props){
+
+    return (
+        <div className='allthingscontainer'>
+             <Navbar className="NavigationForEveryPage justify-content-between">             
+                <Navbar.Brand href="#authorized"> 
+                    <img
+                        alt=""
+                        src={LOGO}
+                        width='30'
+                        height='30'
+                    />{' '}
+                    Listify
+                </Navbar.Brand>
+                <Nav className= "navpages" activeKey="/authorized" >
+                    <Nav.Link href="#Playlist" >Playlist</Nav.Link>
+                    <Nav.Link href="#Tracks">Tracks</Nav.Link>
+                    <Nav.Link href="#authorized" disabled>
+                        Search
+                    </Nav.Link>
+                    <img 
+                            alt=""
+                            src= {searchicon}
+                    />{' '}
+                </Nav>
+            </Navbar>
+            <SearchPresenter/>
+        </div>
+  );
+}
+
+export default AuthorizedView; */
+

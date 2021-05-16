@@ -13,12 +13,6 @@ import searchicon from '../images/Icons/Search.svg'
 // import icons from '/node_modules/bootstrap-icons/icons'
 import React from 'react'
 
-// navigation bar 
-    // LOGO+listyfy playlist
-// background
-
-// search bar
-
 function SearchView(props){
     return (
         <div className="searchview">

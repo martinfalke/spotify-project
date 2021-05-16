@@ -65,15 +65,29 @@
  /*  width: 10%; */
   justify-content: center;
 }
-.th-songinfo{
-  flex:6;
+
+.th-songname{
+  flex:2;
+  display: inline-flex;
+  /* justify-content: center; */
+}
+.th-songartist{
+  flex:2.5;
   display: inline-flex;
   justify-content: center;
- /*  width:80%; */
 }
+.th-songalbum{
+  flex:3;
+  display: inline-flex;
+  justify-content: center;
+}
+
+ /*  width:80%; */
+
 .th-actions{
   display: inline-flex;
   flex:1;
+  justify-content: center;
   /* width=10% */
   flex-direction: row-reverse;
 }
@@ -139,17 +153,22 @@
   margin-right: 8px;
 }
 
-.cd-name{
+.cd-cover{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   flex:2;
+}
+.cd-name{
+  flex:3;
 }
 .cd-artist{
   display: inline-flex;
   flex:2;
-  justify-content: center;
 }
 .cd-album{
   display: inline-flex;
-  flex: 4;
+  flex: 3;
   justify-content: center;
 }
 
