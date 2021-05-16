@@ -44,4 +44,4 @@ const spotifyApiCall = (token, endpoint, method="GET", content_type="application
     return fetch(baseUrl+finalEndpoint, parameters).then(handleHttpResponse).then(response => ({response}) ).catch(error => ({error}) );
 }
 
-export { requestTypes, spotifyApiCall };
+export { baseUrl, requestTypes, spotifyApiCall };
