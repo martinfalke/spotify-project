@@ -26,21 +26,20 @@ function TracksView(props){
                 />
 
             </div>
-            <div className="tabletitle">
-                <Table className="tabletitle" size="sm" >
+        
+           <div className="tabletitle">
+                <Table className="t-tabletitle" size="sm" >
                     <thead>
                         <tr>
-                        <th># </th>
-                        <th>Actions</th>
+                        <th class="text-light"># </th>
+                        <th class="text-light">Actions</th>
                         </tr>
-                    </thead>
+                    </thead> 
                 </Table>
-            </div>
-            <div className='trackscontainer'>
-                {/* <div className="trackitem"> */}
-                    <div className='songitem'>
-                        <h6>1</h6>
-                        <img
+                <div className='trackscontainer'>
+                    <div className='t-songitem'>
+                        <h6 className='t-index'> 1</h6>
+                        <img className='t-songcover'
                             src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
                             width= '48px'
                             height= '48px'
@@ -49,20 +48,21 @@ function TracksView(props){
                             <div className="cardbody">
                                     <div className='cardcontent'>
                                         <div className="song-name">
-                                        The weekend
+                                        The weekendfnaiojfdisaojifjaso
                                         </div>
                                         <div className="song-artist">
-                                        Blinding Lights
+                                        Blinding Lightsdjsajfoajfodsajf
                                         </div>
                                         <div className="song-album">
                                         After Hours
                                         </div>
                                     </div>
-                                    <div className="Actions">
-                                        {/* <button><i class="fa fa-box"></i></button> */}
+                                    <div className="t-actions">
                                         <button className="trackmark">
                                             <img
                                                 src={trackmarkicon}
+                                                width="18px"
+                                                height="18px"
                                                 />
                                         </button>
                                         <ButtonGroup>
@@ -76,7 +76,7 @@ function TracksView(props){
                             </div>
                         </Card>
                     </div>
-
+                </div>
             </div>
         </div>
 
@@ -84,3 +84,56 @@ function TracksView(props){
 }
 
 export default TracksView;
+
+/*                 <Table className="t-tabletitle" size="sm" >
+                    <thead>
+                        <tr>
+                        <th class="text-light">Song</th>
+                        <th class="text-light"> </th>
+                        <th class="text-light">Artist </th>
+                        <th class="text-light">Album </th>
+                        <th class="text-light">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className="t-songitem">
+                            <td class="song-cover">
+                                <h6 className='t-index'> 1</h6>
+                                <img className='t-songcover'
+                                    src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
+                                    width= '48px'
+                                    height= '48px'
+                            />
+                                <div className="song-name">
+                                            The weekendkjfklajfjkldsj
+                                </div>
+                            </td>
+                            <td><div className="song-artist">
+                                            Blinding Lights
+                                            </div>
+                            </td>
+                            <td><div className="song-album">
+                                            After Hours
+                                            </div>
+                            </td>
+                            <td>
+                                <div className="t-actions">
+                                            <button className="trackmark">
+                                                <img
+                                                    src={trackmarkicon}
+                                                    width="18px"
+                                                    height="18px"
+                                                    />
+                                            </button>
+                                            <ButtonGroup>
+                                                <button>
+                                                    <i class="far fa-arrow-alt-circle-up"></i>
+                                                </button>
+                                                <button><i class="far fa-arrow-alt-circle-down"></i></button>
+                                                <button><i class="far fa-minus-square"></i></button>
+                                            </ButtonGroup>
+                                        </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </Table> */
