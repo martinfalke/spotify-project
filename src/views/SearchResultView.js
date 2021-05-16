@@ -13,6 +13,7 @@ import logo from '../images/logo-02.png'
 import spotifyicon from '../images/Icons/Spotify_Icon.png'
 import searchicon from '../images/Icons/Search.svg'
 import trackmarked from '../images/Icons/Inboxes fill.svg'
+import untrackmark from '../images/Icons/Inboxes.png'
 import React from 'react'
 
 
@@ -78,6 +79,11 @@ function SearchResultView(props){
                                    <div className='cd-Actions' > 
                                        <Button onClick={()=>console.log(index)}>
                                            {/* <Button onClick={()=>props.addToStash(index)}> */}
+                                           {/* If it is not clicked */}
+                                           {/* <img
+                                            src={untrackmark}
+                                           /> */}
+                                           {/* If it is clicked */}
                                            <img
                                                src={trackmarked} />
                                        </Button>
