@@ -36,8 +36,8 @@ function SearchPresenter(props) {
         let searchTab = document.querySelector('#home-page-tabs-tabpane-search');
         observer.observe(searchTab, {
             attributes: true
+            
         });
-
         return () => observer.disconnect(searchTab);
     }, []);
 

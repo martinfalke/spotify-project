@@ -17,9 +17,9 @@ import SearchPresenter from '../presenters/SearchPresenter'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 // import PlaylistView from './PlaylistView';
 
+
+
 function AuthorizedView(props){
-
-
     return (
         <div>
             <Tabs className="tabs" defaultActiveKey="tracks" id="home-page-tabs">
@@ -88,20 +88,8 @@ function AuthorizedView(props){
                 </SearchPresenter> 
                 </Tab>
                 <Tab className="listify" eventKey="logo" title="Listify" disabled></Tab>
-                <Tab classname="usermenu" eventKey="usermenu" title="Menu">
-                    <nav>
-                        <div class="dropdown">
-                            <button><a href="#">Home</a></button>
-                            <div class="projects">
-                                <button>Projects</button>
-                                <ul class="list">
-                                    <li><a href="#">Weather App1</a></li>
-                                    <li><a href="#">Weather App2</a></li>
-                                    <li><a href="#">Weather App3</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
+                <Tab classname="usermenu" eventKey="usermenu" title="Username">
+                   
                 </Tab>
             </Tabs>
          
@@ -122,42 +110,4 @@ function AuthorizedView(props){
 }
 
 export default AuthorizedView;
-
-
-
-
-
-
-/* function AuthorizedView(props){
-
-    return (
-        <div className='allthingscontainer'>
-             <Navbar className="NavigationForEveryPage justify-content-between">             
-                <Navbar.Brand href="#authorized"> 
-                    <img
-                        alt=""
-                        src={LOGO}
-                        width='30'
-                        height='30'
-                    />{' '}
-                    Listify
-                </Navbar.Brand>
-                <Nav className= "navpages" activeKey="/authorized" >
-                    <Nav.Link href="#Playlist" >Playlist</Nav.Link>
-                    <Nav.Link href="#Tracks">Tracks</Nav.Link>
-                    <Nav.Link href="#authorized" disabled>
-                        Search
-                    </Nav.Link>
-                    <img 
-                            alt=""
-                            src= {searchicon}
-                    />{' '}
-                </Nav>
-            </Navbar>
-            <SearchPresenter/>
-        </div>
-  );
-}
-
-export default AuthorizedView; */
 
