@@ -10,9 +10,10 @@ import Form from 'react-bootstrap/Form'
 import Card from 'react-bootstrap/Card'
 import LOGO from '../images/LOGO.svg'
 import logo from '../images/logo-02.png'
-import songcover from '../images/songcoverimg.jpeg'
+import spotifyicon from '../images/Icons/Spotify_Icon.png'
 import searchicon from '../images/Icons/Search.svg'
 import trackmarked from '../images/Icons/Inboxes fill.svg'
+import untrackmark from '../images/Icons/Inboxes.png'
 import React from 'react'
 
 
@@ -34,14 +35,14 @@ function SearchResultView(props){
                                 src= {searchicon}
                             />
                 </div>
-                <Table size="sm" >
+                <Table size="sm">
                         <thead>
                             <tr>
-                            <th class='th-index'>#</th>
-                            <th class='th-songname'>Name</th>
-                            <th class='th-songartist'>Artist</th>
-                            <th class='th-songalbum'>Album name</th>
-                            <th class='th-actions'>Actions</th>
+                            <th class='th-index'> </th>
+                            <th class='th-songname text-muted'>Name </th>
+                            <th class='th-songartist text-muted'>Artist</th>
+                            <th class='th-songalbum text-muted'>Album</th>
+                            <th class='th-actions text-muted'>Actions</th>
                             </tr>
                         </thead>
                 </Table>
@@ -51,8 +52,11 @@ function SearchResultView(props){
                    { props.results.map((item, index) => {
                        return (
                         <div className='songitem' >  
+                            <span className="cd-preview fake-button" onClick={()=>console.log(index)}>
+                                <i class="fas fa-play-circle"></i>
+                            </span>
                             <div className='cd-cover'>  
-                                <h6>{(props.currentPage-1)*20 + index+1}</h6>
+                                {/* <h6>{(props.currentPage-1)*20 + index+1}</h6> */}
                                 <img 
                                     className="songitem-cover"
                                     src={item.image} 
@@ -64,20 +68,34 @@ function SearchResultView(props){
                                    {item.track}
                                    </p>
                                    <p className="cd-artist text-muted">
+                                   <i class="fas fa-user"></i>
                                    {item.artist}
                                    </p>
                                    <p className="cd-album text-muted">
+                                   <i class="fas fa-record-vinyl"></i>
                                    {item.album}
                                    </p>
-                                   <div className='cd-Actions'>
-                                   {/* These functions have not been implemented yet
-                                   <div className='cd-Actions'>
-                                       <Button>
+                                   {/* These functions have not been implemented yet */}
+                                   <div className='cd-Actions' > 
+                                       <Button onClick={()=>console.log(index)}>
+                                           {/* <Button onClick={()=>props.addToStash(index)}> */}
+                                           {/* If it is not clicked */}
+                                           {/* <img
+                                            src={untrackmark}
+                                           /> */}
+                                           {/* If it is clicked */}
                                            <img
                                                src={trackmarked} />
                                        </Button>
-                                       <i className="fa fa-plus add-song" aria-hidden="true" />
-                                    */}
+                                       
+                                       <a href={item.spotifyUrl}>
+                                           {/* Open Spotify */}
+                                            <img
+                                                src={spotifyicon}
+                                                className='openinspotify'
+                                                />
+                                        </a>
+                                       {/* <i className="fa fa-plus add-song" aria-hidden="true" /> */}
                                     </div>
                                </div>
                        </Card>
@@ -85,8 +103,6 @@ function SearchResultView(props){
                        )
                     })}
                         
-{/*                         ))
-                    }     */}
 
                     {/* Here needs to get the number of pages */}
                     <div className="Pagenav">
