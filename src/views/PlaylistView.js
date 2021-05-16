@@ -127,7 +127,7 @@ function PlaylistView(props){
                                                 </div>
                                             </div>
                                             <div className="p-actions">
-                                                <button className="trackmarked" >
+                                                <button className="trackmarked" onClick={()=>props.onAddToTracks(index)}>
                                                     {/* if added in tracks  */}
                                                     <img
                                                         src={trackmarkicon}

@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PlaylistView from '../views/PlaylistView';
 import playlistActions from '../state/playlist/playlistActions';
+import tracksActions from '../state/tracks/tracksActions';
 
 function PlaylistPresenter(props){
     const { token, playlists, playlistsFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist  } = props;
@@ -24,10 +25,19 @@ function PlaylistPresenter(props){
     const updateSelectedPlaylist = (playlistId) => props.selectPlaylist(playlistId);
     const moveUpSong = (CI) => props.moveUpSong(token, playlist.id, CI, playlist.snapshot_id);
     const moveDownSong = (CI) => props.moveDownSong(token, playlist.id, CI, playlist.snapshot_id);
-    const deleteFromList = (CI) => props.deleteFromList(token, playlist.id, playlistTracks[CI].uri, playlist.snapshot_id, CI); 
-    
+    const deleteFromList = (CI) => props.deleteFromList(token, playlist.id, playlistTracks[CI].uri, playlist.snapshot_id, CI, playlist.tracks[CI]); 
+    const addToTracks = (CI) => props.addToTracks(playlist.tracks[CI]);
+    //console.log(playlist);
     //console.log("playlistTracks");
     //console.log(playlistTracks);
+
+    // const [searchTerm, setSearchTerm] = useState("");
+    // useEffect(()=>{
+    //     const searcher = new FuzzySearch(playlistTracks, [], {
+    //         caseSensitive: false,
+    //     })
+    // },[searchTerm])
+
     return (playlist && playlists && playlistTracks && allPlaylists) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 
                             onMoveUpSong = {moveUpSong}
@@ -37,6 +47,7 @@ function PlaylistPresenter(props){
                             allPlaylists = {allPlaylists}
                             playlist = {playlist}
                             selectedPlaylist={selectedPlaylist}
+                            onAddToTracks={addToTracks}
 
     /> : <div>Fetching playlists and tracks..</div>
 }
@@ -108,6 +119,7 @@ const mapDispatchToProps = {
     moveDownSong: playlistActions.moveDownSong,
     deleteFromList: playlistActions.deleteFromList,
 
+    addToTracks: tracksActions.addToTracks,
 
 }
 

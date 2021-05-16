@@ -3,25 +3,24 @@ import * as types from './playlistTypes';
 import { createReducer } from '../utils';
 
 const initialState = {
-    //mock data
+    //initial state
     status: null,
     error: null,
     selectedList: "",
-    playlists: {
-        /*
-        "1234" : {
-            tracks: ["test1","test2","test3","test4","test5"]
-        }*/
-    },
+    playlists: {},
     trackIndex: {},
     featureMaps: {},
     playlistsFetched: false,
 
-    //initial state
 
+    //mock data
     // status: null,
     // selectedList: "",
-    // playlists: {},
+    // playlists: {           
+    //     "1234" : {
+    //         tracks: ["test1","test2","test3","test4","test5"]
+    //     }
+    // },
     // trackIndex: {},
     // featureMaps: {},
     // playlistsFetched: false
@@ -102,7 +101,7 @@ export default createReducer(initialState, {
     },
 
     [types.PLAYLIST_MOVE_UP_SONG_SUCCESS]: (state, action) => {
-        console.log("move up");
+        //console.log("move up");
         //const playlistId = action.playlistId;
         let snapshot_id = action.payload.snapshot_id;
         const CI = action.payload.CI;
@@ -114,7 +113,7 @@ export default createReducer(initialState, {
         let reorderedList = playlistobj.tracks;
         // console.log("before")
         // console.log(playlistobj.tracks)
-         console.log("CI" +CI)
+        // console.log("CI" +CI)
 
         let tmp = reorderedList[CI-1];
         reorderedList[CI-1] = reorderedList[CI];
@@ -143,7 +142,7 @@ export default createReducer(initialState, {
     },
 
     [types.PLAYLIST_MOVE_DOWN_SONG_SUCCESS]: (state, action) => {
-        console.log("move down");
+        //console.log("move down");
         let snapshot_id = action.payload.snapshot_id;
         //const playlistId = action.playlistId;
         const CI = action.payload.CI;
@@ -210,5 +209,5 @@ export default createReducer(initialState, {
         return {...state,
             selectedList: playlistId,
         }
-    }
+    },
 })

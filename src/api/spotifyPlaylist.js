@@ -10,7 +10,7 @@ const fetchTrack = (token, playlist_id, offset) => {
 }
 
 const moveTrack = (token, playlist_id, range_start, insert_before, snapshot_id) => {
-    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks', requestTypes.GET, {range_start,insert_before,snapshot_id});
+    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks', requestTypes.PUT, {range_start,insert_before,snapshot_id});
 }
 
 const deleteFromPlaylist = (token, playlist_id, tracks, snapshot_id) => {

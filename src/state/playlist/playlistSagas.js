@@ -1,6 +1,7 @@
 // src/state/playlist/playlistSagas.js
 import { fork, all, put, take, takeLatest, takeEvery, takeLeading, call,select } from 'redux-saga/effects';
 import * as types from './playlistTypes';
+import * as tracksTypes from '../tracks/tracksTypes';
 import action from './playlistActions';
 import { moveTrack, deleteFromPlaylist, fetchPlaylist,fetchTrack } from '../../api/spotifyPlaylist'
 
@@ -42,11 +43,13 @@ function* handleDeleteFromPlaylist(action){
     const token = yield select(getToken);
     const playlistId = action.playlistId;
     const snapshot_id = action.snapshot_id;
-    const tracks = [{"uri": action.trackId, "positions": [action.CI]}];
+    const trackId = action.trackId;
+    const tracks = [{"uri": action.track_uri, "positions": [action.CI]}];
     const { response, error } = yield call(deleteFromPlaylist, token, playlistId, tracks, snapshot_id);
-    
+
     console.log(error)
     if(!error){
+        yield put({'type': tracksTypes.TRACKS_DELETE_LOCATIONS, payload: {playlistId, trackId}});
         yield put({'type': types.PLAYLIST_DELETE_FROM_LIST_SUCCESS, payload: {CI: action.CI, snapshot_id: response.snapshot_id}});
     }else{
         yield put({'type': types.PLAYLIST_DELETE_FROM_LIST_ERROR, payload: error.error});
@@ -102,6 +105,7 @@ function* handleFetchTrack(action){
         }
         if(!error){
             yield put({'type':types.PLAYLIST_TRACK_GET_SUCCESS, payload: {playlist_id, tracks: response.items}})
+            yield put({'type':tracksTypes.TRACKS_SAVE_LOCATIONS, payload: {playlist_id, tracks: response.items}})
         }else{
             yield put({'type': types.PLAYLIST_TRACK_GET_ERROR, payload: error.error});
 
@@ -113,7 +117,7 @@ function* handleFetchTrack(action){
 
 
 
-export default function*() {
+function* playlistRootSaga() {
     yield all([
         takeEvery(types.PLAYLIST_MOVE_UP_SONG, handleMoveUp),
         takeEvery(types.PLAYLIST_MOVE_DOWN_SONG, handleMoveDown),
@@ -123,3 +127,4 @@ export default function*() {
     ])
 };
 
+export default playlistRootSaga;
