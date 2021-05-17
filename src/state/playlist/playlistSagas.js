@@ -3,6 +3,7 @@ import { buffers } from 'redux-saga';
 import { delay, all, put, take, takeLatest, takeEvery, takeLeading, call,select, actionChannel, fork } from 'redux-saga/effects';
 import * as types from './playlistTypes';
 import * as tracksTypes from '../tracks/tracksTypes';
+import * as fbaseTypes from '../fbase/fbaseTypes';
 import action from './playlistActions';
 import { moveTrack, deleteFromPlaylist, fetchPlaylist,fetchTrack } from '../../api/spotifyPlaylist'
 
@@ -62,7 +63,9 @@ function* handleFetchPlaylist(action){
     let response, error;
     ({ response, error } = yield call(fetchPlaylist, token, offset));
     if(error){
-        console.log(error)
+        if(error.status === 401){
+            yield put({'type': fbaseTypes.FBASE_SIGN_OUT});
+        }
     }else{
         let total = response.total;
         let remainingPlaylists = (total > 50);
