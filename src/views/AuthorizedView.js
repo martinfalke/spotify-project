@@ -6,12 +6,13 @@ import LOGO from '../images/LOGO.svg';
 import NavDropdown from "react-bootstrap/NavDropdown";
 import SearchPresenter from '../presenters/SearchPresenter';
 // import PlaylistView from './PlaylistView';
+import LoadingView from './LoadingView';
 
 
 
 function AuthorizedView(props){
     return (
-        <div>
+        <div className="authorized-view">
             <Tab.Container id="left-tabs-example" defaultActiveKey="playlist">
             <Nav className="navbar">
             <Nav variant="tabs" className="mr-auto" id="nav-container">
@@ -40,7 +41,7 @@ function AuthorizedView(props){
                     </SearchPresenter> 
                 </Tab.Pane>
                 <Tab.Pane eventKey="playlist">
-                    <p>Playlistview</p>
+                    <LoadingView size="lg"/>
                 </Tab.Pane>
                 <Tab.Pane eventKey="tracks">
                     <p>Tracksview</p>
