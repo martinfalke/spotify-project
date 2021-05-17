@@ -29,6 +29,7 @@ function PlaylistPresenter(props){
     const moveDownSong = (CI) => props.moveDownSong(token, playlist.id, CI, playlist.snapshot_id);
     const deleteFromList = (CI) => props.deleteFromList(token, playlist.id, playlistTracks[CI].uri, playlist.snapshot_id, CI, playlist.tracks[CI]); 
     const addToTracks = (CI) => props.addToTracks(playlist.tracks[CI]);
+    const deleteFromTracks = (CI) => props.deleteFromTracks(CI);
 
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState(playlistTracks);
@@ -39,7 +40,6 @@ function PlaylistPresenter(props){
                 caseSensitive: false,
             })
             setSearchResults(searcher.search(searchTerm));
-            console.log(searchResults);
         }else if(playlistTracks){
             setSearchResults(playlistTracks);
         }
@@ -58,6 +58,7 @@ function PlaylistPresenter(props){
                             playlist = {playlist}
                             selectedPlaylist={selectedPlaylist}
                             onAddToTracks={addToTracks}
+                            onDeleteFromTracks={deleteFromTracks}
                             onSearchTerm={(term)=>setSearchTerm(term)}
                             searchTerm={searchTerm}
                             actionsDisabled={(searchTerm == false)}
@@ -106,7 +107,6 @@ const mapStateToProps = (state) => {
         }
 
         // create array containing relevant info about all playlists
-        //console.log(state.lists.playlists);
         allPlaylists = Object.values(state.lists.playlists).map((playlist) => ({
             name: playlist.name,
             image: playlist.image,
@@ -136,6 +136,7 @@ const mapDispatchToProps = {
     deleteFromList: playlistActions.deleteFromList,
 
     addToTracks: tracksActions.addToTracks,
+    deleteFromTracks: tracksActions.deleteFromTracks,
 
 }
 

@@ -72,10 +72,8 @@ function SearchResultView(props){
                                    <i class="fas fa-record-vinyl"></i>
                                    {item.album}
                                    </p>
-                                   {/* These functions have not been implemented yet */}
                                    <div className='cd-Actions' > 
-                                       <Button variant="light" onClick={()=>props.onAddToTracks(index)}>
-                                           {/* <Button onClick={()=>props.addToStash(index)}> */}
+                                       <Button variant="light" onClick={(item.isInStash) ? (() => props.onDeleteFromTracks(index)) : (()=>props.onAddToTracks(index))}>
                                            {/* If it is not clicked */}
                                            {/* <img
                                             alt="add to track stash"
@@ -84,7 +82,7 @@ function SearchResultView(props){
                                            {/* If it is clicked */}
                                            <img
                                                 alt="remove from track stash"
-                                                src={trackmarked} />
+                                                src={(item.isInStash) ? (trackmarked) : (untrackmark) } />
                                        </Button>
                                        
                                        <a href={item.spotifyUrl}>

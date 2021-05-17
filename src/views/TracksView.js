@@ -16,7 +16,6 @@ import { ButtonGroup } from 'react-bootstrap';
 
 
 function TracksView(props){
-    console.log(props);
     return (
         <div className="tracksview">
             <div className="pagetitle">

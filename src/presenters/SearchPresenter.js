@@ -53,6 +53,7 @@ function SearchPresenter(props) {
     const [page, setPage] = useState(1);
     const numPages = Math.ceil(props.totalResults/20);
     const addToTracks = (CI) => props.addToTracks(props.results[CI].id);
+    const deleteFromTracks = (CI) => props.deleteFromTracks(CI);
 
     return (search) ?
         <SearchResultView   onSearch={(term)=>setSearch(term)} search={search}
@@ -68,6 +69,7 @@ function SearchPresenter(props) {
                             }}
                             tabVisible={isTabVisible}
                             onAddToTracks={addToTracks}
+                            onDeleteFromTracks={deleteFromTracks}
         /> : 
         <SearchView onSearch={(term)=>setSearch(term)} tabVisible={isTabVisible} />
        
@@ -116,7 +118,8 @@ const mapDispatchToProps = {
     getSearchResults: searchActions.getSearchResults,
     getNextPage: searchActions.getNextPage,
     getPreviousPage: searchActions.getPreviousPage,
-    addToTracks: tracksActions.addToTracks
+    addToTracks: tracksActions.addToTracks,
+    deleteFromTracks: tracksActions.deleteFromTracks,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPresenter);

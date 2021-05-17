@@ -119,7 +119,7 @@ function PlaylistView(props){
                                                 </div>
                                             </div>
                                             <div className="p-actions">
-                                                <div onClick={()=>props.onAddToTracks(index)}>
+                                                <div onClick={(track.isInStash) ? (() => props.onDeleteFromTracks(index)) : (()=>props.onAddToTracks(index))}>
                                                 {(track.isInStash) ? (<button className='trackmarked'>
                                                     {/* if added in tracks  */}
                                                     <img

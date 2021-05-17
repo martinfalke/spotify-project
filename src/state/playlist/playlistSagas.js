@@ -17,9 +17,6 @@ function* handleMoveUp(action){
     const insert_before = action.CI-1;
     const snapshot_id = action.snapshot_id;
     const { response, error } = yield call(moveTrack, token, playlistId, range_start, insert_before, snapshot_id);
-    console.log(response);
-    //console.log(error);
-    //console.log(action.CI)
     if(!error){      
         yield put({'type': types.PLAYLIST_MOVE_UP_SONG_SUCCESS, payload: {CI: action.CI, snapshot_id: response.snapshot_id}});
     }else{
@@ -99,7 +96,7 @@ function* handleFetchTrack(action){
     let response, error;
     ({ response, error } = yield call(fetchTrack, token, playlist_id, offset));
     if(error){
-        console.log(error)
+        //console.log(error)
     }else{
         let total = response.total;
         let remainingTracks = (total > 100);

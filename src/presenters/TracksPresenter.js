@@ -1,13 +1,7 @@
 import React from "react";
-import {useState, useEffect} from "react";
 import { connect } from 'react-redux';
-import searchActions from '../state/search/searchActions';
 import TracksView from '../views/TracksView';
-import PlaylistView from '../views/PlaylistView';
-import LoadingView from '../views/LoadingView';
-import playlistActions from '../state/playlist/playlistActions';
 import tracksActions from '../state/tracks/tracksActions';
-import FuzzySearch from 'fuzzy-search';
 
 
 function TracksPresenter(props){
@@ -15,8 +9,8 @@ function TracksPresenter(props){
 const deleteFromTracks = (CI) => props.deleteFromTracks(CI);
 
 return (
-    <TracksView tracks= {props.results} 
-                onDeleteTrack = {deleteFromTracks}
+    <TracksView tracks={props.results} 
+                onDeleteTrack={deleteFromTracks}
     />
     )
 

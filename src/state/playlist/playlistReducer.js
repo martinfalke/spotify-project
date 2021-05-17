@@ -31,7 +31,6 @@ const initialState = {
 
 export default createReducer(initialState, {
     [types.PLAYLIST_GET_SUCCESS]: (state, action) => {
-        //console.log(action);
         let playlistsObj = {};
         action.payload.playlists.forEach(playlist => {
             playlistsObj[playlist.id] = {
@@ -78,7 +77,6 @@ export default createReducer(initialState, {
             playlist.image = (tracks.length >= 1 && tracks[0].album_image) ? action.payload.tracks[0].album_image : null;
         }
 
-        //console.log(playlist)
 
         return {...state,
             playlists: {
@@ -103,7 +101,6 @@ export default createReducer(initialState, {
     },
 
     [types.PLAYLIST_MOVE_UP_SONG_SUCCESS]: (state, action) => {
-        //console.log("move up");
         //const playlistId = action.playlistId;
         let snapshot_id = action.payload.snapshot_id;
         const CI = action.payload.CI;
@@ -113,16 +110,10 @@ export default createReducer(initialState, {
 
         let playlistobj = state.playlists[state.selectedList];
         let reorderedList = playlistobj.tracks;
-        // console.log("before")
-        // console.log(playlistobj.tracks)
-        // console.log("CI" +CI)
 
         let tmp = reorderedList[CI-1];
         reorderedList[CI-1] = reorderedList[CI];
         reorderedList[CI] = tmp;
-
-        // console.log("reordered");
-        // console.log(reorderedList)
 
         return { ...state, 
                 playlists: {
@@ -144,7 +135,6 @@ export default createReducer(initialState, {
     },
 
     [types.PLAYLIST_MOVE_DOWN_SONG_SUCCESS]: (state, action) => {
-        //console.log("move down");
         let snapshot_id = action.payload.snapshot_id;
         //const playlistId = action.playlistId;
         const CI = action.payload.CI;
