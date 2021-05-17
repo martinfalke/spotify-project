@@ -4,6 +4,7 @@ import Table from 'react-bootstrap/Table'
 import Card from 'react-bootstrap/Card'
 import trackmarkicon from '../images/Icons/Inboxes fill.svg'
 import nottrackedicon from '../images/Icons/Inboxes.png'
+import LOGO from '../images/LOGO.svg';
 // import icons from '/node_modules/bootstrap-icons/icons'
 import React from 'react'
 import { ButtonGroup, NavItem } from 'react-bootstrap';
@@ -30,12 +31,12 @@ function PlaylistView(props){
                 {props.allPlaylists.map((playlist,i) => {
                     return (
                         <div key={i} className={(
-                            props.selectedPlaylist && props.selectedPlaylist === playlist.id || !props.selectedPlaylist && i === 0) ?
+                            (props.selectedPlaylist && props.selectedPlaylist === playlist.id) || (!props.selectedPlaylist && i === 0)) ?
                                 'selectedplaylist': "unselectedplaylist"} 
                                 onClick = {() => props.onSelectPlaylist(playlist.id)}
                         >
-                            <img src={(playlist.image && playlist.image.url) || "https://via.placeholder.com/300"}></img>
-                            <p className="h6 text-light">{playlist.name}</p>
+                            <img className={(playlist.image) ? "" : "no-img"} alt="playlists" src={(playlist.image)?playlist.image.url: LOGO}></img>
+                            <p class="h6 text-light">{playlist.name}</p>
                         </div>
                     )
                 })}
@@ -62,23 +63,21 @@ function PlaylistView(props){
                 */}
             <div className="playlistcontent">
                 <div className="playlistbanner">
-                    <img src={(props.playlist.image && props.playlist.image.url) || "https://via.placeholder.com/300"} />
+                    <img alt="selected playlist" className={(props.playlist.image) ? "" : "no-img"} src={(props.playlist.image)?props.playlist.image.url: LOGO} />
                     <div className="playlistinfo">
                         <div className=" h4 text-light">{props.playlist.name}</div>
                         <p className=" md text-light">{props.playlist.description}</p>
                     
                         <form className="actionsbar">
-                            <div className= "form-group">
-                                <input type="email" className="form-control" id="PlaylistSearchAction" placeholder="search for a song"/>
+                            <div class= "form-group">
+                                <input type="email" class="form-control" id="PlaylistSearchAction" placeholder="search for a song"  defaultValue={props.searchTerm} onChange={e=>props.onSearchTerm(e.target.value)}/>
                             </div>
                             <div className="form-group">
                                 {/* <label for="exampleFormControlSelect1">Sort</label> */}
-                                <select className="form-control" id="PlaylistSortAction" placeholder="Sort">
-                                <option>artist</option>
-                                <option>album</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <select class="form-control" id="PlaylistSortAction" placeholder="Sort">
+                                <option onClick = {()=>props.onSearchKey('name')}>song</option>
+                                <option onClick = {()=>props.onSearchKey('artist')}>artist</option>
+                                <option onClick = {()=>props.onSearchKey('album_name')}>album</option>
                                 </select>
                             </div>
                         </form>
@@ -99,7 +98,8 @@ function PlaylistView(props){
                             <div key={index} className='p-songitem'>
                                 <h6>{index+1}</h6>
                                 <img className="p-songcover"
-                                    src={track.image && track.image.url || "https://via.placeholder.com/300"}
+                                    alt="song album cover"
+                                    src={(track.image) ? track.image.url : LOGO}
                                     width= '48px'
                                     height= '48px'
                                     />
@@ -122,6 +122,7 @@ function PlaylistView(props){
                                                 <button className="trackmarked" onClick={()=>props.onAddToTracks(index)}>
                                                     {/* if added in tracks  */}
                                                     <img
+                                                        alt="add to track stash"
                                                         src={trackmarkicon}
                                                         />
                                                 </button>

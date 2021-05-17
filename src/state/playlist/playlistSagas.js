@@ -112,7 +112,6 @@ function* handleFetchTrack(action){
             remainingTracks = (total > offset+100);
         }
         if(!error){
-            console.log(allTracks);
             let tracks = allTracks.filter(wt => (!wt.is_local)).map(wrappedTrack => {
                 let track = wrappedTrack.track;
                 return {

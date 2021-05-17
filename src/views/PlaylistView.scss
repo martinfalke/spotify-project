@@ -35,6 +35,10 @@
     height: 72px;
     align-content: stretch;
     margin-right: 8px;
+    &.no-img{
+        padding: 2px 14px;
+        background-color: $purple-color;
+    }
 }
 .selectedplaylist p {
     padding-top: 4px;
@@ -51,6 +55,10 @@
     width: 72x;
     height: 72px;
     margin-right: 8px;
+    &.no-img{
+        padding: 2px 14px;
+        background-color: $purple-color;
+    }
 }
 
 .unselectedplaylist p {
@@ -71,12 +79,17 @@
     background:$orange-color;
     padding-top: 24px;
     padding-inline: 12px;
+    padding-bottom: 12px;
 
 }
 
 .playlistbanner img {
     margin-right: 12px;
-
+    max-height: 300px;
+    &.no-img{
+        padding: 6px 58px;
+        background-color: $bg-color;
+    }
 }
 
 .playlistinfo {
