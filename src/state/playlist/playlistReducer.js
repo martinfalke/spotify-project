@@ -64,7 +64,8 @@ export default createReducer(initialState, {
         const playlist_id = action.payload.playlist_id;
         let trackIds = action.payload.tracks.map(track => track.id);
         let trackIndex = state.trackIndex;
-        action.payload.tracks.forEach( track => {
+        let tracks = action.payload.tracks;
+        tracks.forEach( track => {
             if(!trackIndex.hasOwnProperty(track.id)){
                 trackIndex[track.id]=track;
             }
@@ -72,8 +73,9 @@ export default createReducer(initialState, {
         });
 
         let playlist = state.playlists[playlist_id];
-        if(playlist.image === null){
-            playlist.image = trackIndex[playlist.tracks[0]].images[1];
+        if(tracks && playlist.image === null){
+            playlist.image = (tracks.length >= 1 && tracks[0].album_image) ? action.payload.tracks[0].album_image : null;
+            console.log(playlist.tracks)
         }
 
         //console.log(playlist)
