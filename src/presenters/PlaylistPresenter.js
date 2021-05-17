@@ -59,6 +59,7 @@ function PlaylistPresenter(props){
                             onAddToTracks={addToTracks}
                             onSearchTerm={(term)=>setSearchTerm(term)}
                             searchTerm={searchTerm}
+                            actionsDisabled={(searchTerm == false)}
     /> : <div>Fetching playlists and tracks..</div>
 }
 
