@@ -6,17 +6,17 @@ import playlistActions from '../state/playlist/playlistActions';
 import tracksActions from '../state/tracks/tracksActions';
 
 function PlaylistPresenter(props){
-    const { token, playlists, playlistsFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist  } = props;
+    const { token, playlists, playlistsFetched, tracksFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist  } = props;
 
     useEffect(()=>{
         props.fetchPlaylists(token);
     },[])
 
     useEffect(()=>{
-        if(playlistsFetched && Object.keys(playlists).length !== 0){
-            Object.values(playlists).forEach(playlist => {
-                if(!playlist.tracks){
-                    props.fetchTracks(token, playlist.id);
+        if(playlistsFetched && Object.keys(playlists).length !== 0 && !tracksFetched){
+            Object.values(playlists).forEach(list => {
+                if(!list.tracks){
+                    props.fetchTracks(token, list.id);
                 }
             });
         }
@@ -38,7 +38,7 @@ function PlaylistPresenter(props){
     //     })
     // },[searchTerm])
 
-    return (playlist && playlists && playlistTracks && allPlaylists) ? 
+    return (playlist && playlists && playlistTracks && allPlaylists && tracksFetched) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 
                             onMoveUpSong = {moveUpSong}
                             onMoveDownSong = {moveDownSong}
@@ -106,6 +106,7 @@ const mapStateToProps = (state) => {
         playlists: state.lists.playlists,
         playlist: selectedPlaylistData,
         playlistsFetched: state.lists.playlistsFetched,
+        tracksFetched: state.lists.tracksFetched,
         playlistTracks: playlistTracks,
         allPlaylists: allPlaylists,
     });

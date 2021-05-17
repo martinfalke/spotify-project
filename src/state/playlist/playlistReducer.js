@@ -11,6 +11,7 @@ const initialState = {
     trackIndex: {},
     featureMaps: {},
     playlistsFetched: false,
+    tracksFetched: false,
 
 
     //mock data
@@ -61,22 +62,11 @@ export default createReducer(initialState, {
 
     [types.PLAYLIST_TRACK_GET_SUCCESS]: (state, action) => {
         const playlist_id = action.payload.playlist_id;
-        let trackIds = action.payload.tracks.map(wrappedTrack => wrappedTrack.track.id);
+        let trackIds = action.payload.tracks.map(track => track.id);
         let trackIndex = state.trackIndex;
-        action.payload.tracks.forEach( wrappedTrack => {
-            let track = wrappedTrack.track;
+        action.payload.tracks.forEach( track => {
             if(!trackIndex.hasOwnProperty(track.id)){
-                trackIndex[track.id]={
-                    album_name: track.album.name,
-                    album_image: (track.album.images.length >= 2 && track.album.images[1]) || null,
-                    artists: track.artists.map(a=>a.name),
-                    is_local: wrappedTrack.is_local,
-                    external_urls: track.external_urls,
-                    name: track.name,
-                    preview_url: track.preview_url,
-                    uri: track.uri,
-                    duration: track.duration_ms
-                }
+                trackIndex[track.id]=track;
             }
 
         });
@@ -90,7 +80,7 @@ export default createReducer(initialState, {
                 }
                 
             },
-            trackIndex: trackIndex
+            trackIndex: {...trackIndex},
         }
     },
     [types.PLAYLIST_TRACK_GET_ERROR]: (state, action) => {
@@ -98,6 +88,9 @@ export default createReducer(initialState, {
             error: action.payload, 
             status: "ERROR"
         }
+    },
+    [types.PLAYLIST_TRACK_GET_ALL_DONE]: (state, action) => {
+        return { ...state, tracksFetched: true };
     },
 
     [types.PLAYLIST_MOVE_UP_SONG_SUCCESS]: (state, action) => {
@@ -177,7 +170,6 @@ export default createReducer(initialState, {
     },
 
     [types.PLAYLIST_DELETE_FROM_LIST_SUCCESS]: (state, action) => {
-        console.log("delete from playlist");
         let snapshot_id = action.payload.snapshot_id;
         const CI = action.payload.CI;
         let playlistobj = state.playlists[state.selectedList];

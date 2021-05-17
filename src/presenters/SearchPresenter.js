@@ -1,7 +1,5 @@
-import React from "react"
-import { Container, Form } from "react-bootstrap"
-import {useState, useEffect} from "react"
-import { getSearchResults } from "../api/spotifySearch"
+import React from "react";
+import {useState, useEffect} from "react";
 import { connect } from 'react-redux';
 import searchActions from '../state/search/searchActions';
 import SearchView from '../views/SearchView';
@@ -17,8 +15,6 @@ function setPrevPage(currentPage, setPage){
 }
 
 function SearchPresenter(props) {
-    //console.log(props);
-    //search == search
     const [search, setSearch] = useState("");
     const { token } = props;
 
@@ -30,14 +26,14 @@ function SearchPresenter(props) {
     const [isTabVisible, setIsTabVisible] = useState(false);
     useEffect(()=>{
         const observer = new MutationObserver(() =>{
-            let searchTab = document.querySelector('#home-page-tabs-tabpane-search');
+            let searchTab = document.querySelector('#left-tabs-example-tab-search');
             setIsTabVisible( (searchTab && searchTab.classList.contains("active")) );
         })
-        let searchTab = document.querySelector('#home-page-tabs-tabpane-search');
+        let searchTab = document.querySelector('#left-tabs-example-tab-search');
         observer.observe(searchTab, {
             attributes: true
+            
         });
-
         return () => observer.disconnect(searchTab);
     }, []);
 
@@ -76,7 +72,7 @@ const mapStateToProps = (state) => {
     if(state.search.activePage){
         itemsArray = state.search.activePage.items.map( (item) => {
             let artistString = item.artists.reduce((tot,artist,i,arr) => {
-                if (arr.length-1!=i){
+                if (arr.length-1!==i){
                     return (tot + artist.name + ', ');
                 }else return (tot + artist.name);
             }, "");

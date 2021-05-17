@@ -1,26 +1,20 @@
 // src/views/SearchResultView.js
 import './SearchResultView.scss';
-import Table from 'react-bootstrap/Table'
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
-import Button from "react-bootstrap/Button"
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import Card from 'react-bootstrap/Card'
-import LOGO from '../images/LOGO.svg'
-import logo from '../images/logo-02.png'
-import songcover from '../images/songcoverimg.jpeg'
-import searchicon from '../images/Icons/Search.svg'
-import trackmarked from '../images/Icons/Inboxes fill.svg'
-import React from 'react'
+import Table from 'react-bootstrap/Table';
+import Button from "react-bootstrap/Button";
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import spotifyicon from '../images/Icons/Spotify_Icon.png';
+import searchicon from '../images/Icons/Search.svg';
+import trackmarked from '../images/Icons/Inboxes fill.svg';
+import untrackmark from '../images/Icons/Inboxes.png';
+
 
 
 function SearchResultView(props){
     return (
         <div className= 'searchresultview'>
             <div className= 'searchresultcontainer'>
-            <h7 className="sr-slogan">Listify helps you find manage and find inspiration for your playlist</h7>
                 <div className='sr-searchbar'>
                     <form className='sr-searchinput'>
                         <Form.Group controlId="formSearchInput">
@@ -30,18 +24,18 @@ function SearchResultView(props){
                        </Form.Group>
                     </form>
                         <img
-                                alt=""
+                                alt="search icon"
                                 src= {searchicon}
                             />
                 </div>
-                <Table size="sm" >
+                <Table size="sm">
                         <thead>
                             <tr>
-                            <th class='th-index'>#</th>
-                            <th class='th-songname'>Name</th>
-                            <th class='th-songartist'>Artist</th>
-                            <th class='th-songalbum'>Album name</th>
-                            <th class='th-actions'>Actions</th>
+                            <th class='th-index'> </th>
+                            <th class='th-songname text-muted'>Name </th>
+                            <th class='th-songartist text-muted'>Artist</th>
+                            <th class='th-songalbum text-muted'>Album</th>
+                            <th class='th-actions text-muted'>Actions</th>
                             </tr>
                         </thead>
                 </Table>
@@ -50,10 +44,14 @@ function SearchResultView(props){
 
                    { props.results.map((item, index) => {
                        return (
-                        <div className='songitem' >  
+                        <div className='songitem' key={index}>  
+                            <span className="cd-preview fake-button" onClick={()=>console.log(index)}>
+                                <i class="fas fa-play-circle"></i>
+                            </span>
                             <div className='cd-cover'>  
-                                <h6>{(props.currentPage-1)*20 + index+1}</h6>
-                                <img 
+                                {/* <h6>{(props.currentPage-1)*20 + index+1}</h6> */}
+                                <img
+                                    alt="song album cover"
                                     className="songitem-cover"
                                     src={item.image} 
                                     />
@@ -64,20 +62,37 @@ function SearchResultView(props){
                                    {item.track}
                                    </p>
                                    <p className="cd-artist text-muted">
+                                   <i class="fas fa-user"></i>
                                    {item.artist}
                                    </p>
                                    <p className="cd-album text-muted">
+                                   <i class="fas fa-record-vinyl"></i>
                                    {item.album}
                                    </p>
-                                   <div className='cd-Actions'>
-                                   {/* These functions have not been implemented yet
-                                   <div className='cd-Actions'>
-                                       <Button>
+                                   {/* These functions have not been implemented yet */}
+                                   <div className='cd-Actions' > 
+                                       <Button variant="light" onClick={()=>console.log(index)}>
+                                           {/* <Button onClick={()=>props.addToStash(index)}> */}
+                                           {/* If it is not clicked */}
+                                           {/* <img
+                                            alt="add to track stash"
+                                            src={untrackmark}
+                                           /> */}
+                                           {/* If it is clicked */}
                                            <img
-                                               src={trackmarked} />
+                                                alt="remove from track stash"
+                                                src={trackmarked} />
                                        </Button>
-                                       <i className="fa fa-plus add-song" aria-hidden="true" />
-                                    */}
+                                       
+                                       <a href={item.spotifyUrl}>
+                                           {/* Open Spotify */}
+                                            <img
+                                                alt="open song in Spotify"
+                                                src={spotifyicon}
+                                                className='openinspotify'
+                                                />
+                                        </a>
+                                       {/* <i className="fa fa-plus add-song" aria-hidden="true" /> */}
                                     </div>
                                </div>
                        </Card>
@@ -85,8 +100,6 @@ function SearchResultView(props){
                        )
                     })}
                         
-{/*                         ))
-                    }     */}
 
                     {/* Here needs to get the number of pages */}
                     <div className="Pagenav">
@@ -117,7 +130,7 @@ function SearchResultView(props){
 export default SearchResultView;
 
 //small tracksview has not been implemented
-            {/*
+            /*
             <div className= 'smtrackscontainer'>
                 <div className="trackstitle"> 
                     <h5>
@@ -190,4 +203,4 @@ export default SearchResultView;
                     </div>
                    
                 </div>
-            </div> */}
+            </div> */

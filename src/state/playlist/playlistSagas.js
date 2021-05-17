@@ -1,5 +1,6 @@
 // src/state/playlist/playlistSagas.js
-import { fork, all, put, take, takeLatest, takeEvery, takeLeading, call,select } from 'redux-saga/effects';
+import { buffers } from 'redux-saga';
+import { delay, all, put, take, takeLatest, takeEvery, takeLeading, call,select, actionChannel, fork } from 'redux-saga/effects';
 import * as types from './playlistTypes';
 import * as tracksTypes from '../tracks/tracksTypes';
 import action from './playlistActions';
@@ -47,7 +48,6 @@ function* handleDeleteFromPlaylist(action){
     const tracks = [{"uri": action.track_uri, "positions": [action.CI]}];
     const { response, error } = yield call(deleteFromPlaylist, token, playlistId, tracks, snapshot_id);
 
-    console.log(error)
     if(!error){
         yield put({'type': tracksTypes.TRACKS_DELETE_LOCATIONS, payload: {playlistId, trackId}});
         yield put({'type': types.PLAYLIST_DELETE_FROM_LIST_SUCCESS, payload: {CI: action.CI, snapshot_id: response.snapshot_id}});
@@ -65,15 +65,18 @@ function* handleFetchPlaylist(action){
         console.log(error)
     }else{
         let total = response.total;
-        let remainingPlaylists = (total > 20);
+        let remainingPlaylists = (total > 50);
         let allPlaylists = response.items;
         while(remainingPlaylists && !error){
             offset += 20;
             ({ response, error } = yield call(fetchPlaylist, token, offset));
             if(!error){
-                allPlaylists.concat(response.items);
+                allPlaylists = allPlaylists.concat(response.items);
+            }else if(error.status === 429){
+                offset -= 50;
+                yield delay(1000*error.retry_after);
             }
-            remainingPlaylists = (total > offset+20);
+            remainingPlaylists = (total > offset+50);
         }
         if(!error){
             yield put({'type': types.PLAYLIST_GET_SUCCESS, payload: {playlists: allPlaylists}});
@@ -99,13 +102,35 @@ function* handleFetchTrack(action){
             offset += 100;
             ({ response, error } = yield call(fetchTrack, token, playlist_id, offset));
             if(!error){
-                allTracks.concat(response.items);
+                allTracks = allTracks.concat(response.items);
+            }else if(error.status === 429){
+                offset -= 100;
+                yield delay(1000*error.retry_after);
+            }else{
+                console.error(error);
             }
             remainingTracks = (total > offset+100);
         }
         if(!error){
-            yield put({'type':types.PLAYLIST_TRACK_GET_SUCCESS, payload: {playlist_id, tracks: response.items}})
-            yield put({'type':tracksTypes.TRACKS_SAVE_LOCATIONS, payload: {playlist_id, tracks: response.items}})
+            console.log(allTracks);
+            let tracks = allTracks.filter(wt => (!wt.is_local)).map(wrappedTrack => {
+                let track = wrappedTrack.track;
+                return {
+                    album_name: track.album.name,
+                    album_image: (track.album.images.length >= 2 && track.album.images[1]) || null,
+                    artists: track.artists.map(a=>a.name),
+                    is_local: track.is_local,
+                    external_urls: track.external_urls,
+                    name: track.name,
+                    id: track.id,
+                    preview_url: track.preview_url,
+                    uri: track.uri,
+                    duration: track.duration_ms
+                };
+            });
+            let trackIds = response.items.map(wrappedTrack => wrappedTrack.track.id);
+            yield put({'type':types.PLAYLIST_TRACK_GET_SUCCESS, payload: {playlist_id, tracks: tracks}})
+            yield put({'type':tracksTypes.TRACKS_SAVE_LOCATIONS, payload: {playlist_id, trackIds: trackIds}})
         }else{
             yield put({'type': types.PLAYLIST_TRACK_GET_ERROR, payload: error.error});
 
@@ -115,6 +140,17 @@ function* handleFetchTrack(action){
 }
 
 
+function* watchTracksFetch(){
+    const buffer = buffers.expanding(10);
+    const trackFetchChannel = yield actionChannel(types.PLAYLIST_TRACK_GET, buffer);
+    let firstHandled = false;
+    while(!firstHandled || !buffer.isEmpty()){
+        const action = yield take(trackFetchChannel);
+        yield call(handleFetchTrack, action);
+        firstHandled=true;
+    }
+    yield put({'type': types.PLAYLIST_TRACK_GET_ALL_DONE});
+}
 
 
 function* playlistRootSaga() {
@@ -123,7 +159,7 @@ function* playlistRootSaga() {
         takeEvery(types.PLAYLIST_MOVE_DOWN_SONG, handleMoveDown),
         takeLeading(types.PLAYLIST_DELETE_FROM_LIST, handleDeleteFromPlaylist),
         takeLeading(types.PLAYLIST_GET,handleFetchPlaylist),
-        takeEvery(types.PLAYLIST_TRACK_GET, handleFetchTrack),
+        fork(watchTracksFetch),
     ])
 };
 

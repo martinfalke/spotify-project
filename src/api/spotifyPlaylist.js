@@ -2,7 +2,7 @@
 import { spotifyApiCall, requestTypes } from './spotifyUtil';
 
 const fetchPlaylist = (token, offset) => {
-    return spotifyApiCall(token, '/me/playlists?offset='+offset+"&limit=20");
+    return spotifyApiCall(token, '/me/playlists?offset='+offset+"&limit=50");
 }
 
 const fetchTrack = (token, playlist_id, offset) => {

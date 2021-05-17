@@ -57,24 +57,26 @@
   display: flex;
   flex-direction: row;
   width: 100%;
-  padding-inline: 8px;
+  padding-right: 12px;
 }
 
-.th-index{
-  flex:1;
+.th-index {
+  /* flex:2; */
+  width: 112px;
  /*  width: 10%; */
   justify-content: center;
 }
 
 .th-songname{
-  flex:2;
+  flex:3;
   display: inline-flex;
+  margin-left: 8px;
   /* justify-content: center; */
 }
 .th-songartist{
-  flex:2.5;
+  flex:2;
   display: inline-flex;
-  justify-content: center;
+ /*  justify-content: center; */
 }
 .th-songalbum{
   flex:3;
@@ -84,16 +86,15 @@
 
  /*  width:80%; */
 
-.th-actions{
+.th-actions {
   display: inline-flex;
   flex:1;
-  justify-content: center;
-  /* width=10% */
+  justify-content: flex-start;  /* width=10% */
   flex-direction: row-reverse;
 }
 .searchresultcontainer {
   display: flex;
-  background-image: url("../images/BGimg.png");
+  //background-image: url("../images/BGimg.png");
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
@@ -145,6 +146,9 @@
   padding: 8px;
   width: 100%;
   border-color: white;
+  i{
+    margin-right: 4px;
+  }
 }
 
 .cardcontent p{
@@ -152,7 +156,17 @@
   margin-bottom: 0 ;
   margin-right: 8px;
 }
-
+.cd-preview {
+  background: transparent;
+  border:transparent;
+  font-size:24px
+}
+.fake-button{
+  cursor: pointer;
+}
+.cd-preview fas{
+  size:5x;
+}
 .cd-cover{
   display: flex;
   flex-direction: row;
@@ -164,10 +178,14 @@
 }
 .cd-artist{
   display: inline-flex;
+  flex-direction: row;
+  align-items: center;
   flex:2;
 }
 .cd-album{
   display: inline-flex;
+  flex-direction: row;
+  align-items: center;
   flex: 3;
   justify-content: center;
 }
@@ -177,8 +195,10 @@
   flex:1;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around
+  margin-right: 16px;
+  justify-content: flex-end;
 }
+
 .card button{
   background: transparent;
   border-style: none;
@@ -188,6 +208,12 @@
   width:18px;
   height: 18px 
 }
+
+.openinspotify{
+  margin-left: 8px;
+  font-family: spotify-circular, spotify-circular-cyrillic, spotify-circular-arabic, spotify-circular-hebrew, sans-serif;
+}
+
 .sr-slogan {
   margin-left: 18px;
 }
