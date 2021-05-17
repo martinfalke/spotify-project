@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
                     name: trackObj.name,
                     album_name: trackObj.album_name,
                     artist: artistString,
-                    spotifyUrl: trackObj.external_urls,
+                    spotifyUrl: trackObj.external_urls.spotify,
                     duration: trackMinutes + ":" + trackSeconds,
                     previewSong: trackObj.preview_url,
                     image: trackObj.album_image,
