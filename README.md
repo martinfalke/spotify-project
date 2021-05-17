@@ -98,8 +98,10 @@ Create a branch from the latest version of `dev`. Commit on that branch. Regular
 
 ## Deployment
 1. Checkout the git branch that you want to deploy, should be the latest version of `master`.
-2. Run `npm run deploy` at the project root.
-3. Done!
+2. Delete local copies of the `gh-pages` branch by running `git branch -D gh-pages`.
+3. From the branch you want to deploy, create a new branch called "gh-pages": `git checkout -b gh-pages`.
+4. Run `npm run deploy` at the project root.
+5. Done!
 
 
 ---
