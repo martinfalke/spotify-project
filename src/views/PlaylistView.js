@@ -119,19 +119,21 @@ function PlaylistView(props){
                                                 </div>
                                             </div>
                                             <div className="p-actions">
-                                                <button className="trackmarked"  onClick={()=>props.onAddToTracks(index)}>
+                                                <div onClick={()=>props.onAddToTracks(index)}>
+                                                {(track.isInStash) ? (<button className='trackmarked'>
                                                     {/* if added in tracks  */}
                                                     <img
                                                         alt="add to track stash"
                                                         src={trackmarkicon}
                                                         />
-                                                </button>
-                                                {/* : <button className="nottrackmarked" >
+                                                </button>)
+                                                : (<button className="nottrackmarked" >
                                                     <img
                                                         src={nottrackedicon}
                                                         />
-                                                </button>
-                                                */}
+                                                </button>)
+                                                }
+                                                </div>
                                                 <ButtonGroup>
                                                 <button disabled={!props.actionsDisabled} onClick={()=> props.onMoveUpSong(index)}>
                                                     <i class="far fa-arrow-alt-circle-up"></i>

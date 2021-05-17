@@ -89,6 +89,7 @@ const mapStateToProps = (state) => {
 
                 let trackMinutes = Math.floor((trackObj.duration/1000)/60);
                 let trackSeconds = Math.round((trackObj.duration - trackMinutes * 1000 * 60)/1000);
+                let isInStash = state.tracks.stash.includes(trackObj.id);
 
                 return {
                     name: trackObj.name,
@@ -98,6 +99,7 @@ const mapStateToProps = (state) => {
                     duration: trackMinutes + ":" + trackSeconds,
                     previewSong: trackObj.preview_url,
                     image: trackObj.album_image,
+                    isInStash: isInStash,
                     uri: trackObj.uri
                 }
             })
