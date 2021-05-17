@@ -12,6 +12,7 @@ const initialState = {
     featureMaps: {},
     playlistsFetched: false,
     tracksFetched: false,
+    fetchProgress: null,
 
 
     //mock data
@@ -202,4 +203,7 @@ export default createReducer(initialState, {
             selectedList: playlistId,
         }
     },
+    [types.PLAYLIST_FETCH_PROGRESS] (state, action) {
+        return { ...state, fetchProgress: action.currentPercentage };
+    }
 })
