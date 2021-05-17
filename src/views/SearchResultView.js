@@ -59,7 +59,7 @@ function SearchResultView(props){
                             <Card>
                                <div className='cardcontent'>
                                    <p className="cd-name text-muted">
-                                   {item.track}
+                                   <a href={item.spotifyUrl}>{item.track}</a>
                                    </p>
                                    <p className="cd-artist text-muted">
                                    <i class="fas fa-user"></i>

@@ -29,6 +29,11 @@ $loader-color: $secondary-color;
           }
     }
 
+    .loading-percentage{
+        color: $loader-color;
+        font-weight: 600;
+    }
+
     // size variants
     &.loading-view-lg{ // large
         grid-template: 1fr 50% 1fr / 1fr 50vw 1fr;

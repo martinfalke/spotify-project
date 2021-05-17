@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import authActions from '../state/auth/authActions';
+import LoadingView from '../views/LoadingView';
 
 function LoginPresenter(props){
     const history = useHistory();
@@ -9,22 +10,21 @@ function LoginPresenter(props){
 
     // state must be present and correct
     if(!params.state || params.state !== localStorage.getItem("spotifyState")){
-        console.error("Faulty URL parameter 'state' for login attempt.");
         history.push("/login");
     }
 
-    localStorage.removeItem("spotifyState");
-
+    
     if(params.error){
         props.saveSpotifyTokenError(params.error);
         history.push("/login");
     }
-
+    
     if(params.token && params.expires_in){
         props.saveSpotifyToken(params.token, params.expires_in);
+        localStorage.removeItem("spotifyState");
     }
 
-    return <div></div>;
+    return <LoadingView size="lg"/>;
 }
 
 const mapStateToProps = (state) => ({
