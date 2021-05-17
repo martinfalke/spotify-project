@@ -111,6 +111,11 @@ function SearchResultView(props){
                                     <span class="sr-only">Previous</span>
                                 </span>
                                 </li>
+                                <li class="page-item active">
+                                <span class="page-link" aria-label="Current page" >
+                                    <span>{props.currentPage}</span>
+                                </span>
+                                </li>
                                 <li class={(props.currentPage===props.numPages) ? "page-item disabled" : "page-item"}>
                                 <span class="page-link" aria-label="Next" onClick={props.onNextPage} disabled={props.currentPage===props.numPages}>
                                     <span aria-hidden="true">&raquo;</span>
