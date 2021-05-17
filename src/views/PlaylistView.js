@@ -100,7 +100,7 @@ function PlaylistView(props){
                     </thead>
                 </Table>
                 <div className='songscontainer'>
-                    {props.tracks.map((track, index)=> {
+                    {props.tracks.map((track, index) => {
                         return (
                             <div className='p-songitem'>
                                 <h6>{index+1}</h6>
@@ -118,19 +118,24 @@ function PlaylistView(props){
                                                         height="12px"
                                                     />
                                             </button>
-                                                
+
                                             <div class="dropdown-content">
-                                                <p>Link 1</p>
-                                                <p>Link 1</p>
-                                                <p>Link 1</p>
+                                            {/* {props.trackLocations.map((track) => {
+                                                return
+                                                (
+                                                    <p></p>
+                                                )
+                                                })
+                                            }  */}
                                             </div>
+                                            
                                         </div>
                                 </div>
                             <Card borderless='1'>
                                     <div className="p-cardbody">
                                             <div className='p-cardcontent'>
                                                 <div className="p-songname">
-                                                    {track.name}
+                                                    <a href={track.spotifyUrl.spotify}>{track.name}</a>
                                                 </div>
                                                 <div className="p-songartist">
                                                     <i class="fas fa-user"></i>

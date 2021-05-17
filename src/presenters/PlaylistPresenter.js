@@ -7,7 +7,7 @@ import tracksActions from '../state/tracks/tracksActions';
 import FuzzySearch from 'fuzzy-search';
 
 function PlaylistPresenter(props){
-    const { token, playlists, playlistsFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist  } = props;
+    const { token, playlists, playlistsFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist, trackLocations  } = props;
 
     useEffect(()=>{
         props.fetchPlaylists(token);
@@ -47,7 +47,7 @@ function PlaylistPresenter(props){
 
     console.log(searchResults);
 
-    return (playlist && playlists && searchResults && allPlaylists && playlistTracks) ? 
+    return (playlist && playlists && searchResults && allPlaylists && playlistTracks && trackLocations) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 
                             onMoveUpSong = {moveUpSong}
                             onMoveDownSong = {moveDownSong}
@@ -119,6 +119,7 @@ const mapStateToProps = (state) => {
         playlistsFetched: state.lists.playlistsFetched,
         playlistTracks: playlistTracks,
         allPlaylists: allPlaylists,
+        trackLocations: state.tracks.trackLocations,
     });
 }
   
