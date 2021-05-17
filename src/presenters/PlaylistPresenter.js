@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PlaylistView from '../views/PlaylistView';
+import LoadingView from '../views/LoadingView';
 import playlistActions from '../state/playlist/playlistActions';
 import tracksActions from '../state/tracks/tracksActions';
 import FuzzySearch from 'fuzzy-search';
@@ -60,7 +61,7 @@ function PlaylistPresenter(props){
                             onSearchTerm={(term)=>setSearchTerm(term)}
                             searchTerm={searchTerm}
                             actionsDisabled={(searchTerm == false)}
-    /> : <div>Fetching playlists and tracks..</div>
+    /> : <LoadingView />
 }
 
 const mapStateToProps = (state) => {
