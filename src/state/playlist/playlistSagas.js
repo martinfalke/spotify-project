@@ -58,6 +58,7 @@ function* handleDeleteFromPlaylist(action){
 }
 
 function* handleFetchPlaylist(action){
+    yield put({'type': types.PLAYLIST_FETCH_PROGRESS, currentPercentage: 0});
     const token = yield select(getToken);
     let offset = 0;
     let response, error;
@@ -147,11 +148,13 @@ function* handleFetchTrack(action){
 function* watchTracksFetch(){
     const buffer = buffers.expanding(10);
     const trackFetchChannel = yield actionChannel(types.PLAYLIST_TRACK_GET, buffer);
-    let firstHandled = false;
-    while(!firstHandled || !buffer.isEmpty()){
+    let counter = 0;
+    while(counter <= 0 || !buffer.isEmpty()){
         const action = yield take(trackFetchChannel);
         yield call(handleFetchTrack, action);
-        firstHandled=true;
+        counter++;
+        const numPlaylists = yield select(getNumPlaylists);
+        yield put({'type': types.PLAYLIST_FETCH_PROGRESS, currentPercentage: Math.round((counter/numPlaylists)*100)})
     }
     yield put({'type': types.PLAYLIST_TRACK_GET_ALL_DONE});
 }
@@ -167,6 +170,8 @@ function* playlistRootSaga() {
     ])
 };
 
+// selectors
 const getUser = (state) => state.user.id;
+const getNumPlaylists = (state) => Object.keys(state.lists.playlists).length;
 
 export default playlistRootSaga;
