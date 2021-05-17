@@ -61,7 +61,7 @@ function PlaylistPresenter(props){
                             onSearchTerm={(term)=>setSearchTerm(term)}
                             searchTerm={searchTerm}
                             actionsDisabled={(searchTerm == false)}
-    /> : <LoadingView />
+    /> : <LoadingView percentage={props.fetchProgress}/>
 }
 
 const mapStateToProps = (state) => {
@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
                     name: trackObj.name,
                     album_name: trackObj.album_name,
                     artist: artistString,
-                    spotifyUrl: trackObj.external_urls,
+                    spotifyUrl: trackObj.external_urls.spotify,
                     duration: trackMinutes + ":" + trackSeconds,
                     previewSong: trackObj.preview_url,
                     image: trackObj.album_image,
@@ -121,6 +121,7 @@ const mapStateToProps = (state) => {
         tracksFetched: state.lists.tracksFetched,
         playlistTracks: playlistTracks,
         allPlaylists: allPlaylists,
+        fetchProgress: state.lists.fetchProgress,
     });
 }
   
