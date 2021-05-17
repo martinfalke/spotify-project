@@ -1,9 +1,10 @@
 // src/presenters/PlaylistPresenter.js
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PlaylistView from '../views/PlaylistView';
 import playlistActions from '../state/playlist/playlistActions';
 import tracksActions from '../state/tracks/tracksActions';
+import FuzzySearch from 'fuzzy-search';
 
 function PlaylistPresenter(props){
     const { token, playlists, playlistsFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist  } = props;
@@ -27,16 +28,26 @@ function PlaylistPresenter(props){
     const moveDownSong = (CI) => props.moveDownSong(token, playlist.id, CI, playlist.snapshot_id);
     const deleteFromList = (CI) => props.deleteFromList(token, playlist.id, playlistTracks[CI].uri, playlist.snapshot_id, CI, playlist.tracks[CI]); 
     const addToTracks = (CI) => props.addToTracks(playlist.tracks[CI]);
-    //console.log(playlist);
-    //console.log("playlistTracks");
-    //console.log(playlistTracks);
 
     // const [searchTerm, setSearchTerm] = useState("");
+    // let searchResults = playlistTracks;
+
+    // //const [searchKey, setSearchKey] = useState("")
     // useEffect(()=>{
-    //     const searcher = new FuzzySearch(playlistTracks, [], {
-    //         caseSensitive: false,
-    //     })
+    //     if(searchTerm){
+    //         const searcher = new FuzzySearch(playlistTracks, ['name','artist','album_name'], {
+    //             caseSensitive: false,
+    //         })
+    //         const searchResults = searcher.search(searchTerm);
+    //     }
+
     // },[searchTerm])
+    
+
+    // console.log(searchResults);
+
+
+
 
     return (playlist && playlists && playlistTracks && allPlaylists) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 
@@ -48,6 +59,9 @@ function PlaylistPresenter(props){
                             playlist = {playlist}
                             selectedPlaylist={selectedPlaylist}
                             onAddToTracks={addToTracks}
+                            // onSearchTerm={(term)=>setSearchTerm(term)}
+                            // searchTerm={searchTerm}
+                            //onSearchKey={(key)=>setSearchKey(key)}
 
     /> : <div>Fetching playlists and tracks..</div>
 }

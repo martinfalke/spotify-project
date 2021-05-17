@@ -42,7 +42,7 @@ function PlaylistView(props){
                                 'selectedplaylist': "unselectedplaylist"} 
                                 onClick = {() => props.onSelectPlaylist(playlist.id)}
                         >
-                            <img src={playlist.image.url}></img>
+                            <img src={(playlist.image)?playlist.image.url: LOGO}></img>
                             <p class="h6 text-light">{playlist.name}</p>
                         </div>
                     )
@@ -70,23 +70,21 @@ function PlaylistView(props){
                 */}
             <div className="playlistcontent">
                 <div className="playlistbanner">
-                    <img src={props.playlist.image.url} />
+                    <img src={(props.playlist.image)?props.playlist.image.url: LOGO} />
                     <div className="playlistinfo">
                         <div class=" h4 text-light">{props.playlist.name}</div>
                         <p class=" md text-light">{props.playlist.description}</p>
                     
                         <form className="actionsbar">
                             <div class= "form-group">
-                                <input type="email" class="form-control" id="PlaylistSearchAction" placeholder="search for a song"/>
+                                <input type="email" class="form-control" id="PlaylistSearchAction" placeholder="search for a song"  defaultValue={props.searchTerm} onChange={e=>props.onSearchTerm(e.target.value)}/>
                             </div>
                             <div class="form-group">
                                 {/* <label for="exampleFormControlSelect1">Sort</label> */}
                                 <select class="form-control" id="PlaylistSortAction" placeholder="Sort">
-                                <option>artist</option>
-                                <option>album</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                <option onClick = {()=>props.onSearchKey('name')}>song</option>
+                                <option onClick = {()=>props.onSearchKey('artist')}>artist</option>
+                                <option onClick = {()=>props.onSearchKey('album_name')}>album</option>
                                 </select>
                             </div>
                         </form>
