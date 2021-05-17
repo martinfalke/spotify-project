@@ -1,6 +1,7 @@
-@import '../index.scss';
+@import '../shared.scss';
 
 .authorized-view{
+    margin-top: 60px;
     height: 100%;
     width: 100%;
     display: grid;
@@ -16,23 +17,12 @@
     }
 }
 
-.allthingscontainer{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-
-}
-
-.navpages {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-right: 4px;
-    height:fit-content;
-}
-.navpages img{
-    width: 24;
-    height: 24;
+#navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: $bg-color;
 }
 
 #left-tabs-example-tabpane-search{
