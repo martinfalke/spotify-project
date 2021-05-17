@@ -1,161 +1,56 @@
 // src/views/AuthorizedView.js
 import './AuthorizedView.scss';
-import SearchView from  '../views/SearchView'
-import SearchResultView from '../views/SearchResultView'
-import Table from 'react-bootstrap/Table'
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import LOGO from '../images/LOGO.svg'
-import searchicon from '../images/Icons/Search.svg'
+import { Tab, Navbar } from "react-bootstrap";
+import Nav from 'react-bootstrap/Nav';
+import LOGO from '../images/LOGO.svg';
+import NavDropdown from "react-bootstrap/NavDropdown";
+import SearchPresenter from '../presenters/SearchPresenter';
+import PlaylistPresenter from '../presenters/PlaylistPresenter';
 
 
-import React from 'react'
-import SearchPresenter from '../presenters/SearchPresenter'
-import DropdownButton from 'react-bootstrap/DropdownButton'
-import PlaylistView from './PlaylistView';
 
 function AuthorizedView(props){
     return (
-        <div>
-            <Tabs className="tabs" defaultActiveKey="tracks" id="home-page-tabs">
-                <Tab eventKey="playlist" title="Playlists">
-                    <PlaylistView/>
-                </Tab>
-                <Tab eventKey="tracks" title="Tracks">
-                    <Table striped bordered hover variant="dark">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Artist</th>
-                                <th>Song Name</th>
-                                <th>Album</th>
-                            </tr>
-                        </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>The Weeknd</td>
-                                    <td>Blinding Lights</td>
-                                    <td>After Hours</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>The Weeknd</td>
-                                    <td>In Your Eyes</td>
-                                    <td>After Hours</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Justin Bieber</td>
-                                    <td>Peaches</td>
-                                    <td>Justice</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Molly Sandén</td>
-                                    <td>Nån annan nu</td>
-                                    <td>Nån annan nu</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Lil Nas X</td>
-                                    <td>Montero</td>
-                                    <td>Montero</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Alesso</td>
-                                    <td>Going Dumb</td>
-                                    <td>Going Dumb</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td>Tusse</td>
-                                    <td>Voices</td>
-                                    <td>Voices</td>
-                                </tr>
-                            </tbody>
-                    </Table>
-
-                </Tab>
-                <Tab eventKey="search" title="Search">
-                 <SearchPresenter>
-                </SearchPresenter> 
-                </Tab>
-                <Tab className="listify" eventKey="logo" title="Listify" disabled></Tab>
-                <Tab classname="usermenu" eventKey="usermenu" title="Menu">
-                    <nav>
-                        <div class="dropdown">
-                            <button><a href="#">Home</a></button>
-                            <div class="projects">
-                                <button>Projects</button>
-                                <ul class="list">
-                                    <li><a href="#">Weather App1</a></li>
-                                    <li><a href="#">Weather App2</a></li>
-                                    <li><a href="#">Weather App3</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
-                </Tab>
-            </Tabs>
-         
-            
-            {/*<div className="App">
-                <p>Spotify login success!</p>
-                <h2>Sample API data from authorized user</h2>
-                <h5>Username</h5>
-                <p>{props.username}</p>
-                <h5>Display name</h5>
-                <p>{props.display_name}</p>
-                <h5>Country Code</h5>
-                <p>{props.country}</p>
-            </div>
-            */}
+        <div className="authorized-view">
+            <Tab.Container id="left-tabs-example" defaultActiveKey="playlist">
+            <Nav className="navbar">
+            <Nav variant="tabs" className="mr-auto" id="nav-container">
+                    <Nav.Item>
+                        <Nav.Link eventKey="playlist">Playlist</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="search">Search</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="tracks">Tracks</Nav.Link>
+                    </Nav.Item>
+            </Nav>
+            <Nav>
+                <NavDropdown title={props.username}>
+                    <NavDropdown.Item onClick={props.logout} eventKey="1">Sign Out</NavDropdown.Item>
+                </NavDropdown>
+                <Navbar.Brand>
+                    <img id="listify-logo" src={LOGO} alt="Logo" height="30" width="30"/>
+                </Navbar.Brand>
+            </Nav>
+            </Nav>
+            <Tab.Content>
+                <Tab.Pane eventKey="search">
+                    <SearchPresenter>
+                    </SearchPresenter> 
+                </Tab.Pane>
+                <Tab.Pane eventKey="playlist">
+                    <PlaylistPresenter>
+                    </PlaylistPresenter>
+                </Tab.Pane>
+                <Tab.Pane eventKey="tracks">
+                    <p>Tracksview</p>
+                </Tab.Pane>
+            </Tab.Content>
+            </Tab.Container>
         </div>
   );
 }
 
 export default AuthorizedView;
-
-
-
-
-
-
-/* function AuthorizedView(props){
-
-    return (
-        <div className='allthingscontainer'>
-             <Navbar className="NavigationForEveryPage justify-content-between">             
-                <Navbar.Brand href="#authorized"> 
-                    <img
-                        alt=""
-                        src={LOGO}
-                        width='30'
-                        height='30'
-                    />{' '}
-                    Listify
-                </Navbar.Brand>
-                <Nav className= "navpages" activeKey="/authorized" >
-                    <Nav.Link href="#Playlist" >Playlist</Nav.Link>
-                    <Nav.Link href="#Tracks">Tracks</Nav.Link>
-                    <Nav.Link href="#authorized" disabled>
-                        Search
-                    </Nav.Link>
-                    <img 
-                            alt=""
-                            src= {searchicon}
-                    />{' '}
-                </Nav>
-            </Navbar>
-            <SearchPresenter/>
-        </div>
-  );
-}
-
-export default AuthorizedView; */
 

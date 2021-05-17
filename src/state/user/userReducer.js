@@ -1,5 +1,6 @@
 // src/state/user/userReducer.js
 import * as types from './userTypes';
+import * as authTypes from '../auth/authTypes';
 import { createReducer } from '../utils';
 
 const initialState = {
@@ -19,5 +20,7 @@ export default createReducer(initialState, {
     },
     [types.USER_GET_ERROR]: (state, action) => {
         return { ...state, error: action.payload, status: "ERROR"}
-    }
+    },
+    [authTypes.AUTH_SPOTIFY_LOGOUT]: (state, action) => initialState,
+    
 });

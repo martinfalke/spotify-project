@@ -1,5 +1,13 @@
 @import './shared.scss';
 
+body{
+  height: 100vh;
+  overflow-y: scroll;
+  #root{
+    height: 100%;
+  }
+}
+
 // Bootstrap customization
 $theme-colors: (
   // set primary, secondary, success, info, danger, warning, light, dark, link
@@ -9,7 +17,8 @@ $theme-colors: (
   "dark":$purple-color,
   "light": $light-color,
   "white": $bg-color,
-  "transparent":$transparent-color
+  "transparent":$transparent-color,
+  "info": $dark-color
   
 );
 $body-bg: $bg-color;

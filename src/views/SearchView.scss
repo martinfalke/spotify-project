@@ -1,0 +1,65 @@
+@import '../index.scss';
+@import '../shared.scss';
+
+.bg{
+    width: 290px;
+    height: 476px;
+    margin-top: 80px;
+    filter: blur(2px);
+    opacity:60%;
+} 
+
+.searchcontainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 250px;
+    width: 60%;
+    position: fixed;
+    h6 {
+        border-radius: 8px;
+        padding: 8px 12px;
+        background-color: rgba($secondary-color, 0.1);
+    }
+}
+
+
+.s-searchbar{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+.s-searchbar img {
+    width: 30px;
+    height: 30px;
+    margin-left:4px ;
+    padding-top: 4px;
+
+}
+
+.s-searchinput{
+    margin:0;
+    width: 100%;
+
+}
+.searchview {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    vertical-align: center;
+    width: 100%;
+}
+
+/*  change the position only   
+    position: absolute;
+    width: 640px;
+    height: 84px;
+    left: 400px;
+    top: 439px; */
+
+

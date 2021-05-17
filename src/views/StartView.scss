@@ -1,29 +1,22 @@
+@import '../shared.scss';
 
 .start-view {
-    top: 50%;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%,-50%);
+    height: 100%;
     text-align: center;
-}
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
 
-.login-header 
-{
-    h1 {
-        font-size: 60px;
-        color: rgb(1, 32, 13);
-        text-transform: uppercase;
-        padding: 20px;
-        margin: 10px;
+    img{
+        max-height: 30vh;
+        margin-bottom: 20px;
     }
 
-    .vertical-line {
-        height: 2px;
-        background-color: #fff;
-        width: 150px;
-        margin: 0 auto;
-        margin-top: 15px;
-        margin-bottom: 30px;
+    .fa-spotify::before {
+            display: inline-block;
+            min-height: 21px;
+            min-width: 21px;
+            margin-right: 6px;
+            color: $spotify-green;
     }
 }
-

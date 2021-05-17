@@ -1,6 +1,6 @@
 // src/state/auth/authReducer.js
 import * as types from './authTypes';
-import { createReducer } from '../utils';
+import { createExpirationDate, createReducer } from '../utils';
 
 const initialState = {
     status: null,
@@ -14,9 +14,11 @@ const initialState = {
 
 export default createReducer(initialState, {
     [types.AUTH_INIT_TEST]: (state, action) => {
-        return { ...state, status: "initialized"};
+        return { ...state, status: "OK"};
     },
     [types.AUTH_SPOTIFY]: (state, action) => {
+        localStorage.setItem("spotifyToken", action.token);
+        localStorage.setItem("spotifyExpiration", createExpirationDate(3600-5).toUTCString()); // set expiration of token to 1 hour minus 5 seconds
         return { ...state,
             spotify: {
                 token: action.token,
@@ -43,6 +45,13 @@ export default createReducer(initialState, {
                 ...state.spotify,
                 spotify_string: action.spotify_string
             }
+        }
+    },
+    [types.AUTH_SPOTIFY_LOGOUT]: (state, action) => {
+        localStorage.removeItem("spotifyToken");
+        localStorage.removeItem("spotifyExpiration");
+        return {
+            ...initialState
         }
     }
 });

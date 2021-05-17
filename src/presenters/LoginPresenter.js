@@ -10,20 +10,18 @@ function LoginPresenter(props){
     // state must be present and correct
     if(!params.state || params.state !== localStorage.getItem("spotifyState")){
         console.error("Faulty URL parameter 'state' for login attempt.");
-        history.push("/");
+        history.push("/login");
     }
 
     localStorage.removeItem("spotifyState");
 
     if(params.error){
         props.saveSpotifyTokenError(params.error);
-        history.push("/");
+        history.push("/login");
     }
 
     if(params.token && params.expires_in){
-        localStorage.setItem("spotifyToken", params.token);
         props.saveSpotifyToken(params.token, params.expires_in);
-        history.push("/authorized");
     }
 
     return <div></div>;
