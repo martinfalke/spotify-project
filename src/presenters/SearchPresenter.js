@@ -4,6 +4,12 @@ import { connect } from 'react-redux';
 import searchActions from '../state/search/searchActions';
 import SearchView from '../views/SearchView';
 import SearchResultView from '../views/SearchResultView';
+import tracksActions from '../state/tracks/tracksActions';
+import playlistActions from '../state/playlist/playlistActions';
+import PlaylistView from '../views/PlaylistView';
+
+
+
 
 function setNextPage(currentPage, numPages, setPage){
     if(currentPage === numPages) return;
@@ -46,8 +52,8 @@ function SearchPresenter(props) {
 
     const [page, setPage] = useState(1);
     const numPages = Math.ceil(props.totalResults/20);
-   
-    
+    const addToTracks = (CI) => props.addToTracks(props.results[CI].id);
+
     return (search) ?
         <SearchResultView   onSearch={(term)=>setSearch(term)} search={search}
                             results={props.results} currentPage={page}
@@ -61,8 +67,10 @@ function SearchPresenter(props) {
                                 props.getPreviousPage(token);
                             }}
                             tabVisible={isTabVisible}
+                            onAddToTracks={addToTracks}
         /> : 
         <SearchView onSearch={(term)=>setSearch(term)} tabVisible={isTabVisible} />
+       
 
 }
 
@@ -92,7 +100,8 @@ const mapStateToProps = (state) => {
                 spotifyUrl: item.external_urls.spotify,
                 image: smallestAlbumImage.url,
                 duration: trackMinutes + ":" + trackSeconds,
-                previewSong: item.preview_url
+                previewSong: item.preview_url,
+                id: item.id
             }
         })
     }
@@ -106,7 +115,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     getSearchResults: searchActions.getSearchResults,
     getNextPage: searchActions.getNextPage,
-    getPreviousPage: searchActions.getPreviousPage
+    getPreviousPage: searchActions.getPreviousPage,
+    addToTracks: tracksActions.addToTracks
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPresenter);

@@ -45,9 +45,12 @@ function SearchResultView(props){
                    { props.results.map((item, index) => {
                        return (
                         <div className='songitem' key={index}>  
+
+                            {/* 
                             <span className="cd-preview fake-button" onClick={()=>console.log(index)}>
                                 <i class="fas fa-play-circle"></i>
                             </span>
+                            */}
                             <div className='cd-cover'>  
                                 {/* <h6>{(props.currentPage-1)*20 + index+1}</h6> */}
                                 <img
@@ -71,7 +74,7 @@ function SearchResultView(props){
                                    </p>
                                    {/* These functions have not been implemented yet */}
                                    <div className='cd-Actions' > 
-                                       <Button variant="light" onClick={()=>console.log(index)}>
+                                       <Button variant="light" onClick={()=>props.onAddToTracks(index)}>
                                            {/* <Button onClick={()=>props.addToStash(index)}> */}
                                            {/* If it is not clicked */}
                                            {/* <img

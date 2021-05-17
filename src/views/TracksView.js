@@ -16,6 +16,7 @@ import { ButtonGroup } from 'react-bootstrap';
 
 
 function TracksView(props){
+    console.log(props);
     return (
         <div className="tracksview">
             <div className="pagetitle">
@@ -29,39 +30,46 @@ function TracksView(props){
                 <Table className="t-tabletitle" size="sm" >
                     <thead>
                         <tr>
-                        <th class="text-light"># </th>
+                        <th class="text-light"> </th>
                         <th class="text-light">Actions</th>
                         </tr>
                     </thead> 
                 </Table>
                 <div className='trackscontainer'>
+                    
+                    { ((props.tracks === null || props.tracks.length === 0) && (
+                        <span className=" new-playlist text-light" >
+                        Add tracks from your Playlist or search for new songs to add!
+                        </span>
+                    )) || props.tracks.map((track, index) => {
+                    return(
                     <div className='t-songitem'> 
+                        {/*
                         <span className="t-preview fake-button" onClick={()=>console.log('play')}>
                             <i class="fas fa-play-circle"></i>
                         </span>
+                        */}
                         {/* <h6 className='t-index'> </h6> */}
                         <img className='t-songcover'
-                            src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
-                            width= '48px'
-                            height= '48px'
+                             src={track.image.url}
                             />
                        <Card borderless='1'>
                             <div className="cardbody">
                                     <div className='cardcontent'>
                                         <div className="song-name">
-                                        The weekendfnaiojfdisaojifjaso
+                                        {track.name}
                                         </div>
                                         <div className="song-artist">
                                             <i class="fas fa-user"></i>
-                                            Blinding Lightsdjsajfoajfodsajf
+                                            {track.artist}
                                         </div>
                                         <div className="song-album">
                                             <i class="fas fa-record-vinyl"></i>
-                                            After Hours
+                                            {track.album_name}
                                         </div>
                                     </div>
                                     <div className="t-actions">
-                                        <Button variant="light" class="btn-sm">
+                                        <Button variant="light" class="btn-sm" onClick={()=>props.onDeleteTrack(index)}>
                                             {/* <Button variant="light" onClick={()=>console.log(index)}> */}
                                            {/* <Button onClick={()=>props.addToStash(index)}> */}
                                            {/* If it is not clicked */}
@@ -78,11 +86,7 @@ function TracksView(props){
                                                 width='16px'
                                                 height= '16px'/>
                                        </Button>
-                                       {/* multiple-choice */}
-                                       <div class="form-check">
-                                            <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="uncheck" aria-label="..."/>
-                                            {/* <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="uncheck" aria-label="..." onClick={(e)=>console.log(index)}> */}
-                                        </div>
+                                       {/* multiple-choice*/}
                                         {/* <ButtonGroup>
                                             <button>
                                                 <i class="far fa-arrow-alt-circle-up"></i>
@@ -93,19 +97,19 @@ function TracksView(props){
                                     </div>
                             </div>
                         </Card>
-                    </div>
+                    </div>);
+                    
+                    })}
                 </div>
-                <span className="fake-button new-playlist text-light" >
-                    {/* When clicked a new playlist will be created named "Myplaylist#1"
-                        <span className="fake-button new-playlist text-light" onClick={()=>console.log(index)}> */}
-                    + create a new playlist with selected tracks
-                </span>
+           
 
             </div>
         </div>
 
           );
 }
+
+
 
 export default TracksView;
 

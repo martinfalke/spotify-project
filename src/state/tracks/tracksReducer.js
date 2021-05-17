@@ -48,6 +48,15 @@ export default createReducer(initialState, {
             stash: updatedStash
         }
     },
+    [types.DELETE_FROM_TRACKS]: (state, action) => {
+        const CI = action.CI;
+        const stashList = state.stash;
+        let updatedStash = stashList.slice(0, CI).concat(stashList.slice(CI+1, stashList.length));
+
+        return {...state,
+            stash: updatedStash
+        }
+    },
     [types.TRACKS_SAVE_LOCATIONS]: (state, action) => {
         const playlist_id = action.payload.playlist_id;
         let trackIds = action.payload.trackIds;

@@ -6,6 +6,7 @@ import LOGO from '../images/LOGO.svg';
 import NavDropdown from "react-bootstrap/NavDropdown";
 import SearchPresenter from '../presenters/SearchPresenter';
 import PlaylistPresenter from '../presenters/PlaylistPresenter';
+import TracksPresenter from '../presenters/TracksPresenter';
 
 
 
@@ -44,7 +45,7 @@ function AuthorizedView(props){
                     </PlaylistPresenter>
                 </Tab.Pane>
                 <Tab.Pane eventKey="tracks">
-                    <p>Tracksview</p>
+                    <TracksPresenter></TracksPresenter>
                 </Tab.Pane>
             </Tab.Content>
             </Tab.Container>
