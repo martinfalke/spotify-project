@@ -11,7 +11,7 @@ import PlaylistPresenter from '../presenters/PlaylistPresenter';
 
 function AuthorizedView(props){
     return (
-        <div>
+        <div className="authorized-view">
             <Tab.Container id="left-tabs-example" defaultActiveKey="playlist">
             <Nav className="navbar">
             <Nav variant="tabs" className="mr-auto" id="nav-container">
