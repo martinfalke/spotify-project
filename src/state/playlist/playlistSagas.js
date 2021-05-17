@@ -82,7 +82,9 @@ function* handleFetchPlaylist(action){
             remainingPlaylists = (total > offset+50);
         }
         if(!error){
-            yield put({'type': types.PLAYLIST_GET_SUCCESS, payload: {playlists: allPlaylists}});
+            const userId = yield select(getUser);
+            const ownerPlaylists = allPlaylists.filter(playlist => playlist.owner.id === userId);
+            yield put({'type': types.PLAYLIST_GET_SUCCESS, payload: {playlists: ownerPlaylists}});
         }else{
             yield put({'type': types.PLAYLIST_GET_ERROR, payload: error.error});
         }
@@ -164,5 +166,7 @@ function* playlistRootSaga() {
         fork(watchTracksFetch),
     ])
 };
+
+const getUser = (state) => state.user.id;
 
 export default playlistRootSaga;
