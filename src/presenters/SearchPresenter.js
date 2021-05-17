@@ -17,7 +17,7 @@ function setPrevPage(currentPage, setPage){
 }
 
 function SearchPresenter(props) {
-    console.log(props);
+    //console.log(props);
     //search == search
     const [search, setSearch] = useState("");
     const { token } = props;

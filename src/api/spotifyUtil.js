@@ -24,7 +24,7 @@ function handleHttpResponse(response){
         });
 }
 
-const spotifyApiCall = (token, endpoint, method="GET", content_type="application/json", bodyObj={}) => {
+const spotifyApiCall = (token, endpoint, method="GET", bodyObj={}, content_type="application/json") => {
     // add slash if missing
     const finalEndpoint = (endpoint.startsWith("/")) ? endpoint : "/" + endpoint;
     // embed token
@@ -37,7 +37,7 @@ const spotifyApiCall = (token, endpoint, method="GET", content_type="application
     }
     // add the body object to the parameters if it isn't empty
     if(Object.keys(bodyObj).length !== 0){
-        parameters["body"] = JSON.Stringify(bodyObj);
+        parameters["body"] = JSON.stringify(bodyObj);
         headers["Content-Type"] = content_type;
     }
     
