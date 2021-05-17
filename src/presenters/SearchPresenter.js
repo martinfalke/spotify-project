@@ -52,8 +52,8 @@ function SearchPresenter(props) {
 
     const [page, setPage] = useState(1);
     const numPages = Math.ceil(props.totalResults/20);
-    const addToTracks = (CI) => props.addToTracks(props.results[CI].id);
-    const deleteFromTracks = (CI) => props.deleteFromTracks(CI);
+    const addToTracks = (CI) => props.addToTracks(props.results[CI].id, props.rawItems[CI]);
+    const deleteFromTracks = (CI) => props.deleteFromTracks(CI, props.results[CI].id);
 
     return (search) ?
         <SearchResultView   onSearch={(term)=>setSearch(term)} search={search}
@@ -95,6 +95,7 @@ const mapStateToProps = (state) => {
             );
             let trackMinutes = Math.floor((item.duration_ms/1000)/60);
             let trackSeconds = Math.round((item.duration_ms - trackMinutes * 1000 * 60)/1000);
+            let isInStash = state.tracks.stash.includes(item.id);
             return {
                 artist: artistString,
                 album: item.album.name,
@@ -103,14 +104,16 @@ const mapStateToProps = (state) => {
                 image: smallestAlbumImage.url,
                 duration: trackMinutes + ":" + trackSeconds,
                 previewSong: item.preview_url,
-                id: item.id
+                id: item.id,
+                isInStash: isInStash,
             }
         })
     }
     return {
         totalResults: totalResults,
         results: itemsArray,
-        token: state.auth.spotify.token
+        token: state.auth.spotify.token,
+        rawItems: (state.search.activePage && state.search.activePage.items) || null
     };
 }
   

@@ -14,20 +14,7 @@ function PlaylistView(props){
     return (
     
         <div className="playlistview">
-            {/* Playlist navigation (selected/unselected)*/}
             <div className="playlistsnav"> 
-                {/* 
-                {props.playlists.map((playlistlabel)=> {
-                    (playlistlabel.selected)? 
-                    <div className="unselectedplaylist">
-
-                    </div> :
-                    <div className="selectedplaylist>
-                    </div>
-
-
-                })} */}
-
                 {props.allPlaylists.map((playlist,i) => {
                     return (
                         <div key={i} className={(
@@ -40,27 +27,8 @@ function PlaylistView(props){
                         </div>
                     )
                 })}
-                
-                {/* <div className="unselectedplaylist">
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
-                        >
-                    </img>
-                    <p className="h6 text-secondary">Playlist B</p>
-                </div> */}
 
             </div>
-            {/* Playlist content (selected)*/}
-            {/* display the content of selected playlist
-                  {props.playlists.map((playlistlabel)=> {
-                    (playlistlabel.selected)? 
-                     :
-                    <div className="selectedplaylist>
-                    </div>
-
-
-                })}   
-                */}
             <div className="playlistcontent">
                 <div className="playlistbanner">
                     <img alt="selected playlist" className={(props.playlist.image) ? "" : "no-img"} src={(props.playlist.image)?props.playlist.image.url: LOGO} />
@@ -70,15 +38,7 @@ function PlaylistView(props){
                     
                         <form className="actionsbar">
                             <div class= "form-group">
-                                <input type="email" class="form-control" id="PlaylistSearchAction" placeholder="search for a song"  defaultValue={props.searchTerm} onChange={e=>props.onSearchTerm(e.target.value)}/>
-                            </div>
-                            <div className="form-group">
-                                {/* <label for="exampleFormControlSelect1">Sort</label> */}
-                                <select class="form-control" id="PlaylistSortAction" placeholder="Sort">
-                                <option>song</option>
-                                <option>artist</option>
-                                <option>album</option>
-                                </select>
+                                <input type="text" class="form-control" id="PlaylistSearchAction" placeholder="search for a song"  defaultValue={props.searchTerm} onChange={e=>props.onSearchTerm(e.target.value)}/>
                             </div>
                         </form>
                     </div>
@@ -121,7 +81,6 @@ function PlaylistView(props){
                                             <div className="p-actions">
                                                 <div onClick={(track.isInStash) ? (() => props.onDeleteFromTracks(index)) : (()=>props.onAddToTracks(index))}>
                                                 {(track.isInStash) ? (<button className='trackmarked'>
-                                                    {/* if added in tracks  */}
                                                     <img
                                                         alt="add to track stash"
                                                         src={trackmarkicon}

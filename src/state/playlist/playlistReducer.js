@@ -1,5 +1,6 @@
 // src/state/playlist/playlistReducer.js
 import * as types from './playlistTypes';
+import * as tracksTypes from '../tracks/tracksTypes';
 import { createReducer } from '../utils';
 
 const initialState = {
@@ -201,7 +202,28 @@ export default createReducer(initialState, {
             selectedList: playlistId,
         }
     },
-    [types.PLAYLIST_FETCH_PROGRESS] (state, action) {
+    [types.PLAYLIST_FETCH_PROGRESS]: (state, action) => {
         return { ...state, fetchProgress: action.currentPercentage };
+    },
+    [tracksTypes.PLAYLIST_ADD_TO_TRACKS]: (state, action) => {
+        const trackId = action.trackId;
+        const track = action.track;
+        let trackIndex = state.trackIndex;
+        if(!trackIndex.hasOwnProperty(trackId) && track){
+            let trackObj = {
+                album_name: track.album.name,
+                album_image: (track.album.images.length >= 2 && track.album.images[1]) || null,
+                artists: track.artists.map(a=>a.name),
+                is_local: track.is_local,
+                external_urls: track.external_urls,
+                name: track.name,
+                id: track.id,
+                preview_url: track.preview_url,
+                uri: track.uri,
+                duration: track.duration_ms
+            };
+            trackIndex[trackId]=trackObj;
+        }
+        return {...state, trackIndex: {...trackIndex}};
     }
 })

@@ -39,20 +39,12 @@ function SearchResultView(props){
                             </tr>
                         </thead>
                 </Table>
-                {/* Here needs to fetch searchresults data */}
                 <div className='resultscontainer'>
 
                    { props.results.map((item, index) => {
                        return (
                         <div className='songitem' key={index}>  
-
-                            {/* 
-                            <span className="cd-preview fake-button" onClick={()=>console.log(index)}>
-                                <i class="fas fa-play-circle"></i>
-                            </span>
-                            */}
                             <div className='cd-cover'>  
-                                {/* <h6>{(props.currentPage-1)*20 + index+1}</h6> */}
                                 <img
                                     alt="song album cover"
                                     className="songitem-cover"
@@ -74,12 +66,6 @@ function SearchResultView(props){
                                    </p>
                                    <div className='cd-Actions' > 
                                        <Button variant="light" onClick={(item.isInStash) ? (() => props.onDeleteFromTracks(index)) : (()=>props.onAddToTracks(index))}>
-                                           {/* If it is not clicked */}
-                                           {/* <img
-                                            alt="add to track stash"
-                                            src={untrackmark}
-                                           /> */}
-                                           {/* If it is clicked */}
                                            <img
                                                 alt="remove from track stash"
                                                 src={(item.isInStash) ? (trackmarked) : (untrackmark) } />
@@ -93,16 +79,12 @@ function SearchResultView(props){
                                                 className='openinspotify'
                                                 />
                                         </a>
-                                       {/* <i className="fa fa-plus add-song" aria-hidden="true" /> */}
                                     </div>
                                </div>
                        </Card>
                        </div>
                        )
                     })}
-                        
-
-                    {/* Here needs to get the number of pages */}
                     <div className="Pagenav">
                         <nav>
                             <ul class="pagination">
@@ -127,85 +109,8 @@ function SearchResultView(props){
                     </div>
                 </div>
             </div>
-            {/* smtracks here */}
         </div>
   );
 }
 
 export default SearchResultView;
-
-//small tracksview has not been implemented
-            /*
-            <div className= 'smtrackscontainer'>
-                <div className="trackstitle"> 
-                    <h5>
-                        Tracks
-                    </h5>
-                    <img
-                            alt=""
-                            src= {trackmarked}
-                            width ='24px'
-                            height='24px'
-
-                        />
-                </div>
-                <Table size="sm" borderless='1' >
-                        <thead class="text-light">
-                            <tr>
-                            <th><em>Cover </em></th>
-                            <th>Details</th>
-                            <th>Mark</th>
-                            </tr>
-                        </thead>
-                </Table>
-                // Here needs to fetch data from tracks //
-                <div className='resulttable'>
-                    <div className='tracksitem' style={{background:'orange'}}>
-                        <img
-                            src={songcover}
-                             />
-                        <Card style={{ width: '80%' , borderColor:'transparent', background:'orange', display:'flex', justifyContent:"space-evenly"}}>
-                                <div className='cardcontent'>
-                                    // <p><small>The weekend</small></p> //
-                                    <p><small>Blinding Lights</small></p>
-                                    <p><small>After Hours</small></p>                        
-                                    <Button class="btn-sm btn-transparent">
-                                        <img
-                                            src={trackmarked}
-                                            width= '18px'
-                                            height='18px'
-                                             />
-                                    </Button>
-                                </div>
-                        </Card>
-                    </div>
-                    <div className='tracksitem'style={{background:'white'}}>
-                        <img
-                            src={songcover}
-                            width= '72px'
-                            height='72px' />
-                        <Card style={{ width: '80%' , background:'white'}}>
-                            <Card.Body>
-                                <div className='cardcontent'>
-                                    <Card.Text className="sm text-muted">
-                                    The weekend
-                                    </Card.Text>
-                                    <Card.Text className="sm text-muted">
-                                    Blinding Lights
-                                    </Card.Text>
-                                    <Card.Text className="sm text-muted">
-                                    After Hours
-                                    </Card.Text>
-                                    <Button>
-                                        <img
-                                            src={trackmarked}
-                                            width= '18px'
-                                            height='18px' />
-                                    </Button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-                   
-                </div>
-            </div> */

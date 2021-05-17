@@ -28,8 +28,8 @@ function PlaylistPresenter(props){
     const moveUpSong = (CI) => props.moveUpSong(token, playlist.id, CI, playlist.snapshot_id);
     const moveDownSong = (CI) => props.moveDownSong(token, playlist.id, CI, playlist.snapshot_id);
     const deleteFromList = (CI) => props.deleteFromList(token, playlist.id, playlistTracks[CI].uri, playlist.snapshot_id, CI, playlist.tracks[CI]); 
-    const addToTracks = (CI) => props.addToTracks(playlist.tracks[CI]);
-    const deleteFromTracks = (CI) => props.deleteFromTracks(CI);
+    const addToTracks = (CI) => props.addToTracks(playlist.tracks[CI], playlistTracks[CI]);
+    const deleteFromTracks = (CI) => props.deleteFromTracks(CI, playlist.tracks[CI]);
 
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState(playlistTracks);
@@ -101,7 +101,8 @@ const mapStateToProps = (state) => {
                     previewSong: trackObj.preview_url,
                     image: trackObj.album_image,
                     isInStash: isInStash,
-                    uri: trackObj.uri
+                    uri: trackObj.uri,
+                    id: trackObj.id
                 }
             })
         }
