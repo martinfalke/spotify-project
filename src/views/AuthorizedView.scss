@@ -1,5 +1,21 @@
 @import '../index.scss';
 
+.authorized-view{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr;
+    .tab-content{
+        height: 100%;
+        width: 100%;
+        .tab-pane{
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
 .allthingscontainer{
     display: flex;
     flex-direction: column;
@@ -19,6 +35,6 @@
     height: 24;
 }
 
-.tab-pane{
+#left-tabs-example-tabpane-search{
     padding: 12px 24px;
 }

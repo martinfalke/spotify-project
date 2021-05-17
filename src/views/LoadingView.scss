@@ -1,0 +1,93 @@
+@import '../shared.scss';
+// css loader
+
+$loader-color: $secondary-color;
+
+.loading-view{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    .lds-ring {
+        display: block;
+        position: relative;
+        grid-row: 2 / 2;
+        grid-column: 2 / 2;
+        margin-left: -50%;
+        div {
+            box-sizing: border-box;
+            display: block;
+            position: absolute;
+            width: 16vw;
+            height: 16vw;
+            margin: 8px;
+            border-style: solid;
+            border-color: $loader-color;
+            border-radius: 50%;
+            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            border-color: $loader-color transparent transparent transparent;
+          }
+    }
+
+    // size variants
+    &.loading-view-lg{ // large
+        grid-template: 1fr 50% 1fr / 1fr 50vw 1fr;
+        .lds-ring{
+            div{
+                width: 16vw;
+                height: 16vw;
+                border-width: 2vw;
+            }
+        }
+    }
+    &.loading-view-md{ // medium
+        grid-template: 1fr 30% 1fr / 1fr 25vw 1fr;
+        .lds-ring{
+            div{
+                width: 8vw;
+                height: 8vw;
+                border-width: 1vw;
+            }
+        }
+    }
+    &.loading-view-sm{ // small
+        grid-template: 1fr 15% 1fr / 1fr 12.5vw 1fr;
+        .lds-ring{
+            div{
+                width: 4vw;
+                height: 4vw;
+                border-width: .5vw;
+            }
+        }
+    }
+    &.loading-view-xs{ // extra small
+        grid-template: 1fr auto 1fr / 1fr 3.125vw 1fr;
+        .lds-ring{
+            div{
+                width: 1vw;
+                height: 1vw;
+                border-width: .125vw;
+            }
+        }
+    }
+
+}
+
+// animation
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

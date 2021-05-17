@@ -5,6 +5,7 @@ import AuthorizedView from '../views/AuthorizedView';
 import { useHistory } from 'react-router';
 import userActions from '../state/user/userActions';
 import fbaseActions from '../state/fbase/fbaseActions';
+import LoadingView from '../views/LoadingView';
 
 function AuthorizedPresenter(props){
     const { token, user } = props;
@@ -25,7 +26,7 @@ function AuthorizedPresenter(props){
     return (user) ? <AuthorizedView username={user.display_name || user.id || ""}
                         logout={() => props.logout()}/>
                         : 
-                        <div>Fetching user..</div>;
+                        <LoadingView size="lg" />;
 }
 
 const mapStateToProps = (state) => ({

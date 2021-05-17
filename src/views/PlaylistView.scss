@@ -1,0 +1,218 @@
+@import "../index.scss";
+
+.playlistview {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    position: absolute;
+    max-height: 100%;
+}
+
+.playlistsnav {
+    display: flex;
+    flex-direction: column;
+    width:20%;
+    //*check the height is not responsive
+    // height: 640px;
+    max-height: 100%;
+    background: $purple-color;
+    padding-top:24px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+}
+.selectedplaylist {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    background: $orange-color;
+    padding-left: 24px;
+    margin-bottom: 8px;
+}
+
+.selectedplaylist img {
+    width: 72px;
+    height: 72px;
+    align-content: stretch;
+    margin-right: 8px;
+    &.no-img{
+        padding: 2px 14px;
+        background-color: $purple-color;
+    }
+}
+.selectedplaylist p {
+    padding-top: 4px;
+}
+.unselectedplaylist {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin-bottom: 8px;
+    margin-left: 24px;
+    cursor: pointer;
+}
+.unselectedplaylist img {
+    width: 72x;
+    height: 72px;
+    margin-right: 8px;
+    &.no-img{
+        padding: 2px 14px;
+        background-color: $purple-color;
+    }
+}
+
+.unselectedplaylist p {
+    padding-top: 4px;
+}
+.playlistcontent  {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    width: 80%;
+    background-image: url('../images/BGimg.png');
+}
+
+.playlistbanner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background:$orange-color;
+    padding-top: 24px;
+    padding-inline: 12px;
+    padding-bottom: 12px;
+
+}
+
+.playlistbanner img {
+    margin-right: 12px;
+    max-height: 300px;
+    &.no-img{
+        padding: 6px 58px;
+        background-color: $bg-color;
+    }
+}
+
+.playlistinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-content: stretch;
+    width: 100%;
+}
+.actionsbar{
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 100%;
+    width: 100%;
+}
+.form-group {
+    margin-left: 8px;
+    margin-bottom: 8px;
+    line-height: 1rem;
+}
+
+.p-tabletitle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0px;
+
+}
+.p-tabletitle thead{
+    justify-content: space-between;
+    width: 100%;
+    padding-inline: 4px;
+}
+
+.p-tabletitle tr{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 16px;
+    width: 100%;
+}
+.songscontainer {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 12px;
+    max-height: 100%;
+    overflow-y: scroll;
+}
+
+.p-cardcontent{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width:100%;
+  }
+.p-songname{
+    flex: 1.5;
+    padding-right: 4px;
+    color:gray;
+}
+.p-songartist{
+    flex: 1;
+    padding-right: 4px;
+    color:gray;
+}
+.p-songalbum{
+    flex: 1;
+    padding-right: 4px;
+    color:gray;
+}
+.p-songcover {
+    margin-inline: 8px;
+}
+.p-cardbody {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline-end: 8px;
+    width:100%
+}
+/* .cardbody button{
+    align-items: flex-end;
+} */
+
+.p-songitem{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 8px;
+padding-left: 8px;
+background-color: white;
+
+}
+
+.card{
+    border:none;
+}
+.p-actions{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end
+
+}
+
+.p-actions button{
+    margin: 0;
+    padding:4px
+}
+
+.trackmarked {
+    padding:0px;
+    margin:0;
+}
+.trackmarked img{
+    padding:0px;
+    margin:0;
+    width: 18px;
+    height:18px;
+}
+
+
