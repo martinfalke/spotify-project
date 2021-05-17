@@ -107,7 +107,7 @@ function PlaylistView(props){
                                     <div className="p-cardbody">
                                             <div className='p-cardcontent'>
                                                 <div className="p-songname">
-                                                    {track.name}
+                                                    <a href={track.spotifyUrl}>{track.name}</a>
                                                 </div>
                                                 <div className="p-songartist">
                                                     <i className="fas fa-user"></i>

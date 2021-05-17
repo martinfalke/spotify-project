@@ -12,6 +12,7 @@ const initialState = {
     featureMaps: {},
     playlistsFetched: false,
     tracksFetched: false,
+    fetchProgress: null,
 
 
     //mock data
@@ -64,12 +65,20 @@ export default createReducer(initialState, {
         const playlist_id = action.payload.playlist_id;
         let trackIds = action.payload.tracks.map(track => track.id);
         let trackIndex = state.trackIndex;
-        action.payload.tracks.forEach( track => {
+        let tracks = action.payload.tracks;
+        tracks.forEach( track => {
             if(!trackIndex.hasOwnProperty(track.id)){
                 trackIndex[track.id]=track;
             }
 
         });
+
+        let playlist = state.playlists[playlist_id];
+        if(tracks && playlist.image === null){
+            playlist.image = (tracks.length >= 1 && tracks[0].album_image) ? action.payload.tracks[0].album_image : null;
+        }
+
+        //console.log(playlist)
 
         return {...state,
             playlists: {
@@ -202,4 +211,7 @@ export default createReducer(initialState, {
             selectedList: playlistId,
         }
     },
+    [types.PLAYLIST_FETCH_PROGRESS] (state, action) {
+        return { ...state, fetchProgress: action.currentPercentage };
+    }
 })
