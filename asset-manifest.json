@@ -1,22 +1,27 @@
 {
   "files": {
-    "main.css": "/spotify-project/static/css/main.2e3f07cd.chunk.css",
-    "main.js": "/spotify-project/static/js/main.62d5a69f.chunk.js",
-    "main.js.map": "/spotify-project/static/js/main.62d5a69f.chunk.js.map",
-    "runtime-main.js": "/spotify-project/static/js/runtime-main.edb503ce.js",
-    "runtime-main.js.map": "/spotify-project/static/js/runtime-main.edb503ce.js.map",
-    "static/js/2.91cae822.chunk.js": "/spotify-project/static/js/2.91cae822.chunk.js",
-    "static/js/2.91cae822.chunk.js.map": "/spotify-project/static/js/2.91cae822.chunk.js.map",
-    "static/js/3.d823a86c.chunk.js": "/spotify-project/static/js/3.d823a86c.chunk.js",
-    "static/js/3.d823a86c.chunk.js.map": "/spotify-project/static/js/3.d823a86c.chunk.js.map",
+    "main.css": "/spotify-project/static/css/main.a00e4c30.chunk.css",
+    "main.js": "/spotify-project/static/js/main.ed5266cc.chunk.js",
+    "main.js.map": "/spotify-project/static/js/main.ed5266cc.chunk.js.map",
+    "runtime-main.js": "/spotify-project/static/js/runtime-main.23bafdcb.js",
+    "runtime-main.js.map": "/spotify-project/static/js/runtime-main.23bafdcb.js.map",
+    "static/js/2.b9305780.chunk.js": "/spotify-project/static/js/2.b9305780.chunk.js",
+    "static/js/2.b9305780.chunk.js.map": "/spotify-project/static/js/2.b9305780.chunk.js.map",
+    "static/js/3.1e205d68.chunk.js": "/spotify-project/static/js/3.1e205d68.chunk.js",
+    "static/js/3.1e205d68.chunk.js.map": "/spotify-project/static/js/3.1e205d68.chunk.js.map",
     "index.html": "/spotify-project/index.html",
-    "static/css/main.2e3f07cd.chunk.css.map": "/spotify-project/static/css/main.2e3f07cd.chunk.css.map",
-    "static/js/2.91cae822.chunk.js.LICENSE.txt": "/spotify-project/static/js/2.91cae822.chunk.js.LICENSE.txt"
+    "static/css/main.a00e4c30.chunk.css.map": "/spotify-project/static/css/main.a00e4c30.chunk.css.map",
+    "static/js/2.b9305780.chunk.js.LICENSE.txt": "/spotify-project/static/js/2.b9305780.chunk.js.LICENSE.txt",
+    "static/media/PlaylistView.scss": "/spotify-project/static/media/BGimg.7e2b74e4.png",
+    "static/media/Inboxes fill.043f2be9.svg": "/spotify-project/static/media/Inboxes fill.043f2be9.svg",
+    "static/media/LOGO.846060d1.svg": "/spotify-project/static/media/LOGO.846060d1.svg",
+    "static/media/Search.8d2bd43b.svg": "/spotify-project/static/media/Search.8d2bd43b.svg",
+    "static/media/Spotify_Icon.cd66b8f6.png": "/spotify-project/static/media/Spotify_Icon.cd66b8f6.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.edb503ce.js",
-    "static/js/2.91cae822.chunk.js",
-    "static/css/main.2e3f07cd.chunk.css",
-    "static/js/main.62d5a69f.chunk.js"
+    "static/js/runtime-main.23bafdcb.js",
+    "static/js/2.b9305780.chunk.js",
+    "static/css/main.a00e4c30.chunk.css",
+    "static/js/main.ed5266cc.chunk.js"
   ]
 }
