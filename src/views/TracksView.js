@@ -1,20 +1,19 @@
 // src/views/TracksView.js
 import './TracksView.scss';
-import Table from 'react-bootstrap/Table'
-import Tab from 'react-bootstrap/Tab'
-import Tabs from 'react-bootstrap/Tabs'
-import Button from "react-bootstrap/Button"
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import Card from 'react-bootstrap/Card'
-import LOGO from '../images/LOGO.svg'
-import logo from '../images/logo-02.png'
-import searchicon from '../images/Icons/Search.svg'
-import trackmarkicon from '../images/Icons/Inboxes fill.svg'
+import Table from 'react-bootstrap/Table';
+import Button from "react-bootstrap/Button";
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal'
+import LOGO from '../images/LOGO.svg';
+import logo from '../images/logo-02.png';
+import searchicon from '../images/Icons/Search.svg';
+import trackmarked from '../images/Icons/Inboxes fill.svg';
+import untrackmark from '../images/Icons/Inboxes.png';
 // import icons from '/node_modules/bootstrap-icons/icons'
 import React from 'react'
 import { ButtonGroup } from 'react-bootstrap';
+
 
 function TracksView(props){
     return (
@@ -22,12 +21,11 @@ function TracksView(props){
             <div className="pagetitle">
                 <p class="h5">Tracks</p>
                 <img
-                    src= {trackmarkicon}
+                    src= {trackmarked}
                 />
-
             </div>
         
-           <div className="tabletitle">
+           <div className="trackstable">
                 <Table className="t-tabletitle" size="sm" >
                     <thead>
                         <tr>
@@ -37,8 +35,11 @@ function TracksView(props){
                     </thead> 
                 </Table>
                 <div className='trackscontainer'>
-                    <div className='t-songitem'>
-                        <h6 className='t-index'> 1</h6>
+                    <div className='t-songitem'> 
+                        <span className="t-preview fake-button" onClick={()=>console.log('play')}>
+                            <i class="fas fa-play-circle"></i>
+                        </span>
+                        {/* <h6 className='t-index'> </h6> */}
                         <img className='t-songcover'
                             src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/The_Weeknd_-_After_Hours.png/220px-The_Weeknd_-_After_Hours.png"
                             width= '48px'
@@ -51,32 +52,55 @@ function TracksView(props){
                                         The weekendfnaiojfdisaojifjaso
                                         </div>
                                         <div className="song-artist">
-                                        Blinding Lightsdjsajfoajfodsajf
+                                            <i class="fas fa-user"></i>
+                                            Blinding Lightsdjsajfoajfodsajf
                                         </div>
                                         <div className="song-album">
-                                        After Hours
+                                            <i class="fas fa-record-vinyl"></i>
+                                            After Hours
                                         </div>
                                     </div>
                                     <div className="t-actions">
-                                        <button className="trackmark">
-                                            <img
-                                                src={trackmarkicon}
-                                                width="18px"
-                                                height="18px"
-                                                />
-                                        </button>
-                                        <ButtonGroup>
+                                        <Button variant="light" class="btn-sm">
+                                            {/* <Button variant="light" onClick={()=>console.log(index)}> */}
+                                           {/* <Button onClick={()=>props.addToStash(index)}> */}
+                                           {/* If it is not clicked */}
+                                           {/* <img
+                                            alt="add to track stash"
+                                            src={untrackmark}
+                                            width='16px'
+                                            height= '16px'
+                                           /> */}
+                                           {/* If it is clicked */}
+                                           <img
+                                                alt="remove from track stash"
+                                                src={trackmarked} 
+                                                width='16px'
+                                                height= '16px'/>
+                                       </Button>
+                                       {/* multiple-choice */}
+                                       <div class="form-check">
+                                            <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="uncheck" aria-label="..."/>
+                                            {/* <input class="form-check-input position-static" type="checkbox" id="blankCheckbox" value="uncheck" aria-label="..." onClick={(e)=>console.log(index)}> */}
+                                        </div>
+                                        {/* <ButtonGroup>
                                             <button>
                                                 <i class="far fa-arrow-alt-circle-up"></i>
                                             </button>
                                             <button><i class="far fa-arrow-alt-circle-down"></i></button>
                                             <button><i class="far fa-minus-square"></i></button>
-                                        </ButtonGroup>
+                                        </ButtonGroup> */}
                                     </div>
                             </div>
                         </Card>
                     </div>
                 </div>
+                <span className="fake-button new-playlist text-light" >
+                    {/* When clicked a new playlist will be created named "Myplaylist#1"
+                        <span className="fake-button new-playlist text-light" onClick={()=>console.log(index)}> */}
+                    + create a new playlist with selected tracks
+                </span>
+
             </div>
         </div>
 

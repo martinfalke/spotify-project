@@ -33,17 +33,16 @@
 
 
 .t-tabletitle {
-    /* display: flex; */
-    justify-content: space-between;
+    display: flex;
     margin-inline: 8px;
+    border:transparent
+
 
 }
 
 .t-tabletitle thead{
-    justify-content: space-between;
     width: 100%;
     padding-inline: 4px;
-    border:transparent
 }
 
 
@@ -54,7 +53,7 @@
     width: 100%;
 }
 
-.t-tabletitle td{
+.t-tabletitle th{
     border: transparent;
 }
 
@@ -62,7 +61,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-inline: 12px;
+    padding-inline: 8px;
 }
 
 .card{
@@ -89,7 +88,7 @@
 .t-songcover{
     width: 48px;
     height: 48px;
-    margin-right: 8px;
+    margin: 8px;
 
 }
 .song-name{
@@ -123,8 +122,8 @@
 display: flex;
 flex-direction: row;
 align-items: center;
- background-color: white;
- padding-right: 8px;
+background-color: white;
+padding-inline: 8px;
 //width needs change
 width: 100%;
 margin-bottom: 8px;
@@ -138,15 +137,27 @@ margin-bottom: 8px;
 .t-actions{
     display: flex;
     flex-direction: column;
-    align-items:flex-end
+    align-items:center
 
 }
 
 
 .t-actions button{
     margin: 0;
-    padding:4px;
+    padding:0;
     background-color: transparent;
     border:transparent
+}
 
+.new-playlist{
+    display: inline-flex;
+    flex-direction: row-reverse;
+    padding-right: 8px;
+    width: 100%;
+
+}
+.form-check {
+    position: relative;
+    display: block;
+    padding-left: 1.75rem;
 }
