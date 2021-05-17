@@ -13,7 +13,8 @@ function handleHttpResponse(response){
     return response.json().then(
         (json) => {
             if(!response.ok) {
-                const error = Object.assign({}, json, {
+                let startObj = (response.status === 429) ? {retry_after: response.headers.get('retry-after')} : {};
+                const error = Object.assign(startObj, json, {
                     status: response.status,
                     statusText: response.statusText
                 });

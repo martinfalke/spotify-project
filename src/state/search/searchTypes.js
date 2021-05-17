@@ -5,9 +5,3 @@ export const SEARCH_GET_ERROR = 'SEARCH_GET_ERROR';
 export const SEARCH_GET_SUCCESS = 'SEARCH_GET_SUCCESS';
 export const SEARCH_NEXT = 'SEARCH_NEXT'; 
 export const SEARCH_PREV = 'SEARCH_PREV';
-
-
-
-
-
-

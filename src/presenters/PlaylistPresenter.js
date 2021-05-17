@@ -7,17 +7,17 @@ import tracksActions from '../state/tracks/tracksActions';
 import FuzzySearch from 'fuzzy-search';
 
 function PlaylistPresenter(props){
-    const { token, playlists, playlistsFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist  } = props;
+    const { token, playlists, playlistsFetched, tracksFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist  } = props;
 
     useEffect(()=>{
         props.fetchPlaylists(token);
     },[])
 
     useEffect(()=>{
-        if(playlistsFetched && Object.keys(playlists).length !== 0){
-            Object.values(playlists).forEach(playlist => {
-                if(!playlist.tracks){
-                    props.fetchTracks(token, playlist.id);
+        if(playlistsFetched && Object.keys(playlists).length !== 0 && !tracksFetched){
+            Object.values(playlists).forEach(list => {
+                if(!list.tracks){
+                    props.fetchTracks(token, list.id);
                 }
             });
         }
@@ -47,7 +47,7 @@ function PlaylistPresenter(props){
 
 
 
-    return (playlist && playlists && searchResults && allPlaylists && playlistTracks) ? 
+    return (playlist && playlists && searchResults && allPlaylists && playlistTracks && tracksFetched) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 
                             onMoveUpSong = {moveUpSong}
                             onMoveDownSong = {moveDownSong}
@@ -81,7 +81,7 @@ const mapStateToProps = (state) => {
             playlistTracks = selectedPlaylistData.tracks.map(trackId => {
                 let trackObj = state.lists.trackIndex[trackId];
                 let artistString = trackObj.artists.reduce((tot,artist,i,arr) => {
-                    if (arr.length-1!=i){
+                    if (arr.length-1!==i){
                         return (tot + artist + ', ');
                     }else return (tot + artist);
                 }, "");
@@ -117,6 +117,7 @@ const mapStateToProps = (state) => {
         playlists: state.lists.playlists,
         playlist: selectedPlaylistData,
         playlistsFetched: state.lists.playlistsFetched,
+        tracksFetched: state.lists.tracksFetched,
         playlistTracks: playlistTracks,
         allPlaylists: allPlaylists,
     });

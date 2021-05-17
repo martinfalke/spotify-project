@@ -1,17 +1,8 @@
 // src/state/search/searchSagas.js
-import { call, select, all, put, take, takeLatest } from 'redux-saga/effects';
+import { call, select, all, put, takeLatest } from 'redux-saga/effects';
 import * as types from './searchTypes';
-import actions from './searchActions';
 import { getSearchResults } from "../../api/spotifySearch";
 import { baseUrl, spotifyApiCall } from "../../api/spotifyUtil";
-
-function* handleSearchInit(){
-    while(true){
-        yield take(types.SEARCH_INIT_TEST);
-
-        console.log("reached initial saga (search)");
-    }
-}
 
 function* getSearch(action){
     const resultTypes = yield select(getResultTypes);
@@ -56,7 +47,6 @@ function* getPrevPage(action){
 
 function* searchRootSaga() {
     yield all([
-        takeLatest(types.SEARCH_INIT_TEST, handleSearchInit),
         takeLatest(types.SEARCH_GET, getSearch),
         takeLatest(types.SEARCH_NEXT, getNextPage),
         takeLatest(types.SEARCH_PREV, getPrevPage)

@@ -50,13 +50,15 @@ export default createReducer(initialState, {
     },
     [types.TRACKS_SAVE_LOCATIONS]: (state, action) => {
         const playlist_id = action.payload.playlist_id;
-        let trackIds = action.payload.tracks.map(wrappedTrack => wrappedTrack.track.id);
+        let trackIds = action.payload.trackIds;
         let trackLocations = state.trackLocations;
         trackIds.forEach((trackId) => {
             if(!trackLocations.hasOwnProperty(trackId)){
                 trackLocations[trackId] = {};
             }
-            trackLocations[trackId][playlist_id] = true;
+            if(!trackLocations[trackId][playlist_id]){
+                trackLocations[trackId][playlist_id] = true;
+            }
         });
         return {
             ...state,
