@@ -29,40 +29,36 @@ function PlaylistPresenter(props){
     const deleteFromList = (CI) => props.deleteFromList(token, playlist.id, playlistTracks[CI].uri, playlist.snapshot_id, CI, playlist.tracks[CI]); 
     const addToTracks = (CI) => props.addToTracks(playlist.tracks[CI]);
 
-    // const [searchTerm, setSearchTerm] = useState("");
-    // let searchResults = playlistTracks;
+    const [searchTerm, setSearchTerm] = useState("");
+    const [searchResults, setSearchResults] = useState(playlistTracks);
 
-    // //const [searchKey, setSearchKey] = useState("")
-    // useEffect(()=>{
-    //     if(searchTerm){
-    //         const searcher = new FuzzySearch(playlistTracks, ['name','artist','album_name'], {
-    //             caseSensitive: false,
-    //         })
-    //         const searchResults = searcher.search(searchTerm);
-    //     }
+    useEffect(()=>{
+        if(searchTerm){
+            const searcher = new FuzzySearch(playlistTracks, ['name','artist','album_name'], {
+                caseSensitive: false,
+            })
+            setSearchResults(searcher.search(searchTerm));
+            console.log(searchResults);
+        }else if(playlistTracks){
+            setSearchResults(playlistTracks);
+        }
 
-    // },[searchTerm])
-    
-
-    // console.log(searchResults);
-
+    },[searchTerm, playlistTracks])
 
 
 
-    return (playlist && playlists && playlistTracks && allPlaylists) ? 
+    return (playlist && playlists && searchResults && allPlaylists && playlistTracks) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 
                             onMoveUpSong = {moveUpSong}
                             onMoveDownSong = {moveDownSong}
                             onDeleteSong = {deleteFromList}
-                            tracks = {playlistTracks}
+                            tracks = {searchResults}
                             allPlaylists = {allPlaylists}
                             playlist = {playlist}
                             selectedPlaylist={selectedPlaylist}
                             onAddToTracks={addToTracks}
-                            // onSearchTerm={(term)=>setSearchTerm(term)}
-                            // searchTerm={searchTerm}
-                            //onSearchKey={(key)=>setSearchKey(key)}
-
+                            onSearchTerm={(term)=>setSearchTerm(term)}
+                            searchTerm={searchTerm}
     /> : <div>Fetching playlists and tracks..</div>
 }
 
