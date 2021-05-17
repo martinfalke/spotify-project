@@ -45,7 +45,7 @@ function PlaylistPresenter(props){
 
     },[searchTerm, playlistTracks])
 
-
+    console.log(searchResults);
 
     return (playlist && playlists && searchResults && allPlaylists && playlistTracks) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 

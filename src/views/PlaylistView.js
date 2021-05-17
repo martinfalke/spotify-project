@@ -104,11 +104,28 @@ function PlaylistView(props){
                         return (
                             <div className='p-songitem'>
                                 <h6>{index+1}</h6>
-                                <img className="p-songcover"
-                                    src={track.image.url}
-                                    width= '48px'
-                                    height= '48px'
-                                    />
+                                <div className='songlocation'>
+                                    <img className="p-songcover"
+                                        src={track.image.url}
+                                        width= '48px'
+                                        height= '48px'
+                                        />
+                                        <div class="dropdown"> 
+                                            <button class="dropbtn">
+                                                <img
+                                                        src={trackmarkicon}
+                                                        width="12px"
+                                                        height="12px"
+                                                    />
+                                            </button>
+                                                
+                                            <div class="dropdown-content">
+                                                <p>Link 1</p>
+                                                <p>Link 1</p>
+                                                <p>Link 1</p>
+                                            </div>
+                                        </div>
+                                </div>
                             <Card borderless='1'>
                                     <div className="p-cardbody">
                                             <div className='p-cardcontent'>
