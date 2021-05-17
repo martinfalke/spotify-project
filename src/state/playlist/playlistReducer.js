@@ -76,7 +76,6 @@ export default createReducer(initialState, {
         let playlist = state.playlists[playlist_id];
         if(tracks && playlist.image === null){
             playlist.image = (tracks.length >= 1 && tracks[0].album_image) ? action.payload.tracks[0].album_image : null;
-            console.log(playlist.tracks)
         }
 
         //console.log(playlist)
