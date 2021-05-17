@@ -71,6 +71,13 @@ export default createReducer(initialState, {
 
         });
 
+        let playlist = state.playlists[playlist_id];
+        if(playlist.image === null){
+            playlist.image = trackIndex[playlist.tracks[0]].images[1];
+        }
+
+        //console.log(playlist)
+
         return {...state,
             playlists: {
                 ...state.playlists,
