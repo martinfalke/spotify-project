@@ -14,7 +14,7 @@ function AuthorizedView(props){
     return (
         <div className="authorized-view">
             <Tab.Container id="left-tabs-example" defaultActiveKey="playlist">
-            <Nav className="navbar">
+            <Nav id="navbar" className="navbar">
             <Nav variant="tabs" className="mr-auto" id="nav-container">
                     <Nav.Item>
                         <Nav.Link eventKey="playlist">Playlist</Nav.Link>

@@ -58,6 +58,7 @@ function* handleDeleteFromPlaylist(action){
 }
 
 function* handleFetchPlaylist(action){
+    yield put({'type': types.PLAYLIST_FETCH_PROGRESS, currentPercentage: 0});
     const token = yield select(getToken);
     let offset = 0;
     let response, error;
@@ -82,7 +83,9 @@ function* handleFetchPlaylist(action){
             remainingPlaylists = (total > offset+50);
         }
         if(!error){
-            yield put({'type': types.PLAYLIST_GET_SUCCESS, payload: {playlists: allPlaylists}});
+            const userId = yield select(getUser);
+            const ownerPlaylists = allPlaylists.filter(playlist => playlist.owner.id === userId);
+            yield put({'type': types.PLAYLIST_GET_SUCCESS, payload: {playlists: ownerPlaylists}});
         }else{
             yield put({'type': types.PLAYLIST_GET_ERROR, payload: error.error});
         }
@@ -145,11 +148,13 @@ function* handleFetchTrack(action){
 function* watchTracksFetch(){
     const buffer = buffers.expanding(10);
     const trackFetchChannel = yield actionChannel(types.PLAYLIST_TRACK_GET, buffer);
-    let firstHandled = false;
-    while(!firstHandled || !buffer.isEmpty()){
+    let counter = 0;
+    while(counter <= 0 || !buffer.isEmpty()){
         const action = yield take(trackFetchChannel);
         yield call(handleFetchTrack, action);
-        firstHandled=true;
+        counter++;
+        const numPlaylists = yield select(getNumPlaylists);
+        yield put({'type': types.PLAYLIST_FETCH_PROGRESS, currentPercentage: Math.round((counter/numPlaylists)*100)})
     }
     yield put({'type': types.PLAYLIST_TRACK_GET_ALL_DONE});
 }
@@ -164,5 +169,9 @@ function* playlistRootSaga() {
         fork(watchTracksFetch),
     ])
 };
+
+// selectors
+const getUser = (state) => state.user.id;
+const getNumPlaylists = (state) => Object.keys(state.lists.playlists).length;
 
 export default playlistRootSaga;

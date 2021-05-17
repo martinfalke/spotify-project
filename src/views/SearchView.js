@@ -1,7 +1,7 @@
 // src/views/SearchView.js
 import './SearchView.scss';
 import Form from 'react-bootstrap/Form';
-import LOGO from '../images/LOGO.svg';
+import BGimg from '../images/BGimg.png';
 import searchicon from '../images/Icons/Search.svg';
 // import icons from '/node_modules/bootstrap-icons/icons'
 import React from 'react'
@@ -10,9 +10,8 @@ function SearchView(props){
     return (
         <div className="searchview">
             <img
-                alt=""
-                src={LOGO}
-                className="bg"
+                alt="background"
+                src={BGimg}
             />{' '}
 
             <div className= 'searchcontainer'>
