@@ -1,4 +1,4 @@
-@import "../index.scss";
+@import "../shared.scss";
 
 .playlistview {
     display: flex;
@@ -20,8 +20,13 @@
     padding-top:24px;
     overflow-x: hidden;
     overflow-y: scroll;
-
 }
+
+.no-playlists-text{
+    color: $light-color;
+    align-self: center;
+}
+
 .selectedplaylist {
     display: flex;
     flex-direction: row;

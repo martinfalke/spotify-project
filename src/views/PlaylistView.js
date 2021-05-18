@@ -15,7 +15,7 @@ function PlaylistView(props){
     
         <div className="playlistview">
             <div className="playlistsnav"> 
-                {props.allPlaylists.map((playlist,i) => {
+                {props.allPlaylists && (props.allPlaylists.map((playlist,i) => {
                     return (
                         <div key={i} className={(
                             (props.selectedPlaylist && props.selectedPlaylist === playlist.id) || (!props.selectedPlaylist && i === 0)) ?
@@ -26,15 +26,16 @@ function PlaylistView(props){
                             <p class="h6 text-light">{playlist.name}</p>
                         </div>
                     )
-                })}
+                })) || <p className="no-playlists-text">Your account has no playlists yet.</p>}
 
             </div>
             <div className="playlistcontent">
                 <div className="playlistbanner">
-                    <img alt="selected playlist" className={(props.playlist.image) ? "" : "no-img"} src={(props.playlist.image)?props.playlist.image.url: LOGO} />
+                    <img alt="selected playlist" className={(props.playlist && props.playlist.image) ? "" : "no-img"}
+                            src={(props.playlist && props.playlist.image) ? props.playlist.image.url : LOGO} />
                     <div className="playlistinfo">
-                        <div className=" h4 text-light">{props.playlist.name}</div>
-                        <p className=" md text-light">{props.playlist.description}</p>
+                        <div className=" h4 text-light">{props.playlist && props.playlist.name || ""}</div>
+                        <p className=" md text-light">{props.playlist && props.playlist.description || ""}</p>
                     
                         <form className="actionsbar">
                             <div class= "form-group">
@@ -53,7 +54,7 @@ function PlaylistView(props){
                     </thead>
                 </Table>
                 <div className='songscontainer'>
-                    {props.tracks.map((track, index)=> {
+                    {props.tracks.map((track, index, list)=> {
                         return (
                             <div key={index} className='p-songitem'>
                                 <h6>{index+1}</h6>
@@ -94,10 +95,10 @@ function PlaylistView(props){
                                                 }
                                                 </div>
                                                 <ButtonGroup>
-                                                <button disabled={!props.actionsDisabled} onClick={()=> props.onMoveUpSong(index)}>
+                                                <button disabled={!props.actionsDisabled || index==0} onClick={()=> props.onMoveUpSong(index)}>
                                                     <i class="far fa-arrow-alt-circle-up"></i>
                                                 </button>
-                                                <button disabled={!props.actionsDisabled} onClick={()=> props.onMoveDownSong(index)}>
+                                                <button disabled={!props.actionsDisabled || index===list.length-1} onClick={()=> props.onMoveDownSong(index)}>
                                                     <i class="far fa-arrow-alt-circle-down"></i>
                                                 </button>
                                                 <button disabled={!props.actionsDisabled} onClick={()=> props.onDeleteSong(index)}>

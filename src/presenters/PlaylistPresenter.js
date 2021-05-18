@@ -33,22 +33,23 @@ function PlaylistPresenter(props){
 
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState(playlistTracks);
+    const preSearchTracks = (playlistTracks || []);
 
     useEffect(()=>{
         if(searchTerm){
-            const searcher = new FuzzySearch(playlistTracks, ['name','artist','album_name'], {
+            const searcher = new FuzzySearch(preSearchTracks, ['name','artist','album_name'], {
                 caseSensitive: false,
             })
             setSearchResults(searcher.search(searchTerm));
-        }else if(playlistTracks){
-            setSearchResults(playlistTracks);
+        }else if(preSearchTracks){
+            setSearchResults(preSearchTracks);
         }
 
     },[searchTerm, playlistTracks])
 
 
-
-    return (playlist && playlists && searchResults && allPlaylists && playlistTracks && tracksFetched) ? 
+    return ( (playlist && playlists && searchResults && allPlaylists && playlistTracks && tracksFetched) ||
+            playlistsFetched && tracksFetched && Object.keys(playlists).length === 0) ? 
             <PlaylistView   onSelectPlaylist = {updateSelectedPlaylist} 
                             onMoveUpSong = {moveUpSong}
                             onMoveDownSong = {moveDownSong}
@@ -69,7 +70,7 @@ const mapStateToProps = (state) => {
     let selectedPlaylistData = null;
     let allPlaylists = null;
     let playlistTracks = null;
-    if(state.lists.playlistsFetched){
+    if(state.lists.playlistsFetched && Object.keys(state.lists.playlists).length > 0){
         // retrieve the focused playlist
         if(state.lists.selectedList){
             selectedPlaylistData = state.lists.playlists[state.lists.selectedList];

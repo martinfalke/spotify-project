@@ -66,6 +66,12 @@ function* handleFetchPlaylist(action){
         }
     }else{
         let total = response.total;
+        if(total === 0){ // user has no playlists at all
+            yield put({'type': types.PLAYLIST_FETCH_PROGRESS, currentPercentage: 100});
+            yield put({'type': types.PLAYLIST_GET_SUCCESS, payload: {}});
+            yield put({'type': types.PLAYLIST_TRACK_GET_ALL_DONE});
+            return;
+        }
         let remainingPlaylists = (total > 50);
         let allPlaylists = response.items;
         while(remainingPlaylists && !error){
@@ -118,8 +124,8 @@ function* handleFetchTrack(action){
             let tracks = allTracks.filter(wt => (!wt.is_local)).map(wrappedTrack => {
                 let track = wrappedTrack.track;
                 return {
-                    album_name: track.album.name,
-                    album_image: (track.album.images.length >= 2 && track.album.images[1]) || null,
+                    album_name: (track.album) ? track.album.name : "No Album",
+                    album_image: (track.album && track.album.images.length >= 2 && track.album.images[1]) || null,
                     artists: track.artists.map(a=>a.name),
                     is_local: track.is_local,
                     external_urls: track.external_urls,
