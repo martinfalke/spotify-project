@@ -32,7 +32,7 @@ const initialState = {
 
 export default createReducer(initialState, {
     [types.PLAYLIST_GET_SUCCESS]: (state, action) => {
-        if(!action.payload.playlists){
+        if(!action.payload.playlists || Object.keys(action.payload.playlists).length === 0){
             // user has no playlists
             return {...state, playlistsFetched: true};
         }
