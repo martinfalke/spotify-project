@@ -66,12 +66,6 @@ function* handleFetchPlaylist(action){
         }
     }else{
         let total = response.total;
-        if(total === 0){ // user has no playlists at all
-            yield put({'type': types.PLAYLIST_FETCH_PROGRESS, currentPercentage: 100});
-            yield put({'type': types.PLAYLIST_GET_SUCCESS, payload: {}});
-            yield put({'type': types.PLAYLIST_TRACK_GET_ALL_DONE});
-            return;
-        }
         let remainingPlaylists = (total > 50);
         let allPlaylists = response.items;
         while(remainingPlaylists && !error){
@@ -88,6 +82,12 @@ function* handleFetchPlaylist(action){
         if(!error){
             const userId = yield select(getUser);
             const ownerPlaylists = allPlaylists.filter(playlist => playlist.owner.id === userId);
+            if(total === 0 || ownerPlaylists.length === 0){ // user has no playlists at all
+                yield put({'type': types.PLAYLIST_FETCH_PROGRESS, currentPercentage: 100});
+                yield put({'type': types.PLAYLIST_GET_SUCCESS, payload: {}});
+                yield put({'type': types.PLAYLIST_TRACK_GET_ALL_DONE});
+                return;
+            }
             yield put({'type': types.PLAYLIST_GET_SUCCESS, payload: {playlists: ownerPlaylists}});
         }else{
             yield put({'type': types.PLAYLIST_GET_ERROR, payload: error.error});
