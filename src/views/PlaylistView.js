@@ -8,6 +8,7 @@ import LOGO from '../images/LOGO.svg';
 // import icons from '/node_modules/bootstrap-icons/icons'
 import React from 'react'
 import { ButtonGroup, NavItem } from 'react-bootstrap';
+import spotifyicon from '../images/Icons/Spotify_Icon.png';
 
 
 function PlaylistView(props){
@@ -68,7 +69,7 @@ function PlaylistView(props){
                                     <div className="p-cardbody">
                                             <div className='p-cardcontent'>
                                                 <div className="p-songname">
-                                                    <a href={track.spotifyUrl}>{track.name}</a>
+                                                    <a>{track.name}</a>
                                                 </div>
                                                 <div className="p-songartist">
                                                     <i className="fas fa-user"></i>
@@ -79,6 +80,7 @@ function PlaylistView(props){
                                                     {track.album_name}
                                                 </div>
                                             </div>
+                                            
                                             <div className="p-actions">
                                                 <div onClick={(track.isInStash) ? (() => props.onDeleteFromTracks(index)) : (()=>props.onAddToTracks(index))}>
                                                 {(track.isInStash) ? (<button className='trackmarked'>
@@ -94,6 +96,14 @@ function PlaylistView(props){
                                                 </button>)
                                                 }
                                                 </div>
+                                                <a target="_blank" href={track.spotifyUrl}>
+                                                <img
+                                                alt="open song in Spotify"
+                                                src={spotifyicon}
+                                                className='openinspotify'
+                                                />
+                                                </a>
+                                                
                                                 <ButtonGroup>
                                                 <button disabled={!props.actionsDisabled || index==0} onClick={()=> props.onMoveUpSong(index)}>
                                                     <i class="far fa-arrow-alt-circle-up"></i>
@@ -104,8 +114,12 @@ function PlaylistView(props){
                                                 <button disabled={!props.actionsDisabled} onClick={()=> props.onDeleteSong(index)}>
                                                     <i class="far fa-minus-square"></i>
                                                 </button>
+
                                                 </ButtonGroup>
+
+                                            
                                             </div>
+                                            
                                     </div>
                                 </Card>
                             </div>
