@@ -65,6 +65,10 @@ function SearchResultView(props){
                                    {item.album}
                                    </p>
                                    <div className='cd-Actions' > 
+                                        <div className="sr-addsong">
+                                            <i class="far fa-plus-square"></i>
+                                        </div>
+                                
                                        <Button variant="light" onClick={(item.isInStash) ? (() => props.onDeleteFromTracks(index)) : (()=>props.onAddToTracks(index))}>
                                            <img
                                                 alt="remove from track stash"

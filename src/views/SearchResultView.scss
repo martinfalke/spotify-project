@@ -157,6 +157,15 @@
   justify-content: flex-end;
 }
 
+.sr-addsong{
+  display: flex;
+  cursor: pointer;
+  margin:0;
+  align-self: flex-end;
+  margin-right: 4px;
+  margin-bottom: 1px;
+}
+
 .card button{
   background: transparent;
   border-style: none;
