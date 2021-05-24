@@ -1,4 +1,4 @@
-import { spotifyApiCall } from './spotifyUtil';
+import { spotifyApiCall, requestTypes } from './spotifyUtil';
 
 
 const getSearchResults = (token, searchQuery, searchTypes, pageInfo="&offset=0&limit=20") => {
@@ -13,5 +13,9 @@ const getSearchResults = (token, searchQuery, searchTypes, pageInfo="&offset=0&l
     return spotifyApiCall(token, baseEndpoint + queryEndpoint + pageInfo);
 }
 
+const addToPlaylist = (token, playlist_id, uris) => {
+    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks', requestTypes.POST, {uris});
+}
 
-export { getSearchResults };
+
+export { getSearchResults, addToPlaylist };
