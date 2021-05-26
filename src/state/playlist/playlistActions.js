@@ -8,7 +8,8 @@ const actions = {
     deleteFromList: ( token, playlistId, track_uri, snapshot_id, CI, trackId ) => createAction(types.PLAYLIST_DELETE_FROM_LIST, { token, playlistId, track_uri, snapshot_id, CI, trackId}),
     fetchPlaylists: (token) => createAction(types.PLAYLIST_GET, {token}), 
     fetchTrack: (token, playlistId) => createAction(types.PLAYLIST_TRACK_GET, {token, playlistId}),
-    selectPlaylist: (playlistId) => createAction(types.PLAYLIST_SELECT, {playlistId})
+    selectPlaylist: (playlistId) => createAction(types.PLAYLIST_SELECT, {playlistId}),
+    addToPlaylist: (token, playlistId, trackId) => createAction(types.PLAYLIST_ADD_TO_LIST, {token, playlistId, trackId})
 };
 
 export default actions;

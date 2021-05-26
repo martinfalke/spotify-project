@@ -66,7 +66,27 @@ function SearchResultView(props){
                                    </p>
                                    <div className='cd-Actions' > 
                                         <div className="sr-addsong">
-                                            <i class="far fa-plus-square"></i>
+                                            <div class="dropdown"> 
+                                                <button class="dropbtn">
+                                                    <i className="far fa-plus-square"></i>
+                                                </button>
+                                            
+                                            
+                                            <div class="dropdown-content">
+                                                <ul className="playlist-dropdown">
+                                                {props.playlists.map((list) => {
+                                                    return (
+                                        
+                                                        <li onClick={() => props.onAddToPlaylist(list.id, item.id)}>{list.name}</li>
+                                                    )
+                                                     
+                                                })}
+                                               </ul>
+                                                {/* <p>Link 1</p>
+                                                <p>Link 1</p> */}
+                                            </div>
+                                        </div>
+                                            
                                         </div>
                                 
                                        <Button variant="light" onClick={(item.isInStash) ? (() => props.onDeleteFromTracks(index)) : (()=>props.onAddToTracks(index))}>

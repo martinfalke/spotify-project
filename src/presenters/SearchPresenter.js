@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import {useState, useEffect} from "react";
 import { connect } from 'react-redux';
 import searchActions from '../state/search/searchActions';
@@ -54,6 +54,7 @@ function SearchPresenter(props) {
     const numPages = Math.ceil(props.totalResults/20);
     const addToTracks = (CI) => props.addToTracks(props.results[CI].id, props.rawItems[CI]);
     const deleteFromTracks = (CI) => props.deleteFromTracks(CI, props.results[CI].id);
+    const addToPlaylist = (playlistId, trackId) => props.addToPlaylist(token,playlistId, trackId)
 
     return (search) ?
         <SearchResultView   onSearch={(term)=>setSearch(term)} search={search}
@@ -70,6 +71,8 @@ function SearchPresenter(props) {
                             tabVisible={isTabVisible}
                             onAddToTracks={addToTracks}
                             onDeleteFromTracks={deleteFromTracks}
+                            playlists={props.playlists}
+                            onAddToPlaylist={addToPlaylist}
         /> : 
         <SearchView onSearch={(term)=>setSearch(term)} tabVisible={isTabVisible} />
        
@@ -79,6 +82,7 @@ function SearchPresenter(props) {
 const mapStateToProps = (state) => { 
     let totalResults = (state.search.activePage && state.search.activePage.total) || 0; 
     let itemsArray = [];
+    let playlists = [];
     if(state.search.activePage){
         itemsArray = state.search.activePage.items.map( (item) => {
             let artistString = item.artists.reduce((tot,artist,i,arr) => {
@@ -106,14 +110,19 @@ const mapStateToProps = (state) => {
                 previewSong: item.preview_url,
                 id: item.id,
                 isInStash: isInStash,
-            }
-        })
+            };
+        });
+        playlists = Object.values(state.lists.playlists).map(list => {
+            return {name: list.name, id: list.id};
+        });
     }
+    
     return {
         totalResults: totalResults,
         results: itemsArray,
         token: state.auth.spotify.token,
-        rawItems: (state.search.activePage && state.search.activePage.items) || null
+        rawItems: (state.search.activePage && state.search.activePage.items) || null,
+        playlists: playlists,
     };
 }
   
@@ -123,6 +132,7 @@ const mapDispatchToProps = {
     getPreviousPage: searchActions.getPreviousPage,
     addToTracks: tracksActions.addToTracks,
     deleteFromTracks: tracksActions.deleteFromTracks,
+    addToPlaylist: playlistActions.addToPlaylist
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPresenter);

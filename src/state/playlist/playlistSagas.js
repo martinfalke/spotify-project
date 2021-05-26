@@ -5,10 +5,11 @@ import * as types from './playlistTypes';
 import * as tracksTypes from '../tracks/tracksTypes';
 import * as fbaseTypes from '../fbase/fbaseTypes';
 import action from './playlistActions';
-import { moveTrack, deleteFromPlaylist, fetchPlaylist,fetchTrack } from '../../api/spotifyPlaylist'
+import { moveTrack, deleteFromPlaylist, fetchPlaylist,fetchTrack,addToPlaylist } from '../../api/spotifyPlaylist'
 
 
 const getToken = (state) => state.auth.spotify.token;
+const getSearchPage = (state) => state.search.activePage;
 
 function* handleMoveUp(action){
     const token = yield select(getToken);
@@ -163,12 +164,32 @@ function* watchTracksFetch(){
 }
 
 
+function* handleAddToPlaylist(action){
+    const token = yield select(getToken);
+    const searchPage = yield select(getSearchPage);
+    const playlistId = action.playlistId;
+    const trackId = action.trackId;
+    const uris = ["spotify:track:"+ trackId];
+    const { response, error } = yield call(addToPlaylist, token, playlistId, uris);
+    if(!error){
+        const trackObj = (!searchPage) ? null : searchPage.items.filter(t => t.id === trackId)[0];
+        console.log(trackObj);
+        yield put({'type': tracksTypes.TRACKS_SAVE_LOCATIONS, payload: {playlist_id: playlistId, trackIds: [trackId]}})
+        yield put({'type': types.PLAYLIST_ADD_TO_LIST_SUCCESS, payload: {playlistId, snapshot_id: response.snapshot_id, trackId, trackObj}})
+    }
+    else{
+        yield put({'type': types.PLAYLIST_ADD_TO_LIST_ERROR, payload: error.error})
+    }
+
+}
+
 function* playlistRootSaga() {
     yield all([
         takeEvery(types.PLAYLIST_MOVE_UP_SONG, handleMoveUp),
         takeEvery(types.PLAYLIST_MOVE_DOWN_SONG, handleMoveDown),
         takeLeading(types.PLAYLIST_DELETE_FROM_LIST, handleDeleteFromPlaylist),
         takeLeading(types.PLAYLIST_GET,handleFetchPlaylist),
+        takeLeading(types.PLAYLIST_ADD_TO_LIST, handleAddToPlaylist),
         fork(watchTracksFetch),
     ])
 };

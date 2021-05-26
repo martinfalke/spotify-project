@@ -13,9 +13,6 @@ const getSearchResults = (token, searchQuery, searchTypes, pageInfo="&offset=0&l
     return spotifyApiCall(token, baseEndpoint + queryEndpoint + pageInfo);
 }
 
-const addToPlaylist = (token, playlist_id, uris) => {
-    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks', requestTypes.POST, {uris});
-}
 
 
-export { getSearchResults, addToPlaylist };
+export { getSearchResults };
