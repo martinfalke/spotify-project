@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {useState, useEffect} from "react";
 import { connect } from 'react-redux';
 import searchActions from '../state/search/searchActions';
@@ -6,9 +6,6 @@ import SearchView from '../views/SearchView';
 import SearchResultView from '../views/SearchResultView';
 import tracksActions from '../state/tracks/tracksActions';
 import playlistActions from '../state/playlist/playlistActions';
-import PlaylistView from '../views/PlaylistView';
-
-
 
 
 function setNextPage(currentPage, numPages, setPage){
@@ -22,33 +19,21 @@ function setPrevPage(currentPage, setPage){
 
 function SearchPresenter(props) {
     const [search, setSearch] = useState("");
-    const { token } = props;
+    const { token, isTabVisible } = props;
+    const searchBarRef = useRef(null);
 
     useEffect(() =>{
         if (!search) return;
         props.getSearchResults(token, search);
     }, [search])
 
-    const [isTabVisible, setIsTabVisible] = useState(false);
-    useEffect(()=>{
-        const observer = new MutationObserver(() =>{
-            let searchTab = document.querySelector('#left-tabs-example-tab-search');
-            setIsTabVisible( (searchTab && searchTab.classList.contains("active")) );
-        })
-        let searchTab = document.querySelector('#left-tabs-example-tab-search');
-        observer.observe(searchTab, {
-            attributes: true
-            
-        });
-        return () => observer.disconnect(searchTab);
-    }, []);
-
+    // focus search bar when the search (result) view is visible
     useEffect(()=>{
         if(isTabVisible){
-            const searchBar = document.getElementById("formSearchInput");
-            searchBar.focus();
+            if(searchBarRef && searchBarRef.current)
+                searchBarRef.current.focus();
         }
-    }, [isTabVisible]);
+    }, [isTabVisible, searchBarRef]);
 
     const [page, setPage] = useState(1);
     const numPages = Math.ceil(props.totalResults/20);
@@ -68,10 +53,11 @@ function SearchPresenter(props) {
                                 props.getPreviousPage(token);
                             }}
                             tabVisible={isTabVisible}
+                            getSearchBarRef={() => searchBarRef}
                             onAddToTracks={addToTracks}
                             onDeleteFromTracks={deleteFromTracks}
         /> : 
-        <SearchView onSearch={(term)=>setSearch(term)} tabVisible={isTabVisible} />
+        <SearchView onSearch={(term)=>setSearch(term)} tabVisible={isTabVisible} getSearchBarRef={() => searchBarRef} />
        
 
 }
@@ -113,7 +99,8 @@ const mapStateToProps = (state) => {
         totalResults: totalResults,
         results: itemsArray,
         token: state.auth.spotify.token,
-        rawItems: (state.search.activePage && state.search.activePage.items) || null
+        rawItems: (state.search.activePage && state.search.activePage.items) || null,
+        isTabVisible: state.search.isTabVisible,
     };
 }
   

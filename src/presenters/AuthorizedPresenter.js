@@ -5,6 +5,7 @@ import AuthorizedView from '../views/AuthorizedView';
 import { useHistory } from 'react-router';
 import userActions from '../state/user/userActions';
 import fbaseActions from '../state/fbase/fbaseActions';
+import searchActions from '../state/search/searchActions';
 import LoadingView from '../views/LoadingView';
 
 function AuthorizedPresenter(props){
@@ -17,14 +18,18 @@ function AuthorizedPresenter(props){
     }
 
     useEffect(() => {
-        if(token){
+        if(token && !user.id){
             props.fetchSpotifyUser(token);
         }
     }, [token]);
 
+    const onTabClick = () => props.setSearchTabVisibility(false);
+    const onSearchTabClick = () => props.setSearchTabVisibility(true);
 
-    return (user) ? <AuthorizedView username={user.display_name || user.id || ""}
-                        logout={() => props.logout()}/>
+    return (user.id) ? <AuthorizedView username={user.display_name || user.id || ""}
+                        logout={() => props.logout()}
+                        onTabClick={onTabClick}
+                        onSearchTabClick={onSearchTabClick} />
                         : 
                         <LoadingView size="lg" />;
 }
@@ -36,7 +41,8 @@ const mapStateToProps = (state) => ({
   
 const mapDispatchToProps = {
     fetchSpotifyUser: userActions.fetchUser,
-    logout: fbaseActions.logout
+    logout: fbaseActions.logout,
+    setSearchTabVisibility: searchActions.setIsTabVisible,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AuthorizedPresenter);

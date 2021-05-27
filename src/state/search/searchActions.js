@@ -7,5 +7,6 @@ const actions = {
     getSearchResults: (token, query) => createAction(types.SEARCH_GET, {token, query}),
     getNextPage: (token) => createAction(types.SEARCH_NEXT, {token}),
     getPreviousPage: (token) => createAction(types.SEARCH_PREV, {token}),
+    setIsTabVisible: (visible) => createAction(types.SEARCH_TAB_VISBILITY, {visible}),
 };
 export default actions;
