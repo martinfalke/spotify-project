@@ -3,19 +3,32 @@ import { connect } from 'react-redux';
 import TracksView from '../views/TracksView';
 import tracksActions from '../state/tracks/tracksActions';
 import playlistActions from '../state/playlist/playlistActions';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
+toast.configure();
 function TracksPresenter(props){
     const { token } = props;
 
 const deleteFromTracks = (CI) => props.deleteFromTracks(CI);
-const addToPlaylist = (playlistId, trackId) => props.addToPlaylist(token,playlistId, trackId)
+const addToPlaylist = (playlistId, trackId) => props.addToPlaylist(token,playlistId, trackId);
+
+const notify = () => {
+    if(token && props.results && props.playlists){
+        toast.success("Add to playlist successfully!")
+    }
+    else{
+        toast.error("Ops, something wrong!")
+    }
+    
+};
 
 return (
     <TracksView tracks={props.results} 
                 onDeleteTrack={deleteFromTracks}
                 playlists={props.playlists}
                 onAddToPlaylist={addToPlaylist}
+                notify={notify}
     />
     )
 

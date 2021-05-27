@@ -72,7 +72,7 @@ function SearchResultView(props){
                                                 </button>
                                             
                                             
-                                                <div className="dropdown-content">
+                                                <div className="dropdown-content" onClick={props.notify}>
                                                     {props.playlists.map((list) => {
                                                             return (
                                                                 <p onClick={() => props.onAddToPlaylist(list.id, item.id)} className="playlist-dropdown-p">{list.name}</p>

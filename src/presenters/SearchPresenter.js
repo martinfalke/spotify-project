@@ -7,6 +7,8 @@ import SearchResultView from '../views/SearchResultView';
 import tracksActions from '../state/tracks/tracksActions';
 import playlistActions from '../state/playlist/playlistActions';
 import PlaylistView from '../views/PlaylistView';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -20,6 +22,7 @@ function setPrevPage(currentPage, setPage){
     setPage(currentPage-1);
 }
 
+toast.configure();
 function SearchPresenter(props) {
     const [search, setSearch] = useState("");
     const { token } = props;
@@ -54,7 +57,17 @@ function SearchPresenter(props) {
     const numPages = Math.ceil(props.totalResults/20);
     const addToTracks = (CI) => props.addToTracks(props.results[CI].id, props.rawItems[CI]);
     const deleteFromTracks = (CI) => props.deleteFromTracks(CI, props.results[CI].id);
-    const addToPlaylist = (playlistId, trackId) => props.addToPlaylist(token,playlistId, trackId)
+    const addToPlaylist = (playlistId, trackId) => props.addToPlaylist(token,playlistId, trackId);
+
+    const notify = () => {
+        if(token && props.results && props.playlists){
+            toast.success("Add to playlist successfully!")
+        }
+        else{
+            toast.error("Ops, something wrong!")
+        }
+        
+    };
 
     return (search) ?
         <SearchResultView   onSearch={(term)=>setSearch(term)} search={search}
@@ -73,6 +86,7 @@ function SearchPresenter(props) {
                             onDeleteFromTracks={deleteFromTracks}
                             playlists={props.playlists}
                             onAddToPlaylist={addToPlaylist}
+                            notify={notify}
         /> : 
         <SearchView onSearch={(term)=>setSearch(term)} tabVisible={isTabVisible} />
        
