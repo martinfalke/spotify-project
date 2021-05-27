@@ -136,9 +136,10 @@ margin-bottom: 8px;
 
 .t-actions{
     display: flex;
+    flex:1;
     flex-direction: row;
-    align-items:center;
-    margin-right: 4px;
+    align-items: center;
+    margin-right: 16px;
     justify-content: flex-end;
 
 }
@@ -206,9 +207,20 @@ margin-bottom: 8px;
   .playlist-dropdown-p {
    padding: 4px;
    padding-left: 10px;
+   margin-bottom: 0;
   }
   
   .playlist-dropdown-p:hover {
     background-color: $orange-color;
+  }
+  
+
+  .sr-addsong{
+    display: flex;
+    cursor: pointer;
+    margin:0;
+    align-self: flex-end;
+    margin-right: 4px;
+    margin-bottom: 1px;
   }
   

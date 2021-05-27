@@ -6,12 +6,16 @@ import playlistActions from '../state/playlist/playlistActions';
 
 
 function TracksPresenter(props){
+    const { token } = props;
 
 const deleteFromTracks = (CI) => props.deleteFromTracks(CI);
+const addToPlaylist = (playlistId, trackId) => props.addToPlaylist(token,playlistId, trackId)
 
 return (
     <TracksView tracks={props.results} 
                 onDeleteTrack={deleteFromTracks}
+                playlists={props.playlists}
+                onAddToPlaylist={addToPlaylist}
     />
     )
 

@@ -71,12 +71,12 @@ function TracksView(props){
                                             
                                             
                                                 <div className="dropdown-content">
-                                                    {/* {props.playlists.map((list) => {
+                                                    {props.playlists.map((list) => {
                                                             return (
                                                                 <p onClick={() => props.onAddToPlaylist(list.id, track.id)} className="playlist-dropdown-p">{list.name}</p>
                                                             )
                                                         })
-                                                    } */}
+                                                    }
                                                 </div>
                                                 
                                             </div>
