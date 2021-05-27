@@ -66,26 +66,22 @@ function SearchResultView(props){
                                    </p>
                                    <div className='cd-Actions' > 
                                         <div className="sr-addsong">
-                                            <div class="dropdown"> 
-                                                <button class="dropbtn">
+                                            <div className="dropdown"> 
+                                                <button className="dropbtn">
                                                     <i className="far fa-plus-square"></i>
                                                 </button>
                                             
                                             
-                                            <div class="dropdown-content">
-                                                <ul className="playlist-dropdown">
-                                                {props.playlists.map((list) => {
-                                                    return (
-                                        
-                                                        <li onClick={() => props.onAddToPlaylist(list.id, item.id)}>{list.name}</li>
-                                                    )
-                                                     
-                                                })}
-                                               </ul>
-                                                {/* <p>Link 1</p>
-                                                <p>Link 1</p> */}
+                                                <div className="dropdown-content">
+                                                    {props.playlists.map((list) => {
+                                                            return (
+                                                                <p onClick={() => props.onAddToPlaylist(list.id, item.id)} className="playlist-dropdown-p">{list.name}</p>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                                
                                             </div>
-                                        </div>
                                             
                                         </div>
                                 

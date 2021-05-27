@@ -1,4 +1,4 @@
-import { spotifyApiCall, requestTypes } from './spotifyUtil';
+import { spotifyApiCall } from './spotifyUtil';
 
 
 const getSearchResults = (token, searchQuery, searchTypes, pageInfo="&offset=0&limit=20") => {

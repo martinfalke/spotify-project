@@ -4,7 +4,6 @@ import { delay, all, put, take, takeLatest, takeEvery, takeLeading, call,select,
 import * as types from './playlistTypes';
 import * as tracksTypes from '../tracks/tracksTypes';
 import * as fbaseTypes from '../fbase/fbaseTypes';
-import action from './playlistActions';
 import { moveTrack, deleteFromPlaylist, fetchPlaylist,fetchTrack,addToPlaylist } from '../../api/spotifyPlaylist'
 
 
@@ -173,7 +172,6 @@ function* handleAddToPlaylist(action){
     const { response, error } = yield call(addToPlaylist, token, playlistId, uris);
     if(!error){
         const trackObj = (!searchPage) ? null : searchPage.items.filter(t => t.id === trackId)[0];
-        console.log(trackObj);
         yield put({'type': tracksTypes.TRACKS_SAVE_LOCATIONS, payload: {playlist_id: playlistId, trackIds: [trackId]}})
         yield put({'type': types.PLAYLIST_ADD_TO_LIST_SUCCESS, payload: {playlistId, snapshot_id: response.snapshot_id, trackId, trackObj}})
     }

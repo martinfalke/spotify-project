@@ -13,6 +13,7 @@ import untrackmark from '../images/Icons/Inboxes.png';
 // import icons from '/node_modules/bootstrap-icons/icons'
 import React from 'react'
 import { ButtonGroup } from 'react-bootstrap';
+import spotifyicon from '../images/Icons/Spotify_Icon.png';
 
 
 function TracksView(props){
@@ -62,6 +63,26 @@ function TracksView(props){
                                         </div>
                                     </div>
                                     <div className="t-actions">
+                                        <div className="sr-addsong">
+                                            <div className="dropdown"> 
+                                                <button className="dropbtn">
+                                                    <i className="far fa-plus-square"></i>
+                                                </button>
+                                            
+                                            
+                                                <div className="dropdown-content">
+                                                    {/* {props.playlists.map((list) => {
+                                                            return (
+                                                                <p onClick={() => props.onAddToPlaylist(list.id, track.id)} className="playlist-dropdown-p">{list.name}</p>
+                                                            )
+                                                        })
+                                                    } */}
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+
                                         <Button variant="light" class="btn-sm" onClick={()=>props.onDeleteTrack(index)}>
                                            <img
                                                 alt="remove from track stash"
@@ -69,6 +90,16 @@ function TracksView(props){
                                                 width='16px'
                                                 height= '16px'/>
                                        </Button>
+
+
+                                       <a href={track.spotifyUrl}>
+                                           {/* Open Spotify */}
+                                            <img
+                                                alt="open song in Spotify"
+                                                src={spotifyicon}
+                                                className='openinspotify'
+                                                />
+                                        </a>
                                     </div>
                             </div>
                         </Card>

@@ -238,13 +238,23 @@
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+  overflow-y: scroll;
 }
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: $orange-color;}
+.dropdown:hover .fa-plus-square {background-color: $orange-color;}
 /* SONG LOCATION */
 
-.playlist-dropdown{
-  list-style: none;
+.fa-plus-square{
+  margin-top: 10px;
+}
+
+.playlist-dropdown-p {
+ padding: 4px;
+ padding-left: 10px;
+}
+
+.playlist-dropdown-p:hover {
+  background-color: $orange-color;
 }
