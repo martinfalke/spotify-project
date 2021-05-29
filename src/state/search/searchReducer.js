@@ -1,5 +1,6 @@
 // src/state/search/searchReducer.js
 import * as types from './searchTypes';
+import * as authTypes from '../auth/authTypes';
 import { createReducer } from '../utils';
 
 const initialState = {
@@ -28,6 +29,9 @@ export default createReducer(initialState, {
     },
     [types.SEARCH_PREV]: (state, action) => {
         return { ...state, status: "Prev Page Found"}
+    },
+    [authTypes.AUTH_SPOTIFY_LOGOUT]: (state, action) => {
+        return {...initialState};
     }
     
 });

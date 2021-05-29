@@ -3,8 +3,8 @@ import { signInAnonymously, signOut } from 'firebase/auth';
 
 function handleSignIn(auth) {
     return signInAnonymously(auth)
-        .then(response => ({response}))
-        .catch(error => ({error}));
+        .then(response => (response))
+        .catch(error => (error));
 }
 function handleSignOut(auth) {
     return signOut(auth)

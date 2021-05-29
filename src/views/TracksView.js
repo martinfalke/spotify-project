@@ -19,7 +19,7 @@ function TracksView(props){
     return (
         <div className="tracksview">
             <div className="pagetitle">
-                <p class="h5">Tracks</p>
+                <p className="h5">Tracks</p>
                 <img
                     src= {trackmarked}
                 />
@@ -29,8 +29,8 @@ function TracksView(props){
                 <Table className="t-tabletitle" size="sm" >
                     <thead>
                         <tr>
-                        <th class="text-light"> </th>
-                        <th class="text-light">Actions</th>
+                        <th className="text-light"> </th>
+                        <th className="text-light">Actions</th>
                         </tr>
                     </thead> 
                 </Table>
@@ -53,16 +53,16 @@ function TracksView(props){
                                         {track.name}
                                         </div>
                                         <div className="song-artist">
-                                            <i class="fas fa-user"></i>
+                                            <i className="fas fa-user"></i>
                                             {track.artist}
                                         </div>
                                         <div className="song-album">
-                                            <i class="fas fa-record-vinyl"></i>
+                                            <i className="fas fa-record-vinyl"></i>
                                             {track.album_name}
                                         </div>
                                     </div>
                                     <div className="t-actions">
-                                        <Button variant="light" class="btn-sm" onClick={()=>props.onDeleteTrack(index)}>
+                                        <Button variant="light" className="btn-sm" onClick={()=>props.onDeleteTrack(index)}>
                                            <img
                                                 alt="remove from track stash"
                                                 src={trackmarked} 

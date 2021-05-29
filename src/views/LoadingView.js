@@ -14,7 +14,7 @@ function LoadingView(props){
                 <div></div>
                 <div></div>
                 <div></div>
-                {(percentage !== null) && (<p className="loading-percentage">{percentage+"%"}</p>)}
+                {(percentage !== null && typeof percentage !== 'undefined') && (<p className="loading-percentage">{percentage+"%"}</p>)}
             </div>
         </div>
   );

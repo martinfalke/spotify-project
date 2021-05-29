@@ -1,4 +1,5 @@
 import * as types from './tracksTypes';
+import * as authTypes from '../auth/authTypes';
 import { createReducer } from '../utils';
 
 const initialState = {
@@ -88,5 +89,8 @@ export default createReducer(initialState, {
                 ...trackLocations
             }
         };
+    },
+    [authTypes.AUTH_SPOTIFY_LOGOUT]: (state, action) => {
+        return {...initialState, trackLocations: {}};
     }
 })

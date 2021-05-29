@@ -1,6 +1,7 @@
 // src/state/playlist/playlistReducer.js
 import * as types from './playlistTypes';
 import * as tracksTypes from '../tracks/tracksTypes';
+import * as authTypes from '../auth/authTypes';
 import { createReducer } from '../utils';
 
 const initialState = {
@@ -229,5 +230,8 @@ export default createReducer(initialState, {
             trackIndex[trackId]=trackObj;
         }
         return {...state, trackIndex: {...trackIndex}};
+    },
+    [authTypes.AUTH_SPOTIFY_LOGOUT]: (state, action) => {
+        return {...initialState, trackIndex: {}};
     }
 })

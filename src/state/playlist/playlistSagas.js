@@ -1,6 +1,6 @@
 // src/state/playlist/playlistSagas.js
 import { buffers } from 'redux-saga';
-import { delay, all, put, take, takeLatest, takeEvery, takeLeading, call,select, actionChannel, fork } from 'redux-saga/effects';
+import { delay, all, put, take, takeLatest, takeEvery, takeLeading, call,select, actionChannel, fork, cancel } from 'redux-saga/effects';
 import * as types from './playlistTypes';
 import * as tracksTypes from '../tracks/tracksTypes';
 import * as fbaseTypes from '../fbase/fbaseTypes';
@@ -164,13 +164,18 @@ function* watchTracksFetch(){
 
 
 function* playlistRootSaga() {
-    yield all([
-        takeEvery(types.PLAYLIST_MOVE_UP_SONG, handleMoveUp),
-        takeEvery(types.PLAYLIST_MOVE_DOWN_SONG, handleMoveDown),
-        takeLeading(types.PLAYLIST_DELETE_FROM_LIST, handleDeleteFromPlaylist),
-        takeLeading(types.PLAYLIST_GET,handleFetchPlaylist),
-        fork(watchTracksFetch),
-    ])
+    while(true){
+        const tasks = yield all([
+            takeEvery(types.PLAYLIST_MOVE_UP_SONG, handleMoveUp),
+            takeEvery(types.PLAYLIST_MOVE_DOWN_SONG, handleMoveDown),
+            takeLeading(types.PLAYLIST_DELETE_FROM_LIST, handleDeleteFromPlaylist),
+            takeLeading(types.PLAYLIST_GET,handleFetchPlaylist),
+            fork(watchTracksFetch),
+        ])
+        yield take(fbaseTypes.FBASE_SIGN_OUT);
+        yield cancel(tasks);
+    }
+
 };
 
 // selectors
