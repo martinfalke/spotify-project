@@ -7,7 +7,8 @@ const initialState = {
     latestQuery: null,
     activePage: null,
     isExact: false,
-    resultTypes: ["track"]
+    resultTypes: ["track"],
+    isTabVisible: false,
 }
 
 export default createReducer(initialState, {
@@ -28,6 +29,9 @@ export default createReducer(initialState, {
     },
     [types.SEARCH_PREV]: (state, action) => {
         return { ...state, status: "Prev Page Found"}
+    },
+    [types.SEARCH_TAB_VISBILITY]: (state, action) => {
+        return { ...state, isTabVisible: action.visible }
     }
     
 });

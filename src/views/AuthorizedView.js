@@ -17,13 +17,13 @@ function AuthorizedView(props){
             <Nav id="navbar" className="navbar">
             <Nav variant="tabs" className="mr-auto" id="nav-container">
                     <Nav.Item>
-                        <Nav.Link eventKey="playlist">Playlist</Nav.Link>
+                        <Nav.Link eventKey="playlist" onClick={props.onTabClick}>Playlist</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="search">Search</Nav.Link>
+                        <Nav.Link eventKey="search" onClick={props.onSearchTabClick}>Search</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="tracks">Tracks</Nav.Link>
+                        <Nav.Link eventKey="tracks" onClick={props.onTabClick}>Tracks</Nav.Link>
                     </Nav.Item>
             </Nav>
             <Nav>
