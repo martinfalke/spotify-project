@@ -5,11 +5,17 @@
     text-align: center;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
 
-    img{
+    /* img{
         max-height: 30vh;
         margin-bottom: 20px;
+    } */
+
+    img{
+        width:1048px;
+        height:510px
     }
 
     .fa-spotify::before {
