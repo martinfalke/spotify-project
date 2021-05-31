@@ -26,6 +26,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "deploy-listify": "gh-pages -d build --remote listify",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
