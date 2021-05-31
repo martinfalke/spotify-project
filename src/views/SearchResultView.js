@@ -93,7 +93,7 @@ function SearchResultView(props){
                                                 src={(item.isInStash) ? (trackmarked) : (untrackmark) } />
                                        </Button>
                                        
-                                       <a target="_blank" href={item.spotifyUrl}>
+                                       <a target="_blank" rel="noreferrer" href={item.spotifyUrl}>
                                            {/* Open Spotify */}
                                             <img
                                                 alt="open song in Spotify"

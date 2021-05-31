@@ -1,5 +1,6 @@
 // src/state/search/searchReducer.js
 import * as types from './searchTypes';
+import * as authTypes from '../auth/authTypes';
 import { createReducer } from '../utils';
 
 const initialState = {
@@ -32,7 +33,9 @@ export default createReducer(initialState, {
     },
     [types.SEARCH_TAB_VISBILITY]: (state, action) => {
         return { ...state, isTabVisible: action.visible }
-    }
-    
+    },
+    [authTypes.AUTH_SPOTIFY_LOGOUT]: (state, action) => {
+        return {...initialState};
+    },   
 });
 

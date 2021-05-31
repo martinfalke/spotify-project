@@ -22,7 +22,7 @@ export default createReducer(initialState, {
         return { ...state,
             spotify: {
                 token: action.token,
-                expires_in: action.expires_in,
+                expires_in: action.expires_in || state.spotify.expires_in,
                 spotify_string: state.spotify.spotify_string,
                 error: null
             }

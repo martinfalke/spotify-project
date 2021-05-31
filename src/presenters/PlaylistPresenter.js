@@ -11,7 +11,8 @@ function PlaylistPresenter(props){
     const { token, playlists, playlistsFetched, tracksFetched, playlist, playlistTracks, allPlaylists, selectedPlaylist  } = props;
 
     useEffect(()=>{
-        props.fetchPlaylists(token);
+        if(token)
+            props.fetchPlaylists(token);
     },[])
 
     useEffect(()=>{

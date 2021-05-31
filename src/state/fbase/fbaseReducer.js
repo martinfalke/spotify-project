@@ -13,9 +13,6 @@ export default createReducer(initialState, {
     [types.FBASE_INIT_COMPLETED]: (state, action) => {
         return { ...state, status: "OK", app: action.payload.app, auth: action.payload.auth };
     },
-    [types.FBASE_AUTHENTICATE_SUCCESS]: (state, action) => {
-        return { ...state, status: "OK", ...action.payload };
-    },
     [types.FBASE_SET_UID]: (state, action) => {
         return { ...state, uid: action.uid};
     },

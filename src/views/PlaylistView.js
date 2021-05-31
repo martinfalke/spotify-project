@@ -7,7 +7,7 @@ import nottrackedicon from '../images/Icons/Inboxes.png'
 import LOGO from '../images/LOGO.svg';
 // import icons from '/node_modules/bootstrap-icons/icons'
 import React from 'react'
-import { ButtonGroup, NavItem } from 'react-bootstrap';
+import { ButtonGroup } from 'react-bootstrap';
 import spotifyicon from '../images/Icons/Spotify_Icon.png';
 
 
@@ -24,7 +24,7 @@ function PlaylistView(props){
                                 onClick = {() => props.onSelectPlaylist(playlist.id)}
                         >
                             <img className={(playlist.image) ? "" : "no-img"} alt="playlists" src={(playlist.image)?playlist.image.url: LOGO}></img>
-                            <p class="h6 text-light">{playlist.name}</p>
+                            <p className="h6 text-light">{playlist.name}</p>
                         </div>
                     )
                 })) || <p className="no-playlists-text">Your account has no playlists yet.</p>}
@@ -39,7 +39,7 @@ function PlaylistView(props){
                         <p className=" md text-light">{props.playlist && props.playlist.description || ""}</p>
                     
                         <form className="actionsbar">
-                            <div class= "form-group">
+                            <div className= "form-group">
                                 <input type="text" class="form-control" id="PlaylistSearchAction" placeholder="Filter songs.."  defaultValue={props.searchTerm} onChange={e=>props.onSearchTerm(e.target.value)}/>
                             </div>
                         </form>
@@ -69,7 +69,7 @@ function PlaylistView(props){
                                     <div className="p-cardbody">
                                             <div className='p-cardcontent'>
                                                 <div className="p-songname">
-                                                    <a>{track.name}</a>
+                                                    {track.name}
                                                 </div>
                                                 <div className="p-songartist">
                                                     <i className="fas fa-user"></i>
@@ -90,13 +90,13 @@ function PlaylistView(props){
                                                         />
                                                 </button>)
                                                 : (<button className="nottrackmarked" >
-                                                    <img
+                                                    <img alt="remove from track stash"
                                                         src={nottrackedicon}
                                                         />
                                                 </button>)
                                                 }
                                                 </div>
-                                                <a target="_blank" href={track.spotifyUrl}>
+                                                <a target="_blank" rel="noreferrer" href={track.spotifyUrl}>
                                                 <img
                                                 alt="open song in Spotify"
                                                 src={spotifyicon}
@@ -105,14 +105,14 @@ function PlaylistView(props){
                                                 </a>
                                                 
                                                 <ButtonGroup>
-                                                <button disabled={!props.actionsDisabled || index==0} onClick={()=> props.onMoveUpSong(index)}>
-                                                    <i class="far fa-arrow-alt-circle-up"></i>
+                                                <button disabled={!props.actionsDisabled || index===0} onClick={()=> props.onMoveUpSong(index)}>
+                                                    <i className="far fa-arrow-alt-circle-up"></i>
                                                 </button>
                                                 <button disabled={!props.actionsDisabled || index===list.length-1} onClick={()=> props.onMoveDownSong(index)}>
-                                                    <i class="far fa-arrow-alt-circle-down"></i>
+                                                    <i className="far fa-arrow-alt-circle-down"></i>
                                                 </button>
                                                 <button disabled={!props.actionsDisabled} onClick={()=> props.onDeleteSong(index)}>
-                                                    <i class="far fa-minus-square"></i>
+                                                    <i className="far fa-minus-square"></i>
                                                 </button>
 
                                                 </ButtonGroup>

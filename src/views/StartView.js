@@ -1,6 +1,5 @@
 // src/views/StartView.js
 import Button from 'react-bootstrap/Button';
-import LOGO from '../images/LOGO.svg';
 import Startintro from '../images/Startpage.png'
 import "./StartView.scss";
 

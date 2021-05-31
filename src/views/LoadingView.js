@@ -2,7 +2,7 @@
 import './LoadingView.scss';
 
 function LoadingView(props){
-    const { size, percentage, infoText } = props;
+    const { size, percentage } = props;
     const sizeClass = (size === "xs") ? "loading-view-xs" : (
         (size === "sm") ? "loading-view-sm" : (
         (size === "md") ? "loading-view-md" : (
@@ -14,7 +14,7 @@ function LoadingView(props){
                 <div></div>
                 <div></div>
                 <div></div>
-                {(percentage !== null) && (<p className="loading-percentage">{percentage+"%"}</p>)}
+                {(percentage !== null && typeof percentage !== 'undefined') && (<p className="loading-percentage">{percentage+"%"}</p>)}
             </div>
         </div>
   );

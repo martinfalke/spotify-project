@@ -1,6 +1,7 @@
 // src/state/search/searchSagas.js
-import { call, select, all, put, takeLatest } from 'redux-saga/effects';
+import { call, cancel, select, all, put, take, takeLatest } from 'redux-saga/effects';
 import * as types from './searchTypes';
+import * as fbaseTypes from '../fbase/fbaseTypes';
 import { getSearchResults } from "../../api/spotifySearch";
 import { baseUrl, spotifyApiCall } from "../../api/spotifyUtil";
 
@@ -46,12 +47,16 @@ function* getPrevPage(action){
 }
 
 function* searchRootSaga() {
-    yield all([
-        takeLatest(types.SEARCH_GET, getSearch),
-        takeLatest(types.SEARCH_NEXT, getNextPage),
-        takeLatest(types.SEARCH_PREV, getPrevPage)
-
-    ])
+    while(true){
+        const tasks = yield all([
+            takeLatest(types.SEARCH_GET, getSearch),
+            takeLatest(types.SEARCH_NEXT, getNextPage),
+            takeLatest(types.SEARCH_PREV, getPrevPage)
+            
+        ])
+        yield take(fbaseTypes.FBASE_SIGN_OUT);
+        yield cancel(tasks);
+    }
 };
 
 const getResultTypes = (state) => state.search.resultTypes;
