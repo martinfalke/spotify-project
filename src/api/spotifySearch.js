@@ -14,4 +14,5 @@ const getSearchResults = (token, searchQuery, searchTypes, pageInfo="&offset=0&l
 }
 
 
+
 export { getSearchResults };

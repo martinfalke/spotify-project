@@ -20,7 +20,7 @@ function SearchView(props){
                     <form className='s-searchinput'>
                         <Form.Group controlId="formSearchInput">
                             <Form.Control autoFocus={props.tabVisible}
-                                type="text" placeholder="Search for a song, an artist, or an album..." 
+                                type="text" placeholder="Search for songs based on its title, artist, or album.." 
                                 onChange={e=>props.onSearch(e.target.value)}
                                 ref={props.getSearchBarRef()}/> 
                         </Form.Group>

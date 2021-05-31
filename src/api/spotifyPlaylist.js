@@ -17,4 +17,9 @@ const deleteFromPlaylist = (token, playlist_id, tracks, snapshot_id) => {
     return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks', requestTypes.DELETE, {tracks, snapshot_id})
 }
 
-export { moveTrack, deleteFromPlaylist, fetchPlaylist, fetchTrack };
+
+const addToPlaylist = (token, playlist_id, uris) => {
+    return spotifyApiCall(token, '/playlists/' + playlist_id + '/tracks', requestTypes.POST, {uris});
+}
+
+export { moveTrack, deleteFromPlaylist, fetchPlaylist, fetchTrack, addToPlaylist };

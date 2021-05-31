@@ -6,6 +6,10 @@ import SearchView from '../views/SearchView';
 import SearchResultView from '../views/SearchResultView';
 import tracksActions from '../state/tracks/tracksActions';
 import playlistActions from '../state/playlist/playlistActions';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 
 function setNextPage(currentPage, numPages, setPage){
@@ -17,6 +21,7 @@ function setPrevPage(currentPage, setPage){
     setPage(currentPage-1);
 }
 
+toast.configure();
 function SearchPresenter(props) {
     const [search, setSearch] = useState("");
     const { token, isTabVisible } = props;
@@ -39,6 +44,17 @@ function SearchPresenter(props) {
     const numPages = Math.ceil(props.totalResults/20);
     const addToTracks = (CI) => props.addToTracks(props.results[CI].id, props.rawItems[CI]);
     const deleteFromTracks = (CI) => props.deleteFromTracks(CI, props.results[CI].id);
+    const addToPlaylist = (playlistId, trackId) => props.addToPlaylist(token,playlistId, trackId);
+
+    const notify = () => {
+        if(token && props.results && props.playlists){
+            toast.success("Add to playlist successfully!")
+        }
+        else{
+            toast.error("Ops, something wrong!")
+        }
+        
+    };
 
     return (search) ?
         <SearchResultView   onSearch={(term)=>setSearch(term)} search={search}
@@ -56,6 +72,10 @@ function SearchPresenter(props) {
                             getSearchBarRef={() => searchBarRef}
                             onAddToTracks={addToTracks}
                             onDeleteFromTracks={deleteFromTracks}
+                            playlists={props.playlists}
+                            onAddToPlaylist={addToPlaylist}
+                            notify={notify}
+                            isFetchingPlaylists={props.isFetchingPlaylists}
         /> : 
         <SearchView onSearch={(term)=>setSearch(term)} tabVisible={isTabVisible} getSearchBarRef={() => searchBarRef} />
        
@@ -65,6 +85,7 @@ function SearchPresenter(props) {
 const mapStateToProps = (state) => { 
     let totalResults = (state.search.activePage && state.search.activePage.total) || 0; 
     let itemsArray = [];
+    let playlists = [];
     if(state.search.activePage){
         itemsArray = state.search.activePage.items.map( (item) => {
             let artistString = item.artists.reduce((tot,artist,i,arr) => {
@@ -92,15 +113,21 @@ const mapStateToProps = (state) => {
                 previewSong: item.preview_url,
                 id: item.id,
                 isInStash: isInStash,
-            }
-        })
+            };
+        });
+        playlists = Object.values(state.lists.playlists).map(list => {
+            return {name: list.name, id: list.id};
+        });
     }
+    
     return {
         totalResults: totalResults,
         results: itemsArray,
         token: state.auth.spotify.token,
         rawItems: (state.search.activePage && state.search.activePage.items) || null,
         isTabVisible: state.search.isTabVisible,
+        playlists: playlists,
+        isFetchingPlaylists: !state.lists.playlistsFetched || !state.lists.tracksFetched,
     };
 }
   
@@ -110,6 +137,7 @@ const mapDispatchToProps = {
     getPreviousPage: searchActions.getPreviousPage,
     addToTracks: tracksActions.addToTracks,
     deleteFromTracks: tracksActions.deleteFromTracks,
+    addToPlaylist: playlistActions.addToPlaylist
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPresenter);

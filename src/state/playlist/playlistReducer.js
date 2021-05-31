@@ -176,9 +176,11 @@ export default createReducer(initialState, {
     [types.PLAYLIST_DELETE_FROM_LIST_SUCCESS]: (state, action) => {
         let snapshot_id = action.payload.snapshot_id;
         const CI = action.payload.CI;
+        console.log(state.selectedList)
         let playlistobj = state.playlists[state.selectedList];
         let trackList = playlistobj.tracks;
         let updatedList = trackList.slice(0, CI).concat(trackList.slice(CI+1, trackList.length));
+        
 
         return { ...state, 
                         playlists: {
@@ -229,5 +231,53 @@ export default createReducer(initialState, {
             trackIndex[trackId]=trackObj;
         }
         return {...state, trackIndex: {...trackIndex}};
-    }
+    },
+    [types.PLAYLIST_ADD_TO_LIST_SUCCESS]: (state, action) => {
+        let snapshot_id = action.payload.snapshot_id;
+        const playlist_id = action.payload.playlistId;
+        const trackId = action.payload.trackId;
+        let playlistobj = state.playlists[playlist_id];
+        let trackList = playlistobj.tracks;
+        let updatedList = [...trackList, trackId];
+
+        let trackObj = action.payload.trackObj;
+        let trackIndex = state.trackIndex;
+        if(trackObj){
+            let track = {
+                album_name: trackObj.album.name,
+                album_image: (trackObj.album.images.length >= 2 && trackObj.album.images[1]) || null,
+                artists: trackObj.artists.map(a=>a.name),
+                is_local: trackObj.is_local,
+                external_urls: trackObj.external_urls,
+                name: trackObj.name,
+                id: trackObj.id,
+                preview_url: trackObj.preview_url,
+                uri: trackObj.uri,
+                duration: trackObj.duration_ms
+            }
+            trackIndex[trackId]=track;
+        }
+
+
+        return { ...state, 
+            playlists: {
+                ...state.playlists,
+                [playlist_id]: {
+                    ...playlistobj,
+                    snapshot_id: snapshot_id,
+                    tracks: updatedList
+                },
+            },
+            trackIndex: {...trackIndex},
+        };
+
+
+    },
+    [types.PLAYLIST_ADD_TO_LIST_ERROR]: (state, action) => {
+        return {...state,
+            error: action.payload, 
+            status: "ERROR"
+        }
+    },
 })
+

@@ -19,7 +19,7 @@ function SearchResultView(props){
                     <form className='sr-searchinput'>
                         <Form.Group controlId="formSearchInput">
                             <Form.Control autoFocus defaultValue={props.search} 
-                                    type="text" placeholder="Search for a song, an artist or an album"
+                                    type="text" placeholder="Search for songs based on its title, artist, or album.."
                                     onChange={e=>props.onSearch(e.target.value)}
                                     ref={props.getSearchBarRef()} />
                        </Form.Group>
@@ -66,6 +66,27 @@ function SearchResultView(props){
                                    {item.album}
                                    </p>
                                    <div className='cd-Actions' > 
+                                        <div className="sr-addsong">
+                                            <div className={(props.isFetchingPlaylists) ? "dropdown disabled" : "dropdown"} >
+                                                <button className="dropbtn"
+                                                        disabled={props.isFetchingPlaylists}>
+                                                    <i className="far fa-plus-square"></i>
+                                                </button>
+                                            
+                                            
+                                                <div className="dropdown-content" onClick={props.notify}>
+                                                    {props.playlists.map((list) => {
+                                                            return (
+                                                                <p onClick={() => props.onAddToPlaylist(list.id, item.id)} className="playlist-dropdown-p">{list.name}</p>
+                                                            )
+                                                        })
+                                                    }
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </div>
+                                
                                        <Button variant="light" onClick={(item.isInStash) ? (() => props.onDeleteFromTracks(index)) : (()=>props.onAddToTracks(index))}>
                                            <img
                                                 alt="remove from track stash"

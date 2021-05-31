@@ -40,7 +40,7 @@ function PlaylistView(props){
                     
                         <form className="actionsbar">
                             <div class= "form-group">
-                                <input type="text" class="form-control" id="PlaylistSearchAction" placeholder="search for a song"  defaultValue={props.searchTerm} onChange={e=>props.onSearchTerm(e.target.value)}/>
+                                <input type="text" class="form-control" id="PlaylistSearchAction" placeholder="Filter songs.."  defaultValue={props.searchTerm} onChange={e=>props.onSearchTerm(e.target.value)}/>
                             </div>
                         </form>
                     </div>
